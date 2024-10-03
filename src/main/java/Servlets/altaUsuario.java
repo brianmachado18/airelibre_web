@@ -42,18 +42,19 @@ public class altaUsuario extends HttpServlet {
         String apellido = request.getParameter("apellido");
         String correo = request.getParameter("email");
         String contrasena = request.getParameter("contrasena");   
-        String confContrasena = request.getParameter("confirmar"); 
         String fechaNacimientoStr = request.getParameter("fecha");
         String paginaWeb = request.getParameter("sitio_web"); 
         String disciplina = request.getParameter("disciplina"); 
+        String tipoUsuario = request.getParameter("role");
+        String esProfesionalStr = request.getParameter("profesional"); 
+        Boolean esProfesional = "si".equals(esProfesionalStr);
         
-        System.out.println(fechaNacimientoStr);
-        
+                
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(fechaNacimientoStr, formatoFecha);
         
         try {
-			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, "Entrenador", false, disciplina, paginaWeb);
+			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario, esProfesional, disciplina, paginaWeb);
 
 			
 		} catch (PersistenciaException e) {

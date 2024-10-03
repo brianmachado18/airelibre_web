@@ -63,14 +63,14 @@
                     </div>
 
                     <label class="block text-gray-700 mb-2">Selecciona tu rol:</label>
-                    <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" onclick="selectRole('deportista')">Deportista</button>
-                    <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" onclick="selectRole('entrenador')">Entrenador</button>
+                    <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" onclick="selectRole('Deportista')">Deportista</button>
+                    <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" onclick="selectRole('Entrenador')">Entrenador</button>
 
                     <div id="deportistaFields" class="hidden mb-4">
                         <label class="block text-gray-700">¿Eres profesional?</label>
-                        <input type="radio" id="profesional_si" name="profesional" value="si">
+                        <input type="radio" id="profesional_si" name="profesional" value="si" >
                         <label for="profesional_si">Sí</label>
-                        <input type="radio" id="profesional_no" name="profesional" value="no">
+                        <input type="radio" id="profesional_no" name="profesional" value="no" >
                         <label for="profesional_no">No</label>
                     </div>
 
@@ -95,9 +95,23 @@
         function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');
+            
+            const profesionalSi = document.getElementById('profesional_si');
+            const profesionalNo = document.getElementById('profesional_no');
+            const disciplina = document.getElementById('disciplina');
 
-            deportistaFields.classList.toggle('hidden', role !== 'deportista');
-            entrenadorFields.classList.toggle('hidden', role !== 'entrenador');
+            deportistaFields.classList.toggle('hidden', role !== 'Deportista');
+            entrenadorFields.classList.toggle('hidden', role !== 'Entrenador');
+            
+            if (role === 'Deportista') {
+                profesionalSi.setAttribute('required', true);
+                profesionalNo.setAttribute('required', true);
+                disciplina.removeAttibute('required');
+            } else {
+                profesionalSi.removeAttribute('required');
+                profesionalNo.removeAttribute('required');
+                disciplina.setAttribute('required', true);
+            }
         }
 
         document.getElementById('userForm').onsubmit = function(event) {
