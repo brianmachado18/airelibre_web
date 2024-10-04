@@ -3,30 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Alta de Usuario</title>
+    <title>Consultar Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
 
-    <nav class="bg-blue-600 p-4">
-        <h1 class="text-white text-2xl text-center">Registro de Usuarios</h1>
+    <nav class="bg-blue-600 p-4 flex justify-between items-center">
+        <div class="flex-grow text-center">
+            <h1 class="text-white text-2xl">Registro de Usuarios</h1>
+        </div>
+        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
     </nav>
 
     <div class="flex">
+        <!-- Menú lateral -->
         <nav class="bg-white w-64 h-screen p-5 border-r border-gray-200">
             <h5 class="font-semibold mb-4">Menú</h5>
             <ul>
-                <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="#">Inicio</a></li>
-                <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="#">Perfil</a></li>
-                <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="#">Configuraciones</a></li>
+                <li>
+                    <a id="usuariosToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Usuarios</a>
+                    <ul id="submenuUsuarios" class="ml-4 mt-2 hidden">
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaUsuario.jsp">Alta Usuario</a></li>
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarUsuario.jsp">Consultar Usuario</a></li>
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="modificarUsuario.jsp">Modificar Usuario</a></li>
+                    </ul>
+                </li>
                 <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="#">Ayuda</a></li>
             </ul>
+            
         </nav>
 
-        <main class="flex-1 p-5">
-            <div class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto">
-                <h2 class="text-center text-2xl font-bold mb-4">Formulario de Alta de Usuario</h2>
-                <form id="userForm" action="altaUsuario" method="POST">
+        <!-- Contenedor para el formulario y la imagen -->
+        <div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;"> <!-- Estilo inline para margen -->
+            <!-- Formulario con campos bloqueados -->
+            <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
+                <h2 class="text-center text-2xl font-bold mb-4">Crear Usuario</h2>
+
+ 				<form id="userForm" action="altaUsuario" method="POST" enctype="multipart/form-data">
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" required>
@@ -62,15 +80,20 @@
                         <input type="password" id="confirmar" name="confirmar" class="border border-gray-300 rounded w-full p-2" required>
                     </div>
 
+                    <div class="mb-4">
+                        <label for="imagen" class="block text-gray-700">Subir Imagen de Perfil:</label>
+                        <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg" class="border border-gray-300 rounded w-full p-2">
+                    </div>
+
                     <label class="block text-gray-700 mb-2">Selecciona tu rol:</label>
                     <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" onclick="selectRole('Deportista')">Deportista</button>
                     <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" onclick="selectRole('Entrenador')">Entrenador</button>
 
                     <div id="deportistaFields" class="hidden mb-4">
                         <label class="block text-gray-700">¿Eres profesional?</label>
-                        <input type="radio" id="profesional_si" name="profesional" value="si" >
+                        <input type="radio" id="profesional_si" name="profesional" value="si">
                         <label for="profesional_si">Sí</label>
-                        <input type="radio" id="profesional_no" name="profesional" value="no" >
+                        <input type="radio" id="profesional_no" name="profesional" value="no">
                         <label for="profesional_no">No</label>
                     </div>
 
@@ -84,14 +107,21 @@
                             <input type="text" id="sitio_web" name="sitio_web" class="border border-gray-300 rounded w-full p-2">
                         </div>
                     </div>
-                    <button type="submit" id= "CargaUsuario" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600">Enviar</button>
+                    <button type="submit" id="CargaUsuario" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600">Enviar</button>
                 </form>
             </div>
-        </main>
+
+
+        </div>
     </div>
 
     <script>
-     	
+        // Script para mostrar/ocultar el submenú de usuarios
+        document.getElementById('usuariosToggle').onclick = function() {
+            const submenu = document.getElementById('submenuUsuarios');
+            submenu.classList.toggle('hidden');
+        };
+
         function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');
@@ -106,7 +136,7 @@
             if (role === 'Deportista') {
                 profesionalSi.setAttribute('required', true);
                 profesionalNo.setAttribute('required', true);
-                disciplina.removeAttibute('required');
+                disciplina.removeAttribute('required');
             } else {
                 profesionalSi.removeAttribute('required');
                 profesionalNo.removeAttribute('required');
@@ -123,6 +153,5 @@
             }
         };
     </script>
-
 </body>
 </html>
