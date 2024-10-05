@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import javax.swing.JOptionPane;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -15,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import logica.*;
+import modelo.Entrenador;
 import excepciones.*;
 
 
@@ -53,12 +52,12 @@ public class altaUsuario extends HttpServlet {
         String esProfesionalStr = request.getParameter("profesional"); 
         Boolean esProfesional = "si".equals(esProfesionalStr);
         
-        
+        System.out.println(tipoUsuario);
         Part archivo = request.getPart("imagen"); 
         String nombreArchivo = archivo.getSubmittedFileName(); 
         String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
        
-        String rutaDestino = "\\Perfiles\\" + nickname + extension;
+        String rutaDestino = request.getServletContext().getRealPath("/Perfiles/") + nickname + extension;
         archivo.write(rutaDestino);
         
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -72,7 +71,7 @@ public class altaUsuario extends HttpServlet {
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
      		}else {
-    			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario, esProfesional, disciplina, paginaWeb, rutaDestino);
+    			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario.trim(), esProfesional, disciplina, paginaWeb, "/Perfiles/" + nickname + extension);
     			RequestDispatcher rd;
      			request.setAttribute("estado", "Usuario creado.");
      			rd = request.getRequestDispatcher("/notificacion.jsp");

@@ -88,7 +88,10 @@
                     <label class="block text-gray-700 mb-2">Selecciona tu rol:</label>
                     <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" onclick="selectRole('Deportista')">Deportista</button>
                     <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" onclick="selectRole('Entrenador')">Entrenador</button>
-
+					 <input type="hidden" id="role" name="role" value="">
+					
+					
+					
                     <div id="deportistaFields" class="hidden mb-4">
                         <label class="block text-gray-700">¿Eres profesional?</label>
                         <input type="radio" id="profesional_si" name="profesional" value="si">
@@ -129,6 +132,8 @@
             const profesionalSi = document.getElementById('profesional_si');
             const profesionalNo = document.getElementById('profesional_no');
             const disciplina = document.getElementById('disciplina');
+            
+            document.getElementById('role').value = role;
 
             deportistaFields.classList.toggle('hidden', role !== 'Deportista');
             entrenadorFields.classList.toggle('hidden', role !== 'Entrenador');
