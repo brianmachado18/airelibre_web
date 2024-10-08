@@ -24,13 +24,21 @@
         <!-- Menú lateral -->
        <nav class="bg-white w-64 h-screen p-5 border-r border-gray-200">
             <h5 class="font-semibold mb-4">Menú</h5>
-            <ul>
+<ul>
                 <li>
                     <a id="usuariosToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Usuarios</a>
                     <ul id="submenuUsuarios" class="ml-4 mt-2 hidden">
                         <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaUsuario.jsp">Alta Usuario</a></li>
                         <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarUsuario.jsp">Consultar Usuario</a></li>
                         <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="modificarUsuario.jsp">Modificar Usuario</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a id="actividadesToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Actividades</a>
+                    <ul id="submenuActividades" class="ml-4 mt-2 hidden">
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaActividad.jsp">Alta Actividad</a></li>
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarActividad.jsp">Consultar Actividad</a></li>
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaClase.jsp">Alta Clase Deportiva</a></li>
                     </ul>
                 </li>
                 <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="#">Ayuda</a></li>
@@ -119,8 +127,13 @@
     <script>
  
     document.getElementById('usuariosToggle').onclick = function() {
-        const submenu = document.getElementById('submenuUsuarios');
-        submenu.classList.toggle('hidden');
+        const submenuUsuarios = document.getElementById('submenuUsuarios');
+        submenuUsuarios.classList.toggle('hidden');
+    };
+
+    document.getElementById('actividadesToggle').onclick = function() {
+        const submenuActividades = document.getElementById('submenuActividades');
+        submenuActividades.classList.toggle('hidden');
     };
 
 
