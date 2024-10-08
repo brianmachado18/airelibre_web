@@ -15,9 +15,9 @@
 
     <nav class="bg-blue-600 p-4 flex justify-between items-center">
         <div class="flex-grow text-center">
-            <h1 class="text-white text-2xl">Registro de Actividades</h1>
+            <h1 class="text-white text-2xl">Consulta de Actividades</h1>
         </div>
-        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
+        <a href="login.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
     </nav>
 
     <div class="flex">
@@ -59,59 +59,50 @@
                 <h2 class="text-center text-2xl font-bold mb-4">Buscar Actividad</h2>
 
 				<!-- Campo de búsqueda -->
-				<form id="userForm" action="consultarUsuario" method="POST">
+				<form id="userForm" action="consultarActividad" method="POST">
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
-							placeholder="Buscar usuario..."
+							placeholder="Buscar actividad..."
 							class="border border-gray-300 rounded w-full p-2" required>
 						<button type="submit"
 							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
 					</div>
 				</form>
 
-                <form id="activityForm" action="altaActividad" method="POST" enctype="multipart/form-data">
+                <form id="activityForm" action="consultarActividad" method="POST" enctype="multipart/form-data">
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" value="${nombre}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="descripcion" class="block text-gray-700">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" class="border border-gray-300 rounded w-full p-2" disabled></textarea>
+                        <textarea id="descripcion" name="descripcion" class="border border-gray-300 rounded w-full p-2" ${descripcion} disabled></textarea>
                     </div>
 
                     <div class="mb-4">
                         <label for="duracionHoras" class="block text-gray-700">Duración (Horas):</label>
-                        <input type="number" id="duracionHoras" name="duracionHoras" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="number" id="duracionHoras" name="duracionHoras" class="border border-gray-300 rounded w-full p-2" value="${duracionHoras}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="costo" class="block text-gray-700">Costo:</label>
-                        <input type="number" id="costo" name="costo" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="number" id="costo" name="costo" class="border border-gray-300 rounded w-full p-2" value="${costo}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="lugar" class="block text-gray-700">Lugar:</label>
-                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" value="${lugar}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="fechaAlta" class="block text-gray-700">Fecha de Alta:</label>
-                        <input type="date" id="fechaAlta" name="fechaAlta" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="date" id="fechaAlta" name="fechaAlta" class="border border-gray-300 rounded w-full p-2" value="${fechaAlta}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="estado" class="block text-gray-700">Estado:</label>
-                        <select id="estado" name="estado" class="border border-gray-300 rounded w-full p-2" disabled>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                            <option value="Suspendido">Suspendido</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="imagen" class="block text-gray-700">Subir Imagen:</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="text" id="estado" name="Estado" class="border border-gray-300 rounded w-full p-2" value="${estado}" disabled>
                     </div>
 
                     <div class="mb-4">
@@ -126,12 +117,9 @@
                     </div>
                 </form>
             </div>
-            			<div
-				class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
+            <div class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
 				<!-- Sin margen izquierdo -->
-				<img id="userImage" src="${imgen}"
-					alt="Imagen de Usuario"
-					class="w-full h-full object-cover rounded-lg">
+				<img id="imagen" src="${imgen}" alt="Imagen de Actividad" class="w-full h-full object-cover rounded-lg">
 			</div>
         </div>
     </div>

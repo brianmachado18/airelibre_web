@@ -1,12 +1,8 @@
 package Servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import datatype.DtDeportista;
-import datatype.DtEntrenador;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -15,7 +11,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
 import logica.*;
 import excepciones.*;
 
@@ -44,22 +39,23 @@ public class login extends HttpServlet {
     	
     	String nickname = request.getParameter("username");
     	String password = request.getParameter("password");
-    	Boolean usuarioExiste;
-    	Boolean consExiste;
+    	//Boolean usuarioExiste;
+    	Boolean consExiste = false;
     	
     	try {
     		
     		if(!Pattern.compile("^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$").matcher(nickname).matches()){
-    			usuarioExiste = ICC.usuarioExiste(nickname, null);
-    			consExiste = ICC.traerPass(nickname, null, password);
+    			if(ICC.usuarioExiste(nickname, null)) {
+    				consExiste = ICC.traerPass(nickname, null, password);
+    			}
     		}else{
-    			usuarioExiste = ICC.usuarioExiste(null, nickname);
-    			consExiste = ICC.traerPass(null, nickname, password);
-    			nickname = ICC.obtenerNickname(nickname);
+    			if(ICC.usuarioExiste(null, nickname)) {
+    				consExiste = ICC.traerPass(null, nickname, password);
+        			nickname = ICC.obtenerNickname(nickname);
+    			}
     		}
-    	
     		
-    		if(usuarioExiste && consExiste){
+    		if(consExiste){
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioLogueado", nickname);
                 if(ICC.esEntrenador(nickname)){
@@ -69,17 +65,17 @@ public class login extends HttpServlet {
                 }
                 response.sendRedirect("index.jsp");
                 
+                
                 //Visualizar datos guiardados en localStorage
                 HttpSession session2 = request.getSession(false);
                 if (session2 != null) {
-                    
                     String usuarioLogueado = (String) session2.getAttribute("usuarioLogueado");
                     if (usuarioLogueado != null) {
-                      
                         System.out.println("Usuario logueado: " + usuarioLogueado);
                     }
                 }
-                       
+                //-------------------------------------------
+                
                 
     		}else{
 				RequestDispatcher rd;

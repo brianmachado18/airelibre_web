@@ -17,7 +17,7 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Registro de Actividades</h1>
         </div>
-        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
+        <a href="login.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
     </nav>
 
     <div class="flex">
