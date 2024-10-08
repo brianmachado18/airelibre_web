@@ -38,10 +38,17 @@
                     <ul id="submenuActividades" class="ml-4 mt-2 hidden">
                         <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaActividad.jsp">Alta Actividad</a></li>
                         <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarActividad.jsp">Consultar Actividad</a></li>
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaClase.jsp">Alta Clase Deportiva</a></li>
                     </ul>
                 </li>
-                <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="#">Ayuda</a></li>
+                                 <li>
+                    <a id="clasesToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Clases Deportivas</a>
+                    <ul id="submenuClases" class="ml-4 mt-2 hidden">
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaClaseDeportiva.jsp">Alta Clase Deportiva</a></li>
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarClaseDeportiva.jsp">Consultar Clase Deportiva</a></li>
+                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="inscripcionClaseDeportiva.jsp">Inscripción Clase Deportiva</a></li>
+                    </ul>
+                </li>
+                <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="https://chatgpt.com/">Ayuda</a></li>
             </ul>
         </nav>
 
@@ -136,7 +143,11 @@
         submenuActividades.classList.toggle('hidden');
     };
 
-
+    document.getElementById('clasesToggle').onclick = function() {
+        const submenuActividades = document.getElementById('submenuClases');
+        submenuActividades.classList.toggle('hidden');
+    };
+    
         function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');
