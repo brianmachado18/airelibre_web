@@ -45,6 +45,7 @@ public class consultarActividad extends HttpServlet {
     		request.setAttribute("fechaAlta", tActividad.getFechaAlta());
     		request.setAttribute("estado", tActividad.getEstado());
     		request.setAttribute("imgen", request.getContextPath()+ tActividad.getImagen());
+			request.setAttribute("clases", ICA.obtenerVectorClasesActividad(nombre));
     		
     		rd = request.getRequestDispatcher("/consultarActividad.jsp");
  			rd.forward(request, response);

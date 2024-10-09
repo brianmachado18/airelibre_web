@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,11 +81,16 @@
                     <div class="mb-4">
                         <label for="clases" class="block text-gray-700">Seleccionar Clases Asociadas:</label>
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                            <option value="Clase1">Clase 1</option>
-                            <option value="Clase2">Clase 2</option>
-                            <option value="Clase3">Clase 3</option>
-                            <option value="Clase4">Clase 4</option>
-                            <!-- Agrega más opciones según sea necesario -->
+                            <%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%
+                            Vector<String> clases = (java.util.Vector<String>)request.getAttribute("clases");
+							if (clases!=null){
+								for (String clase : clases){ 
+									out.print("<option value='"+clase+"'>"+clase+"</option>");
+								}
+							}
+							%>
                         </select>
                     </div>
                 </form>
