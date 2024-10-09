@@ -26,6 +26,7 @@
 
     </div>
 
+<<<<<<< Updated upstream
     <script>
         
         document.addEventListener("DOMContentLoaded", function() {
@@ -63,5 +64,9 @@
         
         
     </script>
+=======
+    <script type="text/javascript" src="js/menu.jsp"></script>
+
+>>>>>>> Stashed changes
 </body>
 </html>

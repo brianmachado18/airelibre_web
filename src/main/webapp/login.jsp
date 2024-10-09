@@ -32,6 +32,7 @@
             <button onclick="location.href='altaUsuario.jsp'" class="bg-green-500 text-white rounded p-2 hover:bg-green-600 ml-2">Registrarse</button>
         </div>
     </div>
+<<<<<<< Updated upstream
     <script>
         
         
@@ -48,5 +49,7 @@
         }
     });
     </script>
+=======
+>>>>>>> Stashed changes
 </body>
 </html>
