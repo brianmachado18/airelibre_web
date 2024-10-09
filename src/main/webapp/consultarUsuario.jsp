@@ -17,10 +17,9 @@
 
 	<nav class="bg-blue-600 p-4 flex justify-between items-center">
 		<div class="flex-grow text-center">
-			<h1 class="text-white text-2xl">Registro de Usuarios</h1>
+			<h1 class="text-white text-2xl">Consulta de Usuarios</h1>
 		</div>
-		<a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar
-			Sesión</a>
+		<a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
 	</nav>
 
 	<div class="flex">
@@ -38,6 +37,23 @@
 
 				<!-- Campo de búsqueda -->
 				<form id="userForm" action="consultarUsuario" method="POST">
+					<div class="mb-4">
+            			<label for="clases" class="block text-gray-700">Usuarios:</label>
+            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                    		<%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+                    		Fabrica fab = Fabrica.getInstance();
+							Vector<String> usus = fab.getIControladorUsuario().obtenerVectorUsuarios();
+							if (usus!=null){
+								for (String u : usus){ 
+									out.print("<option value='"+u+"'>"+u+"</option>");
+								}
+							}
+							%>
+            			</select>
+            		</div>
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
 							placeholder="Buscar usuario..."
@@ -79,28 +95,14 @@
 							class="border border-gray-300 rounded w-full p-2"value="${fnac}" disabled>
 					</div>
 
-					<div class="mb-4">
-						<label for="contrasena" class="block text-gray-700" >Contraseña:</label>
-						<input type="password" id="contrasena" name="contrasena"
-							class="border border-gray-300 rounded w-full p-2" value="${con}"disabled>
-					</div>
-
-					<div class="mb-4">
-						<label for="confirmar" class="block text-gray-700">Confirmar
-							Contraseña:</label> <input type="password" id="confirmar"
-							name="confirmar"
-							class="border border-gray-300 rounded w-full p-2"  value="${con}"disabled>
-					</div>
-
-					<label class="block text-gray-700 mb-2">Selecciona tu rol:</label>
-					<button type="button" id = "srol"
-						class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600"
-						onclick="selectRole('Deportista')"  disabled >Deportista</button>
-					<button type="button" id = "srol"
-						class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600"
-						onclick="selectRole('Entrenador')" disabled >Entrenador</button>
+					<label class="block text-gray-700 mb-2">Rol:</label>
+					
+					
 
 					<div id="deportistaFields" class="hidden mb-4">
+						<button type="button" id = "srol"
+							class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600"
+							onclick="selectRole('Deportista')"  disabled >Deportista</button>
 						<label class="block text-gray-700">¿Eres profesional?</label> <input
 							type="radio" id="profesional_si" name="profesional" value="si" disabled>
 						<label for="profesional_si">Sí</label> <input type="radio"
@@ -109,6 +111,9 @@
 					</div>
 
 					<div id="entrenadorFields" class="hidden mb-4">
+						<button type="button" id = "srol"
+							class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600"
+							onclick="selectRole('Entrenador')" disabled >Entrenador</button>
 						<div>
 							<label for="disciplina" class="block text-gray-700">¿Cuál
 								es tu disciplina?</label> <input type="text" id="disciplina"
@@ -121,6 +126,39 @@
 								class="border border-gray-300 rounded w-full p-2" value="${web}"disabled>
 						</div>
 					</div>
+					
+					<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4" style="display: none;">
+						<label for="inscrp" class="block text-gray-700">Clases Inscripto:</label>
+            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                    		<%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%
+							Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
+							if (clasesIns!=null){
+								for (String ci : clasesIns){ 
+									out.print("<option value='"+ci+"'>"+ci+"</option>");
+								}
+							}
+							%>
+            			</select>
+					</div>
+					
+					<div id="inscrpcionesFieldsMismoDepor" class="hidden mb-4" style="display: none;">
+						<label for="inscrp" class="block text-gray-700">Mis Inscripciones:</label>
+            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                    		<%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%
+							Vector<String> inscrips = (java.util.Vector<String>)request.getAttribute("inscrips");
+							if (inscrips!=null){
+								for (String in : inscrips){ 
+									out.print("<option value='"+in+"'>"+in+"</option>");
+								}
+							}
+							%>
+            			</select>
+					</div>
+					
 				</form>
 			</div>
 
@@ -161,7 +199,21 @@
                 profesionalSi.checked = true;
             }
 
-
+            const inscrpcionesFieldsOtroDepor = document.getElementById('inscrpcionesFieldsOtroDepor');
+            const inscrpcionesFieldsMismoDepor = document.getElementById('inscrpcionesFieldsMismoDepor');
+            var nn = '<%= session.getAttribute("usuarioLogueado") %>';
+            var tu = '<%= session.getAttribute("tipoUsuario") %>';
+            if("${nickname}" == nn && 'Deportista' == tu){
+            	inscrpcionesFieldsOtroDepor.style.display = "none";
+            	inscrpcionesFieldsMismoDepor.style.display = "inline";
+            }else if("${tipoUsuario}" == 'Deportista'){
+            	inscrpcionesFieldsOtroDepor.style.display = "inline";
+            	inscrpcionesFieldsMismoDepor.style.display = "none";
+			}else{
+				inscrpcionesFieldsOtroDepor.style.display = "none";
+            	inscrpcionesFieldsMismoDepor.style.display = "none";
+			}
+            
         });</script>
 </body>
 </html>

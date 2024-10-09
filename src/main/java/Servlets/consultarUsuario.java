@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import logica.*;
 import excepciones.*;
 
@@ -35,48 +36,50 @@ public class consultarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	Fabrica fab = Fabrica.getInstance();
-    	IControladorUsuario ICC = fab.getIControladorUsuario();
+    	IControladorUsuario ICU = fab.getIControladorUsuario();
+    	IControladorClaseDeportiva ICC = fab.getIControladorClaseDeportiva();
     	
     	String nickname = request.getParameter("buscar");
     	
     	try {
     		
-			if(ICC.usuarioExiste(nickname)){
+			if(ICU.usuarioExiste(nickname)){
 				RequestDispatcher rd;
-				if(ICC.esEntrenador(nickname)){
-					DtEntrenador traerEntrenador = ICC.obtenerEntrenador(nickname);
+				if(ICU.esEntrenador(nickname)){
+					DtEntrenador traerEntrenador = ICU.obtenerEntrenador(nickname);
 					request.setAttribute("nombre", traerEntrenador.getNombre());
 	     			request.setAttribute("apellido", traerEntrenador.getApellido());
 	     			request.setAttribute("nickname", traerEntrenador.getNickname());
 	     			request.setAttribute("correo", traerEntrenador.getMail());
 	     			request.setAttribute("fnac", traerEntrenador.getFechaNacimiento());
-	     			request.setAttribute("con", traerEntrenador.getContrasena());
 	     			request.setAttribute("tipoUsuario", "Entrenador");
 	     			request.setAttribute("web", traerEntrenador.getSitioWeb());
 	     			request.setAttribute("disciplina", traerEntrenador.getDisciplina());
-	     			request.setAttribute("imgen", traerEntrenador.getImagen());
+	     			request.setAttribute("imgen", request.getContextPath()+ traerEntrenador.getImagen());
 	     			
 	     			rd = request.getRequestDispatcher("/consultarUsuario.jsp");
 	     			rd.forward(request, response);
 				}else{
-					DtDeportista traerDeportista = ICC.obtenerDeportista(nickname);
+					DtDeportista traerDeportista = ICU.obtenerDeportista(nickname);
 					request.setAttribute("nombre", traerDeportista.getNombre());
 	     			request.setAttribute("apellido", traerDeportista.getApellido());
 	     			request.setAttribute("nickname", traerDeportista.getNickname());
 	     			request.setAttribute("correo", traerDeportista.getMail());
 	     			request.setAttribute("fnac", traerDeportista.getFechaNacimiento());
-	     			request.setAttribute("con", traerDeportista.getContrasena());
 	     			request.setAttribute("imgen",request.getContextPath()+ traerDeportista.getImagen());
-	     			
-	     			System.out.println(request.getContextPath() + traerDeportista.getImagen());
-	     			
 	     			request.setAttribute("tipoUsuario", "Deportista");
-	     		
+	     			request.setAttribute("clasesIns", ICC.obtenerClasesDeportista(nickname));
+	     			
 	     			if (traerDeportista.isEsProfesional()) {
 	     	            request.setAttribute("prof", true);
 	     	        } else {
 	     	            request.setAttribute("prof", false);
 	     	        }
+	     			
+	     			HttpSession session = request.getSession(false);
+					if(nickname.equals((String) session.getAttribute("usuarioLogueado"))) {
+						request.setAttribute("inscrips", ICC.obtenerInscrpcionesDeportista(nickname));
+					}
 	     			
 	     			rd = request.getRequestDispatcher("/consultarUsuario.jsp");
 	     			rd.forward(request, response);
@@ -92,7 +95,5 @@ public class consultarUsuario extends HttpServlet {
 		} catch (PersistenciaException e) {
 			e.printStackTrace();
 		}
-    	
-    	System.out.println(nickname);
     }
 }
