@@ -145,18 +145,62 @@
 					
 					<div id="inscrpcionesFieldsMismoDepor" class="hidden mb-4" style="display: none;">
 						<label for="inscrp" class="block text-gray-700">Mis Inscripciones:</label>
-            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                    		<%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
-							<%
-							Vector<String> inscrips = (java.util.Vector<String>)request.getAttribute("inscrips");
-							if (inscrips!=null){
-								for (String in : inscrips){ 
-									out.print("<option value='"+in+"'>"+in+"</option>");
-								}
+            			<table id="tablaInscripciones">
+						<tr>
+							<th>Clase</th>
+						   	<th>Costo</th>
+						   	<th>Cantidad de deportistas</th>
+						</tr>
+						<%@ page import="java.util.Vector" %>
+						<%@ page import="java.util.Iterator" %>
+						<%
+						String[][] inscrips = (String[][])request.getAttribute("inscrips");
+						if (inscrips!=null){
+							for (int i=0; i<inscrips.length; i++){ 
+								out.print("<tr><td>" + inscrips[i][0] + "</td><td>" + inscrips[i][1] + "</td><td>" + inscrips[i][2] + "</td></tr>");
 							}
-							%>
-            			</select>
+						}
+						%>
+						</table>
+					</div>
+					
+					<div id="actividadesEntrenador" class="hidden mb-4" style="display: none;">
+						<label for="inscrp" class="block text-gray-700">Actividades vinculadas:</label>
+            			<table id="tablaActividadesAceptadas">
+						<tr>
+							<th>Actividad</th>
+						   	<th>Lugar</th>
+						   	<th>Duracion</th>
+						</tr>
+						<%
+						String[][] actividadesAceptadas = (String[][])request.getAttribute("actividadesAceptadas");
+						if (actividadesAceptadas!=null){
+							for (int i=0; i<actividadesAceptadas.length; i++){ 
+								out.print("<tr><td>" + actividadesAceptadas[i][0] + "</td><td>" + actividadesAceptadas[i][1] + "</td><td>" + actividadesAceptadas[i][2] + "</td></tr>");
+							}
+						}
+						%>
+						</table>
+					</div>
+					
+					<div id="actividadesMismoEntrenador" class="hidden mb-4" style="display: none;">
+						<label for="inscrp" class="block text-gray-700">Mis Actividades:</label>
+            			<table id="tablaActividades">
+						<tr>
+							<th>Actividad</th>
+							<th>Estado</th>
+						   	<th>Lugar</th>
+						   	<th>Duracion</th>
+						</tr>
+						<%
+						String[][] actividades = (String[][])request.getAttribute("actividades");
+						if (actividades!=null){
+							for (int i=0; i<actividades.length; i++){ 
+								out.print("<tr><td>" + actividades[i][0] + "</td><td>" + actividades[i][1] + "</td><td>" + actividades[i][2] + "</td><td>" + actividades[i][3] + "</td></tr>");
+							}
+						}
+						%>
+						</table>
 					</div>
 					
 				</form>
@@ -201,17 +245,40 @@
 
             const inscrpcionesFieldsOtroDepor = document.getElementById('inscrpcionesFieldsOtroDepor');
             const inscrpcionesFieldsMismoDepor = document.getElementById('inscrpcionesFieldsMismoDepor');
+            const actividadesEntrenador = document.getElementById('actividadesEntrenador');
+            const actividadesMismoEntrenador = document.getElementById('actividadesMismoEntrenador');
+            
             var nn = '<%= session.getAttribute("usuarioLogueado") %>';
             var tu = '<%= session.getAttribute("tipoUsuario") %>';
-            if("${nickname}" == nn && 'Deportista' == tu){
-            	inscrpcionesFieldsOtroDepor.style.display = "none";
-            	inscrpcionesFieldsMismoDepor.style.display = "inline";
-            }else if("${tipoUsuario}" == 'Deportista'){
-            	inscrpcionesFieldsOtroDepor.style.display = "inline";
-            	inscrpcionesFieldsMismoDepor.style.display = "none";
+            
+            if("${nickname}" == nn){
+            	if('Deportista' == tu){
+					//Un deportista consulta SU perfil
+            		inscrpcionesFieldsOtroDepor.style.display = "none";
+                	inscrpcionesFieldsMismoDepor.style.display = "inline";
+                	actividadesEntrenador.style.display = "none";
+                	actividadesMismoEntrenador.style.display = "none";
+				}else{
+					//Un entrenador consulta SU perfil
+            		inscrpcionesFieldsOtroDepor.style.display = "none";
+                	inscrpcionesFieldsMismoDepor.style.display = "none";
+                	actividadesEntrenador.style.display = "none";
+                	actividadesMismoEntrenador.style.display = "inline";
+				}
 			}else{
-				inscrpcionesFieldsOtroDepor.style.display = "none";
-            	inscrpcionesFieldsMismoDepor.style.display = "none";
+				if("${tipoUsuario}" == 'Deportista'){
+					//Un usuario consulta un perfil de deportista
+					inscrpcionesFieldsOtroDepor.style.display = "inline";
+	            	inscrpcionesFieldsMismoDepor.style.display = "none";
+                	actividadesEntrenador.style.display = "none";
+                	actividadesMismoEntrenador.style.display = "none";
+				}else{
+					//Un usuario consulta un perfil de entrenador
+            		inscrpcionesFieldsOtroDepor.style.display = "none";
+                	inscrpcionesFieldsMismoDepor.style.display = "none";
+                	actividadesEntrenador.style.display = "inline";
+                	actividadesMismoEntrenador.style.display = "none";
+				}
 			}
             
         });</script>

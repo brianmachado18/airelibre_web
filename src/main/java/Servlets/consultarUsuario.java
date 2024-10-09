@@ -38,6 +38,7 @@ public class consultarUsuario extends HttpServlet {
     	Fabrica fab = Fabrica.getInstance();
     	IControladorUsuario ICU = fab.getIControladorUsuario();
     	IControladorClaseDeportiva ICC = fab.getIControladorClaseDeportiva();
+    	IControladorActividad ICA = fab.getIControladorActividad();
     	
     	String nickname = request.getParameter("buscar");
     	
@@ -57,6 +58,13 @@ public class consultarUsuario extends HttpServlet {
 	     			request.setAttribute("disciplina", traerEntrenador.getDisciplina());
 	     			request.setAttribute("imgen", request.getContextPath()+ traerEntrenador.getImagen());
 	     			
+	     			HttpSession session = request.getSession(false);
+					if(nickname.equals((String) session.getAttribute("usuarioLogueado"))) {
+						request.setAttribute("actividades", ICA.obtenerVectorActividadesEntrenador(nickname));
+					}else {
+		     			request.setAttribute("actividadesAceptadas", ICA.obtenerVectorActividadesAceptadasEntrenador(nickname));
+					}
+	     			
 	     			rd = request.getRequestDispatcher("/consultarUsuario.jsp");
 	     			rd.forward(request, response);
 				}else{
@@ -68,7 +76,6 @@ public class consultarUsuario extends HttpServlet {
 	     			request.setAttribute("fnac", traerDeportista.getFechaNacimiento());
 	     			request.setAttribute("imgen",request.getContextPath()+ traerDeportista.getImagen());
 	     			request.setAttribute("tipoUsuario", "Deportista");
-	     			request.setAttribute("clasesIns", ICC.obtenerClasesDeportista(nickname));
 	     			
 	     			if (traerDeportista.isEsProfesional()) {
 	     	            request.setAttribute("prof", true);
@@ -79,6 +86,8 @@ public class consultarUsuario extends HttpServlet {
 	     			HttpSession session = request.getSession(false);
 					if(nickname.equals((String) session.getAttribute("usuarioLogueado"))) {
 						request.setAttribute("inscrips", ICC.obtenerInscrpcionesDeportista(nickname));
+					}else {
+		     			request.setAttribute("clasesIns", ICC.obtenerClasesDeportista(nickname));
 					}
 	     			
 	     			rd = request.getRequestDispatcher("/consultarUsuario.jsp");
