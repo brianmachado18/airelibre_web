@@ -150,6 +150,7 @@
 							<th>Clase</th>
 						   	<th>Costo</th>
 						   	<th>Cantidad de deportistas</th>
+						   	<th></th>
 						</tr>
 						<%@ page import="java.util.Vector" %>
 						<%@ page import="java.util.Iterator" %>
@@ -157,7 +158,11 @@
 						String[][] inscrips = (String[][])request.getAttribute("inscrips");
 						if (inscrips!=null){
 							for (int i=0; i<inscrips.length; i++){ 
-								out.print("<tr><td>" + inscrips[i][0] + "</td><td>" + inscrips[i][1] + "</td><td>" + inscrips[i][2] + "</td></tr>");
+								out.print("<tr><td>" + inscrips[i][0] + 
+										"</td><td>" + inscrips[i][1] + 
+										"</td><td>" + inscrips[i][2] + 
+										"</td><td>" + "<button id=\"btnC" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + inscrips[i][0] + "\" onclick=\"testFunction(this.value)\">Buscar</button>" + 
+										"</td></tr>");
 							}
 						}
 						%>
@@ -171,12 +176,17 @@
 							<th>Actividad</th>
 						   	<th>Lugar</th>
 						   	<th>Duracion</th>
+						   	<th></th>
 						</tr>
 						<%
 						String[][] actividadesAceptadas = (String[][])request.getAttribute("actividadesAceptadas");
 						if (actividadesAceptadas!=null){
 							for (int i=0; i<actividadesAceptadas.length; i++){ 
-								out.print("<tr><td>" + actividadesAceptadas[i][0] + "</td><td>" + actividadesAceptadas[i][1] + "</td><td>" + actividadesAceptadas[i][2] + "</td></tr>");
+								out.print("<tr><td>" + actividadesAceptadas[i][0] + 
+										"</td><td>" + actividadesAceptadas[i][1] + 
+										"</td><td>" + actividadesAceptadas[i][2] + 
+										"</td><td>" + "<button id=\"btnA" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + actividadesAceptadas[i][0] + "\" onclick=\"testFunction(this.value)\">Buscar</button>" + 
+										"</td></tr>");
 							}
 						}
 						%>
@@ -191,12 +201,18 @@
 							<th>Estado</th>
 						   	<th>Lugar</th>
 						   	<th>Duracion</th>
+						   	<th></th>
 						</tr>
 						<%
 						String[][] actividades = (String[][])request.getAttribute("actividades");
 						if (actividades!=null){
 							for (int i=0; i<actividades.length; i++){ 
-								out.print("<tr><td>" + actividades[i][0] + "</td><td>" + actividades[i][1] + "</td><td>" + actividades[i][2] + "</td><td>" + actividades[i][3] + "</td></tr>");
+								out.print("<tr><td>" + actividades[i][0] + 
+										"</td><td>" + actividades[i][1] + 
+										"</td><td>" + actividades[i][2] + 
+										"</td><td>" + actividades[i][3] + 
+										"</td><td>" + "<button id=\"btnB" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + actividades[i][0] + "\" onclick=\"testFunction(this.value)\">Buscar</button>" + 
+										"</td></tr>");
 							}
 						}
 						%>
@@ -214,11 +230,25 @@
 					alt="Imagen de Usuario"
 					class="w-full h-full object-cover rounded-lg">
 			</div>
+			
 		</div>
+		
 	</div>
 
 	    <script type="text/javascript" src="js/menu.jsp"></script>
 	    <script>
+	    
+	    function testFunction(val) {
+	    	console.log(val);
+	    	const actividadesAceptadas = <%String[][] aa = (String[][])request.getAttribute("actividadesAceptadas");%>;
+	    	for(let i = 0; actividadesAceptadas.lenght()>i; i++){
+	    		document.getElementById("btnB" + i).onclick=function(){
+					window.location.href="/consultarActividad";
+	    		}
+			}
+	    	
+		}
+	    
 	    function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');
