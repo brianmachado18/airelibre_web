@@ -51,13 +51,18 @@ public class altaUsuario extends HttpServlet {
         String esProfesionalStr = request.getParameter("profesional"); 
         Boolean esProfesional = "si".equals(esProfesionalStr);
         
-        System.out.println(tipoUsuario);
         Part archivo = request.getPart("imagen"); 
-        String nombreArchivo = archivo.getSubmittedFileName(); 
-        String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
+        String nombreArchivo = null; 
+        String extension = null;
+        String rutaArchivo = null;
        
-        String rutaDestino = request.getServletContext().getRealPath("/Perfiles/") + nickname + extension;
-        archivo.write(rutaDestino);
+        if(archivo.getSize() > 0) {
+            nombreArchivo = archivo.getSubmittedFileName(); 
+            extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
+            String rutaDestino = request.getServletContext().getRealPath("/Perfiles/") + nickname + extension;
+            archivo.write(rutaDestino);
+            rutaArchivo = "/Perfiles/" + nickname + extension;
+        }
         
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(fechaNacimientoStr, formatoFecha);
@@ -70,7 +75,7 @@ public class altaUsuario extends HttpServlet {
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
      		}else {
-    			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario.trim(), esProfesional, disciplina, paginaWeb, "/Perfiles/" + nickname + extension);
+    			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario.trim(), esProfesional, disciplina, paginaWeb, rutaArchivo);
     			RequestDispatcher rd;
      			request.setAttribute("estado", "Usuario creado.");
      			rd = request.getRequestDispatcher("/notificacion.jsp");

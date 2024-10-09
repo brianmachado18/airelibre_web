@@ -20,7 +20,7 @@
             <div class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto text-center">
                 <h2 class="text-2xl font-bold mb-4">${estado}</h2>
                 <p class="text-gray-700 mb-4">${mensaje}</p>
-                <button type="submit" id="continuar" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600">Continuar</button>
+                <button type="submit" id="continuar" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600" >Continuar</button>
             </div>
         </main>
     </div>
