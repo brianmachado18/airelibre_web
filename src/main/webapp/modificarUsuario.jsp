@@ -104,16 +104,22 @@
         </div>
     </div>
 <<<<<<< Updated upstream
-    
-    <script type="text/javascript" src="js/menu.jsp"></script>
-    
-    <script>
+<<<<<<< Updated upstream
 =======
 >>>>>>> Stashed changes
     
     <script type="text/javascript" src="js/menu.jsp"></script>
     
     <script>
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+    
+    <script type="text/javascript" src="js/menu.jsp"></script>
+    
+    <script>
+=======
+>>>>>>> Stashed changes
     
    	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
     if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {

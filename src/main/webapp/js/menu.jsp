@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
         document.addEventListener("DOMContentLoaded", function() {
             
@@ -39,6 +40,8 @@
         });
         
 =======
+=======
+>>>>>>> Stashed changes
 document.addEventListener("DOMContentLoaded", function() {
     let menuUrl;
     const tipoUsuario = '<%= session.getAttribute("tipoUsuario") %>';
@@ -70,4 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     }
 });
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

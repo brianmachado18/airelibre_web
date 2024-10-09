@@ -138,7 +138,10 @@
 	    <script type="text/javascript" src="js/menu.jsp"></script>
 	    <script>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 	    
 	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
 	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
@@ -147,6 +150,9 @@
 	    
 	    }
 	    
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	    function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
