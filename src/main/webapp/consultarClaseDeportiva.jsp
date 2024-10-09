@@ -22,35 +22,7 @@
 
     <div class="flex">
         <!-- Menú lateral -->
-        <nav class="bg-white w-64 h-screen p-5 border-r border-gray-200">
-            <h5 class="font-semibold mb-4">Menú</h5>
-            <ul>
-                <li>
-                    <a id="usuariosToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Usuarios</a>
-                    <ul id="submenuUsuarios" class="ml-4 mt-2 hidden">
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaUsuario.jsp">Alta Usuario</a></li>
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarUsuario.jsp">Consultar Usuario</a></li>
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="modificarUsuario.jsp">Modificar Usuario</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a id="actividadesToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Actividades</a>
-                    <ul id="submenuActividades" class="ml-4 mt-2 hidden">
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaActividad.jsp">Alta Actividad</a></li>
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarActividad.jsp">Consultar Actividad</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a id="clasesToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Clases Deportivas</a>
-                    <ul id="submenuClases" class="ml-4 mt-2 hidden">
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaClaseDeportiva.jsp">Alta Clase Deportiva</a></li>
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarClaseDeportiva.jsp">Consultar Clase Deportiva</a></li>
-                        <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="inscripcionClaseDeportiva.jsp">Inscripción Clase Deportiva</a></li>
-                    </ul>
-                </li>
-                <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="https://chatgpt.com/">Ayuda</a></li>
-            </ul>
-        </nav>
+<div id="menuLateral"></div>
 
         <!-- Contenedor para el formulario -->
         <div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;">
@@ -136,22 +108,14 @@
         </div>
     </div>
 
-    <script>
-        // Script para mostrar/ocultar los submenús
-        document.getElementById('usuariosToggle').onclick = function() {
-            const submenuUsuarios = document.getElementById('submenuUsuarios');
-            submenuUsuarios.classList.toggle('hidden');
-        };
-
-        document.getElementById('actividadesToggle').onclick = function() {
-            const submenuActividades = document.getElementById('submenuActividades');
-            submenuActividades.classList.toggle('hidden');
-        };
-        
-        document.getElementById('clasesToggle').onclick = function() {
-            const submenuActividades = document.getElementById('submenuClases');
-            submenuActividades.classList.toggle('hidden');
-        };
-    </script>
+    <script type="text/javascript" src="js/menu.jsp"></script>
+        <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesión";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
 </body>
 </html>

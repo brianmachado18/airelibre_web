@@ -19,7 +19,7 @@
 		<div class="flex-grow text-center">
 			<h1 class="text-white text-2xl">Registro de Usuarios</h1>
 		</div>
-		<a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar
+		<a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar
 			Sesión</a>
 	</nav>
 
@@ -137,6 +137,17 @@
 
 	    <script type="text/javascript" src="js/menu.jsp"></script>
 	    <script>
+<<<<<<< Updated upstream
+=======
+	    
+	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+	    	document.getElementById("acs").innerText = "Cerrar Sesión";
+	    	document.getElementById("acs").href = "logout"; 
+	    
+	    }
+	    
+>>>>>>> Stashed changes
 	    function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');

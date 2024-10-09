@@ -103,11 +103,24 @@
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
+    
+    <script type="text/javascript" src="js/menu.jsp"></script>
+    
+    <script>
+=======
+>>>>>>> Stashed changes
     
     <script type="text/javascript" src="js/menu.jsp"></script>
     
     <script>
     
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesión";
+    	document.getElementById("acs").href = "logout"; 
+    
+
         function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');

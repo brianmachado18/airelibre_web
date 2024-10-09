@@ -17,7 +17,7 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl"></h1>
         </div>
-        <a href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesión</a>
+        <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesión</a>
     </nav>
 
     <div class="flex">
@@ -27,6 +27,18 @@
     </div>
 
     <script type="text/javascript" src="js/menu.jsp"></script>
+<<<<<<< Updated upstream
+=======
+    <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesión";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
+
+>>>>>>> Stashed changes
 
 </body>
 </html>

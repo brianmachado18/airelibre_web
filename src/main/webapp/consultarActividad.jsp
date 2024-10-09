@@ -97,6 +97,17 @@
     </div>
 
         <script type="text/javascript" src="js/menu.jsp"></script>
+<<<<<<< Updated upstream
 
+=======
+    <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesión";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
+>>>>>>> Stashed changes
 </body>
 </html>
