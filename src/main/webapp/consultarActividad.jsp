@@ -77,7 +77,7 @@
 
                     <div class="mb-4">
                         <label for="descripcion" class="block text-gray-700">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" class="border border-gray-300 rounded w-full p-2" ${descripcion} disabled></textarea>
+                        <textarea id="descripcion" name="descripcion" class="border border-gray-300 rounded w-full p-2" disabled> ${descripcion}</textarea>
                     </div>
 
                     <div class="mb-4">

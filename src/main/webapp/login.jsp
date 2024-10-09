@@ -32,6 +32,21 @@
             <button onclick="location.href='altaUsuario.jsp'" class="bg-green-500 text-white rounded p-2 hover:bg-green-600 ml-2">Registrarse</button>
         </div>
     </div>
-
+    <script>
+        
+        
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener el atributo de sesión desde el JSP
+        var tipoUsuario = '<%= session.getAttribute("tipoUsuario") %>';
+        var usuarioLogueado = '<%= session.getAttribute("usuarioLogueado") %>';
+        // Almacenar el valor en sessionStorage
+        if (tipoUsuario && usuarioLogueado) {
+        	localStorage.setItem('tipoUsuario', tipoUsuario);
+        	localStorage.setItem('usuarioLogueado', usuarioLogueado);
+        } else {
+            console.log('No hay valor para almacenar en sessionStorage.');
+        }
+    });
+    </script>
 </body>
 </html>

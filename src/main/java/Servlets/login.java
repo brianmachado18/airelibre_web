@@ -67,13 +67,13 @@ public class login extends HttpServlet {
                 
                 
                 //Visualizar datos guiardados en localStorage
-                HttpSession session2 = request.getSession(false);
-                if (session2 != null) {
-                    String usuarioLogueado = (String) session2.getAttribute("usuarioLogueado");
-                    if (usuarioLogueado != null) {
-                        System.out.println("Usuario logueado: " + usuarioLogueado);
-                    }
-                }
+//                HttpSession session2 = request.getSession(false);
+//                if (session2 != null) {
+//                    String usuarioLogueado = (String) session2.getAttribute("usuarioLogueado");
+//                    if (usuarioLogueado != null) {
+//                        System.out.println("Usuario logueado: " + usuarioLogueado);
+//                    }
+//                }
                 //-------------------------------------------
                 
                 
