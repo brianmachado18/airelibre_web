@@ -17,11 +17,12 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Registro de Clases Deportivas</h1>
         </div>
-        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesion</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesi�n</a>
+
     </nav>
 
     <div class="flex">
-        <!-- Menu lateral -->
+        <!-- Men� lateral -->
 		<div id="menuLateral"></div>
 
         <!-- Contenedor para el formulario -->
@@ -94,6 +95,13 @@
     </div>
 
        <script type="text/javascript" src="js/menu.jsp"></script>
-
+		    <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesi�n";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
 </body>
 </html>

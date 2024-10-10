@@ -1,92 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Usuarios</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultar Usuarios</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+	rel="stylesheet">
+<style>
+.hidden {
+	display: none;
+}
+</style>
 </head>
 <body class="bg-gray-100">
 
-    <nav class="bg-blue-600 p-4 flex justify-between items-center">
-        <div class="flex-grow text-center">
-            <h1 class="text-white text-2xl">Registro de Usuarios</h1>
-        </div>
-        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
-    </nav>
+	<nav class="bg-blue-600 p-4 flex justify-between items-center">
+		<div class="flex-grow text-center">
+			<h1 class="text-white text-2xl">Registro de Usuarios</h1>
+		</div>
+		<a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar
+			Sesiï¿½n</a>
+	</nav>
 
-    <div class="flex">
-        <!-- Menú lateral -->
-               <div id="menuLateral"></div>
+	<div class="flex">
+		<!-- Menï¿½ lateral -->
+        <div id="menuLateral"></div>
 
-        <!-- Contenedor para el formulario y la imagen -->
-        <div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;">
-            <!-- Formulario con campos bloqueados -->
-            <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
-                <h2 class="text-center text-2xl font-bold mb-4">Buscar Usuario</h2>
 
-                <!-- Campo de búsqueda -->
-                <div class="mb-4 flex">
-                    <input type="text" id="buscar" name="buscar" placeholder="Buscar usuario..." class="border border-gray-300 rounded w-full p-2" required>
-                    <button class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
+		<!-- Contenedor para el formulario y la imagen -->
+		<div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;">
+			<!-- Estilo inline para margen -->
+			<!-- Formulario con campos bloqueados -->
+			<div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full"
+				style="margin-right: 2rem;">
+				<h2 class="text-center text-2xl font-bold mb-4">Buscar Usuario</h2>
+
+  			<form id="modificarForm" action="modificarUsuario" method="POST" >
+                <div class="mb-4">
+                    <label for="nombre" class="block text-gray-700">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2"
+                           value="${nombre}" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="apellido" class="block text-gray-700">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" class="border border-gray-300 rounded w-full p-2"
+                           value="${apellido}" required>
                 </div>
 
-                <form id="userForm" action="altaUsuario" method="POST">
-                    <div class="mb-4">
-                        <label for="nombre" class="block text-gray-700">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2">
-                    </div>
+                <div class="mb-4">
+                    <label for="nickname" class="block text-gray-700">Nickname:</label>
+                    <input type="text" id="nickname" name="nickname" class="border border-gray-300 rounded w-full p-2"
+                           value="${nickname}" disabled>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="apellido" class="block text-gray-700">Apellido:</label>
-                        <input type="text" id="apellido" name="apellido" class="border border-gray-300 rounded w-full p-2">
-                    </div>
+                <div class="mb-4">
+                    <label for="correo" class="block text-gray-700">Correo Electrï¿½nico:</label>
+                    <input type="email" id="correo" name="correo" class="border border-gray-300 rounded w-full p-2"
+                           value="${correo}" disabled>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="nickname" class="block text-gray-700">Nickname:</label>
-                        <input type="text" id="nickname" name="nickname" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
+                <div class="mb-4">
+                    <label for="fechaNacimiento" class="block text-gray-700">Fecha de Nacimiento:</label>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="border border-gray-300 rounded w-full p-2"
+                           value="${fnac}" required>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700">Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
+                <div class="mb-4">
+                    <label for="contrasena" class="block text-gray-700">Contraseï¿½a:</label>
+                    <input type="password" id="contrasena" name="contrasena" class="border border-gray-300 rounded w-full p-2"
+                           value="${con}" required>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="fecha" class="block text-gray-700">Fecha de Nacimiento:</label>
-                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2">
-                    </div>
+                <div class="mb-4">
+                    <label for="confirmarContrasena" class="block text-gray-700">Confirmar Contraseï¿½a:</label>
+                    <input type="password" id="confirmarContrasena" name="confirmarContrasena" class="border border-gray-300 rounded w-full p-2"
+                           value="${con}" required>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="contrasena" class="block text-gray-700">Contraseña:</label>
-                        <input type="password" id="contrasena" name="contrasena" class="border border-gray-300 rounded w-full p-2">
-                    </div>
+                <div class="mb-4">
+                    <label for="rol" class="block text-gray-700">Rol:</label>
+                    <input type="text" id="rol" name="rol" class="border border-gray-300 rounded w-full p-2"
+                           value="${tipoUsuario}" disabled>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="confirmar" class="block text-gray-700">Confirmar Contraseña:</label>
-                        <input type="password" id="confirmar" name="confirmar" class="border border-gray-300 rounded w-full p-2">
-                    </div>
+                <button type="submit" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600">Guardar Cambios</button>
+            </form>
+			</div>
 
-                    <label class="block text-gray-700 mb-2">Selecciona tu rol:</label>
-                    <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" onclick="selectRole('Deportista')">Deportista</button>
-                    <button type="button" class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" onclick="selectRole('Entrenador')">Entrenador</button>
+			<!-- Cuadro de imagen separado, pero mï¿½s cerca -->
+			<div
+				class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
+				<!-- Sin margen izquierdo -->
+				<img id="userImage" src="${imgen}"
+					alt="Imagen de Usuario"
+					class="w-full h-full object-cover rounded-lg">
+			</div>
+		</div>
+	</div>
 
                     <div id="deportistaFields" class="hidden mb-4">
-                        <label class="block text-gray-700">¿Eres profesional?</label>
+                        <label class="block text-gray-700">ï¿½Eres profesional?</label>
                         <input type="radio" id="profesional_si" name="profesional" value="si">
-                        <label for="profesional_si">Sí</label>
+                        <label for="profesional_si">Sï¿½</label>
                         <input type="radio" id="profesional_no" name="profesional" value="no">
                         <label for="profesional_no">No</label>
                     </div>
 
                     <div id="entrenadorFields" class="hidden mb-4">
                         <div>
-                            <label for="disciplina" class="block text-gray-700">¿Cuál es tu disciplina?</label>
+                            <label for="disciplina" class="block text-gray-700">ï¿½Cuï¿½l es tu disciplina?</label>
                             <input type="text" id="disciplina" name="disciplina" class="border border-gray-300 rounded w-full p-2">
                         </div>
                         <div>
@@ -97,7 +121,7 @@
                 </form>
             </div>
 
-            <!-- Cuadro de imagen separado, pero más cerca -->
+            <!-- Cuadro de imagen separado, pero mï¿½s cerca -->
             <div class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
                 <img id="userImage" src="https://via.placeholder.com/150" alt="Imagen de Usuario" class="w-full h-full object-cover rounded-lg">
             </div>
@@ -134,7 +158,7 @@
             const password = document.getElementById('contrasena').value;
             const confirmPassword = document.getElementById('confirmar').value;
             if (password !== confirmPassword) {
-                alert("Las contraseñas no coinciden.");
+                alert("Las contraseï¿½as no coinciden.");
                 event.preventDefault();
             }
 
@@ -143,11 +167,22 @@
             const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
             
             if (imagePath && !allowedExtensions.exec(imagePath)) {
-                alert('Por favor sube un archivo de imagen válido (JPG, JPEG o PNG).');
+                alert('Por favor sube un archivo de imagen vï¿½lido (JPG, JPEG o PNG).');
                 event.preventDefault();
                 imageInput.value = '';
             }
         };
     </script>
+	    <script type="text/javascript" src="js/menu.jsp"></script>
+	    <script>
+	    
+	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+	    	document.getElementById("acs").innerText = "Cerrar Sesiï¿½n";
+	    	document.getElementById("acs").href = "logout"; 
+	    
+	    }
+	    
+        </script>
 </body>
 </html>

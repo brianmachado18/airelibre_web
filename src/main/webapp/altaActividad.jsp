@@ -17,11 +17,12 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Registro de Actividades</h1>
         </div>
-        <a href="login.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesiï¿½n</a>
+
     </nav>
 
     <div class="flex">
-        <!-- Menú lateral -->
+        <!-- Menï¿½ lateral -->
         <div id="menuLateral"></div>
 
         <!-- Contenedor para el formulario -->
@@ -37,12 +38,12 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="descripcion" class="block text-gray-700">Descripción:</label>
+                        <label for="descripcion" class="block text-gray-700">Descripciï¿½n:</label>
                         <textarea id="descripcion" name="descripcion" class="border border-gray-300 rounded w-full p-2" required></textarea>
                     </div>
 
                     <div class="mb-4">
-                        <label for="duracionHoras" class="block text-gray-700">Duración (Horas):</label>
+                        <label for="duracionHoras" class="block text-gray-700">Duraciï¿½n (Horas):</label>
                         <input type="number" id="duracionHoras" name="duracionHoras" class="border border-gray-300 rounded w-full p-2" required>
                     </div>
 
@@ -73,5 +74,13 @@
     </div>
 
 <script type="text/javascript" src="js/menu.jsp"></script>
+    <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesiï¿½n";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
 </body>
 </html>

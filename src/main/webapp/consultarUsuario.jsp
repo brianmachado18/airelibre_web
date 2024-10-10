@@ -19,11 +19,12 @@
 		<div class="flex-grow text-center">
 			<h1 class="text-white text-2xl">Consulta de Usuarios</h1>
 		</div>
-		<a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
+		<a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar
+			Sesiï¿½n</a>
 	</nav>
 
 	<div class="flex">
-		<!-- Menú lateral -->
+		<!-- Menï¿½ lateral -->
         <div id="menuLateral"></div>
 
 
@@ -35,8 +36,8 @@
 				style="margin-right: 2rem;">
 				<h2 class="text-center text-2xl font-bold mb-4">Buscar Usuario</h2>
 
-				<!-- Campo de búsqueda -->
-				<form id="userForm" action="consultarUsuario" method="POST">
+				<!-- Campo de bï¿½squeda -->
+				<form id="userForm" action="consultarUsuario" method="POST" enctype="multipart/form-data">
 					<div class="mb-4">
             			<label for="clases" class="block text-gray-700">Usuarios:</label>
             			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
@@ -85,7 +86,7 @@
 
 					<div class="mb-4">
 						<label for="email" class="block text-gray-700">Correo
-							Electrónico:</label> <input type="email" id="email" name="email"
+							Electrï¿½nico:</label> <input type="email" id="email" name="email"
 							class="border border-gray-300 rounded w-full p-2"  value="${correo}"disabled>
 					</div>
 
@@ -103,9 +104,9 @@
 						<button type="button" id = "srol"
 							class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600"
 							onclick="selectRole('Deportista')"  disabled >Deportista</button>
-						<label class="block text-gray-700">¿Eres profesional?</label> <input
+						<label class="block text-gray-700">ï¿½Eres profesional?</label> <input
 							type="radio" id="profesional_si" name="profesional" value="si" disabled>
-						<label for="profesional_si">Sí</label> <input type="radio"
+						<label for="profesional_si">Sï¿½</label> <input type="radio"
 							id="profesional_no" name="profesional" value="no" disabled> <label
 							for="profesional_no">No</label>
 					</div>
@@ -115,7 +116,7 @@
 							class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600"
 							onclick="selectRole('Entrenador')" disabled >Entrenador</button>
 						<div>
-							<label for="disciplina" class="block text-gray-700">¿Cuál
+							<label for="disciplina" class="block text-gray-700">ï¿½Cuï¿½l
 								es tu disciplina?</label> <input type="text" id="disciplina"
 								name="disciplina"
 								class="border border-gray-300 rounded w-full p-2" value="${disciplina}"disabled>
@@ -222,7 +223,7 @@
 				</form>
 			</div>
 
-			<!-- Cuadro de imagen separado, pero más cerca -->
+			<!-- Cuadro de imagen separado, pero mï¿½s cerca -->
 			<div
 				class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
 				<!-- Sin margen izquierdo -->
@@ -326,6 +327,21 @@
 		}
 	  
 	  //===================================================================================================================
+	    function selectRole(role) {
+            const deportistaFields = document.getElementById('deportistaFields');
+            const entrenadorFields = document.getElementById('entrenadorFields');
+
+            deportistaFields.classList.toggle('hidden', role !== 'Deportista');
+            entrenadorFields.classList.toggle('hidden', role !== 'Entrenador');
+        }
+
+	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+	    	document.getElementById("acs").innerText = "Cerrar Sesiï¿½n";
+	    	document.getElementById("acs").href = "logout"; 
+	    
+	    }
+	    
 	    function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción Clase Deportiva</title>
+    <title>Inscripciï¿½n Clase Deportiva</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .hidden {
@@ -15,21 +15,22 @@
 
     <nav class="bg-blue-600 p-4 flex justify-between items-center">
         <div class="flex-grow text-center">
-            <h1 class="text-white text-2xl">Inscripción a Clase Deportiva</h1>
+            <h1 class="text-white text-2xl">Inscripciï¿½n a Clase Deportiva</h1>
         </div>
-        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesiï¿½n</a>
+
     </nav>
 
     <div class="flex">
-        <!-- Menú lateral -->
+        <!-- Menï¿½ lateral -->
                <div id="menuLateral"></div>
 
 
         <!-- Contenedor para el formulario -->
         <div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;">
-            <!-- Formulario para inscripción -->
+            <!-- Formulario para inscripciï¿½n -->
             <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
-                <h2 class="text-center text-2xl font-bold mb-4">Inscripción a Clase Deportiva</h2>
+                <h2 class="text-center text-2xl font-bold mb-4">Inscripciï¿½n a Clase Deportiva</h2>
 
                 <form id="inscripcionForm" action="inscribirClaseDeportiva" method="POST">
                    
@@ -40,7 +41,7 @@
                             <option value="Actividad2">Actividad 2</option>
                             <option value="Actividad3">Actividad 3</option>
                             <option value="Actividad4">Actividad 4</option>
-                            <!-- Agrega más opciones según sea necesario -->
+                            <!-- Agrega mï¿½s opciones segï¿½n sea necesario -->
                         </select>
                     </div>
 
@@ -51,7 +52,7 @@
                             <option value="Clase2">Clase 2</option>
                             <option value="Clase3">Clase 3</option>
                             <option value="Clase4">Clase 4</option>
-                            <!-- Agrega más opciones según sea necesario -->
+                            <!-- Agrega mï¿½s opciones segï¿½n sea necesario -->
                         </select>
                     </div>
 				<div class="mb-4">
@@ -83,5 +84,13 @@
     </div>
 
     <script type="text/javascript" src="js/menu.jsp"></script>
+        <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesiï¿½n";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
 </body>
 </html>
