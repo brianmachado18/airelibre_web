@@ -34,6 +34,23 @@
 
 				<!-- Campo de b�squeda -->
 				<form id="userForm" action="consultarActividad" method="POST">
+				<div class="mb-4">
+                        <label for="clases" class="block text-gray-700">Actividades:</label>
+                        <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                            <%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+                    		Fabrica fab = Fabrica.getInstance();
+							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividades();
+							if (acts!=null){
+								for (String a : acts){ 
+									out.print("<option value='"+a+"'>"+a+"</option>");
+								}
+							}
+							%>
+                        </select>
+                    </div>
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
 							placeholder="Buscar actividad..."
@@ -118,7 +135,7 @@
     <script type="text/javascript">
    	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
     if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
-    	document.getElementById("acs").innerText = "Cerrar Sesi�n";
+    	document.getElementById("acs").innerText = "Cerrar Sesion";
     	document.getElementById("acs").href = "logout"; 
     
     }

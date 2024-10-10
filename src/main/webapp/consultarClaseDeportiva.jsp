@@ -34,7 +34,7 @@
 				<!-- Campo de b�squeda -->
 				<form id="userForm" action="consultarClaseDeportiva" method="POST">
 					<div class="mb-4">
-                        <label for="clases" class="block text-gray-700">Seleccionar Clases Asociadas:</label>
+                        <label for="clases" class="block text-gray-700">Clases:</label>
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
                             <%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
@@ -64,32 +64,32 @@
                     
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" value=${nombre} disabled>
+                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" value="${nombre}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="fecha" class="block text-gray-700">Fecha:</label>
-                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2" value=${fecha} disabled>
+                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2" value="${fecha}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="hora" class="block text-gray-700">Hora:</label>
-                        <input type="time" id="hora" name="hora" class="border border-gray-300 rounded w-full p-2" value=${hora} disabled>
+                        <input type="time" id="hora" name="hora" class="border border-gray-300 rounded w-full p-2" value="${hora}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="lugar" class="block text-gray-700">Lugar:</label>
-                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" value=${lugar} disabled>
+                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" value="${lugar}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="fechaAlta" class="block text-gray-700">Fecha de Alta:</label>
-                        <input type="date" id="fechaAlta" name="fechaAlta" class="border border-gray-300 rounded w-full p-2" value=${fechaAlta} disabled>
+                        <input type="date" id="fechaAlta" name="fechaAlta" class="border border-gray-300 rounded w-full p-2" value="${fechaAlta}" disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="cupo" class="block text-gray-700">Cupo:</label>
-                        <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" value=${cupo} disabled>
+                        <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" value="${cupo}" disabled>
                     </div>
 
                     <div class="mb-4">
@@ -123,7 +123,7 @@
         <script type="text/javascript">
    	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
     if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
-    	document.getElementById("acs").innerText = "Cerrar Sesi�n";
+    	document.getElementById("acs").innerText = "Cerrar Sesion";
     	document.getElementById("acs").href = "logout"; 
     
     }

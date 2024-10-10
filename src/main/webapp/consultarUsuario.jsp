@@ -350,7 +350,7 @@
 
 	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
 	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
-	    	document.getElementById("acs").innerText = "Cerrar Sesi�n";
+	    	document.getElementById("acs").innerText = "Cerrar Sesion";
 	    	document.getElementById("acs").href = "logout"; 
 	    
 	    }
