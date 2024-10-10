@@ -72,12 +72,14 @@ public class altaUsuario extends HttpServlet {
      			RequestDispatcher rd;
      			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
      			request.setAttribute("mensaje", "El nickname o el correo electrónico ya están en uso.");
+     			request.setAttribute("pag", "\"altaUsuario.jsp\"");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
      		}else {
     			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario.trim(), esProfesional, disciplina, paginaWeb, rutaArchivo);
     			RequestDispatcher rd;
      			request.setAttribute("estado", "Usuario creado.");
+     			request.setAttribute("pag", "\"login.jsp\"");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
      		}

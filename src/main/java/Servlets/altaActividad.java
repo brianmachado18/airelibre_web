@@ -68,12 +68,14 @@ public class altaActividad extends HttpServlet {
     			RequestDispatcher rd;
     			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
     			request.setAttribute("mensaje", "El nombre de la actividad ya están en uso.");
+     			request.setAttribute("pag", "\"altaActividad.jsp\"");
     			rd = request.getRequestDispatcher("/notificacion.jsp");
     			rd.forward(request, response);
     		}else {
     			ICA.AltaActividad(nombre, descripcion, Integer.parseInt(duracion), Integer.parseInt(costo), lugar, fecha, rutaPersistir, dtEnt);
     			RequestDispatcher rd;
     			request.setAttribute("estado", "Actividad creada.");
+     			request.setAttribute("pag", "\"index.jsp\"");
     			rd = request.getRequestDispatcher("/notificacion.jsp");
     			rd.forward(request, response);
     		}

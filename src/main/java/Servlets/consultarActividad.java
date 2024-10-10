@@ -60,6 +60,7 @@ public class consultarActividad extends HttpServlet {
 			RequestDispatcher rd;
 			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
  			request.setAttribute("mensaje", "La actividad no existe.");
+ 			request.setAttribute("pag", "\"consultarActividad.jsp\"");
  			rd = request.getRequestDispatcher("/notificacion.jsp");
  			rd.forward(request, response);
 		}

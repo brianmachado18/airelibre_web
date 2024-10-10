@@ -64,23 +64,11 @@ public class login extends HttpServlet {
                 	session.setAttribute("tipoUsuario", "Deportista");
                 }
                 response.sendRedirect("index.jsp");
-                
-                
-                //Visualizar datos guiardados en localStorage
-//                HttpSession session2 = request.getSession(false);
-//                if (session2 != null) {
-//                    String usuarioLogueado = (String) session2.getAttribute("usuarioLogueado");
-//                    if (usuarioLogueado != null) {
-//                        System.out.println("Usuario logueado: " + usuarioLogueado);
-//                    }
-//                }
-                //-------------------------------------------
-                
-                
     		}else{
 				RequestDispatcher rd;
 				request.setAttribute("estado", "Vuelva a intentar mas tarde.");
      			request.setAttribute("mensaje", "Usuario o Contrasena incorrecta.");
+     			request.setAttribute("pag", "\"login.jsp\"");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
     		}
@@ -89,16 +77,5 @@ public class login extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
     }
 }

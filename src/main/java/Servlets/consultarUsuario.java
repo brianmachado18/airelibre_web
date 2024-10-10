@@ -97,6 +97,7 @@ public class consultarUsuario extends HttpServlet {
 				RequestDispatcher rd;
 				request.setAttribute("estado", "Vuelva a intentar mas tarde.");
      			request.setAttribute("mensaje", "El usuario no existe.");
+     			request.setAttribute("pag", "\"consultarUsuario.jsp\"");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
 				
