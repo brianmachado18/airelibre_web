@@ -54,7 +54,7 @@ public class consultarUsuario extends HttpServlet {
 	     			request.setAttribute("tipoUsuario", "Entrenador");
 	     			request.setAttribute("web", traerEntrenador.getSitioWeb());
 	     			request.setAttribute("disciplina", traerEntrenador.getDisciplina());
-	     			request.setAttribute("imgen", traerEntrenador.getImagen());
+	     			request.setAttribute("imgen", request.getContextPath()+traerEntrenador.getImagen());
 	     			
 	     			rd = request.getRequestDispatcher("/consultarUsuario.jsp");
 	     			rd.forward(request, response);
