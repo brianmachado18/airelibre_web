@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consultar Usuarios</title>
+<title>Modificar Usuarios</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
 	rel="stylesheet">
@@ -17,10 +17,10 @@
 
 	<nav class="bg-blue-600 p-4 flex justify-between items-center">
 		<div class="flex-grow text-center">
-			<h1 class="text-white text-2xl">Registro de Usuarios</h1>
+			<h1 class="text-white text-2xl">Modifiación de Usuarios</h1>
 		</div>
 		<a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar
-			Sesiï¿½n</a>
+			Sesion</a>
 	</nav>
 
 	<div class="flex">
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="correo" class="block text-gray-700">Correo Electrï¿½nico:</label>
+                    <label for="correo" class="block text-gray-700">Correo Electronico:</label>
                     <input type="email" id="correo" name="correo" class="border border-gray-300 rounded w-full p-2"
                            value="${correo}" disabled>
                 </div>
@@ -68,13 +68,13 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="contrasena" class="block text-gray-700">Contraseï¿½a:</label>
+                    <label for="contrasena" class="block text-gray-700">Contrasena:</label>
                     <input type="password" id="contrasena" name="contrasena" class="border border-gray-300 rounded w-full p-2"
                            value="${con}" required>
                 </div>
 
                 <div class="mb-4">
-                    <label for="confirmarContrasena" class="block text-gray-700">Confirmar Contraseï¿½a:</label>
+                    <label for="confirmarContrasena" class="block text-gray-700">Confirmar Contrasena:</label>
                     <input type="password" id="confirmarContrasena" name="confirmarContrasena" class="border border-gray-300 rounded w-full p-2"
                            value="${con}" required>
                 </div>
@@ -101,16 +101,16 @@
 	</div>
 
                     <div id="deportistaFields" class="hidden mb-4">
-                        <label class="block text-gray-700">ï¿½Eres profesional?</label>
+                        <label class="block text-gray-700">¿Eres profesional?</label>
                         <input type="radio" id="profesional_si" name="profesional" value="si">
-                        <label for="profesional_si">Sï¿½</label>
+                        <label for="profesional_si">Si</label>
                         <input type="radio" id="profesional_no" name="profesional" value="no">
                         <label for="profesional_no">No</label>
                     </div>
 
                     <div id="entrenadorFields" class="hidden mb-4">
                         <div>
-                            <label for="disciplina" class="block text-gray-700">ï¿½Cuï¿½l es tu disciplina?</label>
+                            <label for="disciplina" class="block text-gray-700">¿Cual es tu disciplina?</label>
                             <input type="text" id="disciplina" name="disciplina" class="border border-gray-300 rounded w-full p-2">
                         </div>
                         <div>
@@ -158,7 +158,7 @@
             const password = document.getElementById('contrasena').value;
             const confirmPassword = document.getElementById('confirmar').value;
             if (password !== confirmPassword) {
-                alert("Las contraseï¿½as no coinciden.");
+                alert("Las contrasenas no coinciden.");
                 event.preventDefault();
             }
 
@@ -167,7 +167,7 @@
             const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
             
             if (imagePath && !allowedExtensions.exec(imagePath)) {
-                alert('Por favor sube un archivo de imagen vï¿½lido (JPG, JPEG o PNG).');
+                alert('Por favor sube un archivo de imagen valido (JPG, JPEG o PNG).');
                 event.preventDefault();
                 imageInput.value = '';
             }
@@ -178,7 +178,7 @@
 	    
 	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
 	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
-	    	document.getElementById("acs").innerText = "Cerrar Sesiï¿½n";
+	    	document.getElementById("acs").innerText = "Cerrar Sesion";
 	    	document.getElementById("acs").href = "logout"; 
 	    
 	    }

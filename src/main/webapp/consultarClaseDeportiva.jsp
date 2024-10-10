@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alta Clase Deportiva</title>
+    <title>Consulta Clase Deportiva</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .hidden {
@@ -15,7 +15,7 @@
 
     <nav class="bg-blue-600 p-4 flex justify-between items-center">
         <div class="flex-grow text-center">
-            <h1 class="text-white text-2xl">Registro de Clases Deportivas</h1>
+            <h1 class="text-white text-2xl">Consulta de Clases Deportivas</h1>
         </div>
                 <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesi�n</a>
 
@@ -114,7 +114,7 @@
             <div
 				class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
 				<!-- Sin margen izquierdo -->
-				<img id="userImage" src="${imgen}" alt="Imagen de Usuario" class="w-full h-full object-cover rounded-lg">
+				<img id="userImage" src="${imgen}" alt="Imagen Clase Deportiva" class="w-full h-full object-cover rounded-lg">
 			</div>
         </div>
     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alta Actividad</title>
+    <title>Consultar Actividad</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .hidden {
@@ -18,7 +18,7 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Consulta de Actividades</h1>
         </div>
-                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesi�n</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesion</a>
 
     </nav>
 
@@ -50,12 +50,12 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="descripcion" class="block text-gray-700">Descripci�n:</label>
+                        <label for="descripcion" class="block text-gray-700">Descripcion:</label>
                         <textarea id="descripcion" name="descripcion" class="border border-gray-300 rounded w-full p-2" disabled> ${descripcion}</textarea>
                     </div>
 
                     <div class="mb-4">
-                        <label for="duracionHoras" class="block text-gray-700">Duraci�n (Horas):</label>
+                        <label for="duracionHoras" class="block text-gray-700">Duracion (Horas):</label>
                         <input type="number" id="duracionHoras" name="duracionHoras" class="border border-gray-300 rounded w-full p-2" value="${duracionHoras}" disabled>
                     </div>
 

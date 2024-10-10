@@ -17,7 +17,7 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Registro de Clases Deportivas</h1>
         </div>
-                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesi�n</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesion</a>
 
     </nav>
 

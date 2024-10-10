@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripci�n Clase Deportiva</title>
+    <title>Inscripcion Clase Deportiva</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .hidden {
@@ -15,9 +15,9 @@
 
     <nav class="bg-blue-600 p-4 flex justify-between items-center">
         <div class="flex-grow text-center">
-            <h1 class="text-white text-2xl">Inscripci�n a Clase Deportiva</h1>
+            <h1 class="text-white text-2xl">Inscripcion a Clase Deportiva</h1>
         </div>
-                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesi�n</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesion</a>
 
     </nav>
 
@@ -30,7 +30,7 @@
         <div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;">
             <!-- Formulario para inscripci�n -->
             <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
-                <h2 class="text-center text-2xl font-bold mb-4">Inscripci�n a Clase Deportiva</h2>
+                <h2 class="text-center text-2xl font-bold mb-4">Inscripcion a Clase Deportiva</h2>
 
                 <form id="inscripcionForm" action="inscribirClaseDeportiva" method="POST">
                    
