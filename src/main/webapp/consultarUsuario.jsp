@@ -129,14 +129,14 @@
 					
 					<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4" style="display: none;">
 						<label for="inscrp" class="block text-gray-700">Clases Inscripto:</label>
-            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
                     		<%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
 							<%
 							Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
 							if (clasesIns!=null){
 								for (String ci : clasesIns){ 
-									out.print("<option value='"+ci+"'>"+ci+"</option>");
+									out.print("<option value=\"" + ci + "\">" + ci + "</option>"); 
 								}
 							}
 							%>
@@ -161,7 +161,7 @@
 								out.print("<tr><td>" + inscrips[i][0] + 
 										"</td><td>" + inscrips[i][1] + 
 										"</td><td>" + inscrips[i][2] + 
-										"</td><td>" + "<button id=\"btnC" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + inscrips[i][0] + "\" onclick=\"testFunction(this.value)\">Buscar</button>" + 
+										"</td><td>" + "<button id=\"btnC" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + inscrips[i][0] + "\" onclick=\"consInscripciones(this.value)\">Buscar</button>" + 
 										"</td></tr>");
 							}
 						}
@@ -185,7 +185,7 @@
 								out.print("<tr><td>" + actividadesAceptadas[i][0] + 
 										"</td><td>" + actividadesAceptadas[i][1] + 
 										"</td><td>" + actividadesAceptadas[i][2] + 
-										"</td><td>" + "<button id=\"btnA" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + actividadesAceptadas[i][0] + "\" onclick=\"testFunction(this.value)\">Buscar</button>" + 
+										"</td><td>" + "<button id=\"btnA" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + actividadesAceptadas[i][0] + "\" onclick=\"consActividadAceptada(this.value)\">Buscar</button>" + 
 										"</td></tr>");
 							}
 						}
@@ -211,7 +211,7 @@
 										"</td><td>" + actividades[i][1] + 
 										"</td><td>" + actividades[i][2] + 
 										"</td><td>" + actividades[i][3] + 
-										"</td><td>" + "<button id=\"btnB" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + actividades[i][0] + "\" onclick=\"testFunction(this.value)\">Buscar</button>" + 
+										"</td><td>" + "<button id=\"btnB" + i + "\" type=\"button\" class=\"bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600\" value=\"" + actividades[i][0] + "\" onclick=\"consActividad(this.value)\">Buscar</button>" + 
 										"</td></tr>");
 							}
 						}
@@ -239,18 +239,45 @@
 	    <script>
 	    
 
-	    const actividades = [
+	    //=== actividadesAaceptadas ==================================================================================
+	    const actividadesAaceptadas = [
 	        <% 
-	        String[][] aa = (String[][]) request.getAttribute("actividades");
-	        if (aa != null) {  // Comprobar si 'aa' no es null
-	            for (int i = 0; i < aa.length; i++) { %>
-	                ["<%= aa[i][0] %>", "<%= aa[i][1] %>"]<% if (i < aa.length - 1) { %>,<% } %>
+	        String[][] arrayAA = (String[][]) request.getAttribute("actividadesAceptadas");
+	        if (arrayAA != null) {  // Comprobar si 'aa' no es null
+	            for (int i = 0; i < arrayAA.length; i++) { %>
+	                ["<%= arrayAA[i][0] %>", "<%= arrayAA[i][1] %>"]<% if (i < arrayAA.length - 1) { %>,<% } %>
 	            <% } 
 	        }
 	        %>
 	    ];
 
-	    function testFunction(val) {
+	    function consActividadAceptada(val) {
+	        console.log("Val: "+val);
+	        
+	        if (actividadesAaceptadas.length > 0) {
+	            for (let i = 0; i < actividadesAaceptadas.length; i++) {
+	                document.getElementById("btnA" + i).onclick = function() {
+	                    window.location.href = "consultarActividad?actividadSeleccionada=" + encodeURIComponent(val);
+	                }
+	            }
+	        } else {
+	            console.log("No hay actividades aceptadas.");
+	        }
+	    }
+	    
+	  //=== actividades ==============================================================================================
+	  const actividades = [
+	        <% 
+	        String[][] arrayA = (String[][]) request.getAttribute("actividades");
+	        if (arrayA != null) {  // Comprobar si 'aa' no es null
+	            for (int i = 0; i < arrayA.length; i++) { %>
+	                ["<%= arrayA[i][0] %>", "<%= arrayA[i][1] %>"]<% if (i < arrayA.length - 1) { %>,<% } %>
+	            <% } 
+	        }
+	        %>
+	   ];
+	    
+	   function consActividad(val) {
 	        console.log("Val: "+val);
 	        
 	        if (actividades.length > 0) {
@@ -260,10 +287,45 @@
 	                }
 	            }
 	        } else {
-	            console.log("No hay actividades aceptadas.");
+	            console.log("No hay actividades.");
 	        }
-	    }
+	   }
 	    
+	    
+	  //=== inscripcionesTabla ============================================================================================
+		const inscripciones = [
+	        <% 
+	        String[][] arrayI = (String[][]) request.getAttribute("inscrips");
+	        if (arrayI != null) {  // Comprobar si 'aa' no es null
+	            for (int i = 0; i < arrayI.length; i++) { %>
+	                ["<%= arrayI[i][0] %>", "<%= arrayI[i][1] %>"]<% if (i < arrayI.length - 1) { %>,<% } %>
+	            <% } 
+	        }
+	        %>
+	    ];
+	  
+	    function consInscripciones(val){
+			console.log("Val: "+val);
+	        
+	        if (inscripciones.length > 0) {
+	            for (let i = 0; i < inscripciones.length; i++) {
+	                document.getElementById("btnC" + i).onclick = function() {
+	                    window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); //MODIFICAR PARA CONSULTAR CLASE
+	                }
+	            }
+	        } else {
+	            console.log("No hay inscripciones.");
+	        }
+		}
+	    
+	  //=== inscripcionesLista ============================================================================================
+	    function consInscripciones(val){
+			console.log("Val: "+val);
+
+			window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); //MODIFICAR PARA CONSULTAR CLASE
+		}
+	  
+	  //===================================================================================================================
 	    function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');

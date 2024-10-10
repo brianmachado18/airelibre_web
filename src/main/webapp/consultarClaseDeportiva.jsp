@@ -63,7 +63,7 @@
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
 							placeholder="Buscar actividad..."
-							class="border border-gray-300 rounded w-full p-2" required>
+							class="border border-gray-300 rounded w-full p-2" value= "${nom}" required>
 						<button type="submit"
 							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
 					</div>
