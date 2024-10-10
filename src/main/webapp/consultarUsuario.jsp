@@ -238,16 +238,31 @@
 	    <script type="text/javascript" src="js/menu.jsp"></script>
 	    <script>
 	    
+
+	    const actividades = [
+	        <% 
+	        String[][] aa = (String[][]) request.getAttribute("actividades");
+	        if (aa != null) {  // Comprobar si 'aa' no es null
+	            for (int i = 0; i < aa.length; i++) { %>
+	                ["<%= aa[i][0] %>", "<%= aa[i][1] %>"]<% if (i < aa.length - 1) { %>,<% } %>
+	            <% } 
+	        }
+	        %>
+	    ];
+
 	    function testFunction(val) {
-	    	console.log(val);
-	    	const actividadesAceptadas = <%String[][] aa = (String[][])request.getAttribute("actividadesAceptadas");%>;
-	    	for(let i = 0; actividadesAceptadas.lenght()>i; i++){
-	    		document.getElementById("btnB" + i).onclick=function(){
-					window.location.href="/consultarActividad";
-	    		}
-			}
-	    	
-		}
+	        console.log("Val: "+val);
+	        
+	        if (actividades.length > 0) {
+	            for (let i = 0; i < actividades.length; i++) {
+	                document.getElementById("btnB" + i).onclick = function() {
+	                    window.location.href = "consultarActividad?actividadSeleccionada=" + encodeURIComponent(val);
+	                }
+	            }
+	        } else {
+	            console.log("No hay actividades aceptadas.");
+	        }
+	    }
 	    
 	    function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');

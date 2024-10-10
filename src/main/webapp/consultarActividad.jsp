@@ -36,8 +36,8 @@
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
 							placeholder="Buscar actividad..."
-							class="border border-gray-300 rounded w-full p-2" required>
-						<button type="submit"
+							class="border border-gray-300 rounded w-full p-2" value= "${nom}" required>
+						<button id="btnBuscar" type="submit"
 							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
 					</div>
 				</form>
@@ -103,6 +103,16 @@
     </div>
 
         <script type="text/javascript" src="js/menu.jsp"></script>
+		<script >
+		 document.addEventListener("DOMContentLoaded", function() {
+	            
+	                const buscarInput = document.getElementById("buscar");
+	                if (buscarInput.value !== "") {
+	                    document.getElementById("userForm").submit(); // Envía el formulario
+	                }
+	           
+	        });
 
+		</script>
 </body>
 </html>
