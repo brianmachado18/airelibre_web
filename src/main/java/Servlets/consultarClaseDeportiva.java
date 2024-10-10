@@ -35,5 +35,35 @@ public class consultarClaseDeportiva extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
+    	Fabrica fab = Fabrica.getInstance();
+    	IControladorClaseDeportiva ICC = fab.getIControladorClaseDeportiva();
+    	
+    	String nombre = request.getParameter("buscar");
+    	System.out.println(nombre);
+    	
+    	if(ICC.claseExiste(nombre)) {
+    		RequestDispatcher rd;
+    		
+    		DtClaseDeportiva tClase = ICC.obtenerClase(nombre);
+    		request.setAttribute("nombre", tClase.getNombre());
+    		request.setAttribute("fecha", tClase.getFecha());
+    		request.setAttribute("hora", tClase.getHora());
+    		request.setAttribute("lugar", tClase.getLugar());
+    		request.setAttribute("fechaAlta", tClase.getFechaAlta());
+    		request.setAttribute("cupo", tClase.getCupo());
+    		request.setAttribute("imgen", request.getContextPath()+ tClase.getImagen());
+    		request.setAttribute("inscrips", ICC.obtenerListaInscripciones(nombre));
+    		
+    		rd = request.getRequestDispatcher("/consultarClaseDeportiva.jsp");
+ 			rd.forward(request, response);
+    	}else {
+    		RequestDispatcher rd;
+			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
+ 			request.setAttribute("mensaje", "La clase no existe.");
+ 			request.setAttribute("pag", "\"consultarClaseDeportiva.jsp\"");
+ 			rd = request.getRequestDispatcher("/notificacion.jsp");
+ 			rd.forward(request, response);
+    	}
+    	
     }
 }

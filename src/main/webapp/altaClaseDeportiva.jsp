@@ -17,11 +17,11 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Registro de Clases Deportivas</h1>
         </div>
-        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesión</a>
+        <a href="cerrarSesion.jsp" class="text-white hover:text-blue-200 ml-4">Cerrar Sesion</a>
     </nav>
 
     <div class="flex">
-        <!-- Menú lateral -->
+        <!-- Menu lateral -->
 		<div id="menuLateral"></div>
 
         <!-- Contenedor para el formulario -->
@@ -69,11 +69,19 @@
                     <div class="mb-4">
                         <label for="actividad" class="block text-gray-700">Seleccionar Actividad:</label>
                         <select id="actividad" name="actividad" class="border border-gray-300 rounded w-full p-2" required>
-                            <option value="Actividad1">Actividad 1</option>
-                            <option value="Actividad2">Actividad 2</option>
-                            <option value="Actividad3">Actividad 3</option>
-                            <option value="Actividad4">Actividad 4</option>
-                            <!-- Agrega más opciones según sea necesario -->
+                            <%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+                    		Fabrica fab = Fabrica.getInstance();
+							HttpSession session2 = request.getSession(false);
+							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividadesAceptadasEntrenador((String) session.getAttribute("usuarioLogueado"));
+							if (acts!=null){
+								for (String a : acts){ 
+									out.print("<option value='"+a+"'>"+a+"</option>");
+								}
+							}
+							%>
                         </select>
                     </div>
 

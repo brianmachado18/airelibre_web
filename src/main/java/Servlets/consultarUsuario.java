@@ -60,9 +60,9 @@ public class consultarUsuario extends HttpServlet {
 	     			
 	     			HttpSession session = request.getSession(false);
 					if(nickname.equals((String) session.getAttribute("usuarioLogueado"))) {
-						request.setAttribute("actividades", ICA.obtenerVectorActividadesEntrenador(nickname));
+						request.setAttribute("actividades", ICA.obtenerArrayActividadesEntrenador(nickname));
 					}else {
-		     			request.setAttribute("actividadesAceptadas", ICA.obtenerVectorActividadesAceptadasEntrenador(nickname));
+		     			request.setAttribute("actividadesAceptadas", ICA.obtenerArrayActividadesAceptadasEntrenador(nickname));
 					}
 	     			
 	     			rd = request.getRequestDispatcher("/consultarUsuario.jsp");

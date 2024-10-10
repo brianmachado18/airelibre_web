@@ -59,7 +59,25 @@
                 <h2 class="text-center text-2xl font-bold mb-4">Buscar Actividad</h2>
 
 				<!-- Campo de búsqueda -->
-				<form id="userForm" action="consultarUsuario" method="POST">
+				<form id="userForm" action="consultarClaseDeportiva" method="POST">
+					<div class="mb-4">
+                        <label for="clases" class="block text-gray-700">Seleccionar Clases Asociadas:</label>
+                        <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                            <%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+                    		Fabrica fab = Fabrica.getInstance();
+							Vector<String> clas = fab.getIControladorClaseDeportiva().obtenerVectorClases();
+							if (clas!=null){
+								for (String c : clas){ 
+									out.print("<option value='"+c+"'>"+c+"</option>");
+								}
+							}
+							%>
+                        </select>
+                    </div>
+                    
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
 							placeholder="Buscar actividad..."
@@ -70,68 +88,60 @@
 				</form>
 
                 <form id="activityForm" action="altaClaseDeportiva" method="POST" enctype="multipart/form-data">
-                
-                 <div class="mb-4">
-                        <label for="clases" class="block text-gray-700">Seleccionar Clases Asociadas:</label>
-                        <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                            <option value="Clase1">Clase 1</option>
-                            <option value="Clase2">Clase 2</option>
-                            <option value="Clase3">Clase 3</option>
-                            <option value="Clase4">Clase 4</option>
-                            <!-- Agrega más opciones según sea necesario -->
-                        </select>
-                    </div>
+                    
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" value=${nombre} disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="fecha" class="block text-gray-700">Fecha:</label>
-                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2" value=${fecha} disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="hora" class="block text-gray-700">Hora:</label>
-                        <input type="time" id="hora" name="hora" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="time" id="hora" name="hora" class="border border-gray-300 rounded w-full p-2" value=${hora} disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="lugar" class="block text-gray-700">Lugar:</label>
-                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="imagen" class="block text-gray-700">Subir Imagen:</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" value=${lugar} disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="fechaAlta" class="block text-gray-700">Fecha de Alta:</label>
-                        <input type="date" id="fechaAlta" name="fechaAlta" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="date" id="fechaAlta" name="fechaAlta" class="border border-gray-300 rounded w-full p-2" value=${fechaAlta} disabled>
                     </div>
 
                     <div class="mb-4">
                         <label for="cupo" class="block text-gray-700">Cupo:</label>
-                        <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" disabled>
+                        <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" value=${cupo} disabled>
                     </div>
 
                     <div class="mb-4">
-                        <label for="inscritos" class="block text-gray-700">Inscritos:</label>
-                        <textarea id="inscritos" name="inscritos" class="border border-gray-300 rounded w-full p-2" rows="4" disabled></textarea>
+                        <label for="inscritos" class="block text-gray-700">Inscriptos:</label>
+                        <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                            <%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+							Vector<String> inscrips = (java.util.Vector<String>)request.getAttribute("inscrips");
+							if (inscrips!=null){
+								for (String i : inscrips){ 
+									out.print("<option value='"+i+"'>"+i+"</option>");
+								}
+							}
+							%>
+                        </select>
                     </div>
 
-                    <div class="text-center">
-                        <button type="submit" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600">Crear Clase Deportiva</button>
-                    </div>
                 </form>
             </div>
-            			<div
+            <div
 				class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
 				<!-- Sin margen izquierdo -->
-				<img id="userImage" src="${imgen}"
-					alt="Imagen de Usuario"
-					class="w-full h-full object-cover rounded-lg">
+				<img id="userImage" src="${imgen}" alt="Imagen de Usuario" class="w-full h-full object-cover rounded-lg">
 			</div>
         </div>
     </div>
@@ -152,6 +162,15 @@
             const submenuActividades = document.getElementById('submenuClases');
             submenuActividades.classList.toggle('hidden');
         };
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const buscarInput = document.getElementById("buscar");
+            if (buscarInput.value !== "") {
+                document.getElementById("userForm").submit(); // Envía el formulario
+            }
+       
+    	});
     </script>
 </body>
 </html>
