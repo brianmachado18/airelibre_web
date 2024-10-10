@@ -92,7 +92,6 @@ public class modificarUsuario extends HttpServlet {
         	DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         	fecha = LocalDate.parse(fechaNacimientoStr, formatoFecha);
         }else {
-        	System.out.println("PITO");
         	System.out.println(nickname);
         }
         
@@ -115,8 +114,9 @@ public class modificarUsuario extends HttpServlet {
 
     			
     			RequestDispatcher rd;
-     			request.setAttribute("estado", "Usuario creado.");
+     			request.setAttribute("estado", "Usuario modificado.");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
+     			request.setAttribute("pag", "\"index.jsp\"");
      			rd.forward(request, response);
      		
 		} catch (PersistenciaException e) {

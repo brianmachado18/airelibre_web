@@ -1,5 +1,5 @@
 <nav class="bg-white w-64 h-screen p-5 border-r border-gray-200">
-    <h5 class="font-semibold mb-4">Men�</h5>
+    <h5 class="font-semibold mb-4">Menu</h5>
     <ul>
         <li>
             <a id="usuariosToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Usuarios</a>
