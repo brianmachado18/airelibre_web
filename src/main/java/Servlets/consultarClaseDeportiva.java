@@ -26,8 +26,8 @@ public class consultarClaseDeportiva extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
         
-        String actividadSeleccionada = request.getParameter("claseSeleccionada");
-        request.setAttribute("nom", actividadSeleccionada);
+        String claseSeleccionada = request.getParameter("claseSeleccionada");
+        request.setAttribute("nom", claseSeleccionada);
         
         RequestDispatcher rd = request.getRequestDispatcher("consultarClaseDeportiva.jsp");
         rd.forward(request, response);
