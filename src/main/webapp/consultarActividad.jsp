@@ -39,10 +39,8 @@
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
                             <%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
 							<%
-                    		Fabrica fab = Fabrica.getInstance();
-							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividades();
+							Vector<String> acts = (java.util.Vector<String>)request.getAttribute("listAct");
 							if (acts!=null){
 								for (String a : acts){ 
 									out.print("<option value='"+a+"'>"+a+"</option>");

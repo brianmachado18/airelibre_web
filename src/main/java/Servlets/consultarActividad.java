@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import logica.*;
 import datatype.*;
+import excepciones.PersistenciaException;
 
 @WebServlet("/consultarActividad")
 @MultipartConfig
@@ -26,8 +28,19 @@ public class consultarActividad extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
         
-        String actividadSeleccionada = request.getParameter("actividadSeleccionada");
-        request.setAttribute("nom", actividadSeleccionada);
+        Fabrica fab = Fabrica.getInstance();
+        Vector<String> vActividades = new Vector<String>();
+        try {
+        	vActividades = fab.getIControladorActividad().obtenerVectorActividades();
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
+        request.setAttribute("listAct", vActividades);
+        
+        if(request.getParameter("actividadSeleccionada")!=null) {
+        	String actividadSeleccionada = request.getParameter("actividadSeleccionada");
+            request.setAttribute("nom", actividadSeleccionada);
+        }
         
         RequestDispatcher rd = request.getRequestDispatcher("consultarActividad.jsp");
         rd.forward(request, response);
@@ -37,6 +50,14 @@ public class consultarActividad extends HttpServlet {
     	
     	Fabrica fab = Fabrica.getInstance();
     	IControladorActividad ICA = fab.getIControladorActividad();
+    	
+    	Vector<String> vActividades = new Vector<String>();
+        try {
+        	vActividades = ICA.obtenerVectorActividades();
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
+        request.setAttribute("listAct", vActividades);
     	
     	String nombre = request.getParameter("buscar");
     	

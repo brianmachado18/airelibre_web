@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import logica.*;
 import datatype.*;
+import excepciones.PersistenciaException;
 
 @WebServlet("/consultarClaseDeportiva")
 @MultipartConfig
@@ -26,8 +28,15 @@ public class consultarClaseDeportiva extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
         
-        String claseSeleccionada = request.getParameter("claseSeleccionada");
-        request.setAttribute("nom", claseSeleccionada);
+        Fabrica fab = Fabrica.getInstance();
+        Vector<String> vClases = new Vector<String>();
+        vClases = fab.getIControladorClaseDeportiva().obtenerVectorClases();
+        request.setAttribute("listCla", vClases);
+        
+        if(request.getParameter("claseSeleccionada")!=null) {
+        	String claseSeleccionada = request.getParameter("claseSeleccionada");
+        	request.setAttribute("nom", claseSeleccionada);
+        }
         
         RequestDispatcher rd = request.getRequestDispatcher("consultarClaseDeportiva.jsp");
         rd.forward(request, response);
@@ -38,8 +47,11 @@ public class consultarClaseDeportiva extends HttpServlet {
     	Fabrica fab = Fabrica.getInstance();
     	IControladorClaseDeportiva ICC = fab.getIControladorClaseDeportiva();
     	
+    	Vector<String> vClases = new Vector<String>();
+        vClases = ICC.obtenerVectorClases();
+        request.setAttribute("listCla", vClases);
+    	
     	String nombre = request.getParameter("buscar");
-    	System.out.println(nombre);
     	
     	if(ICC.claseExiste(nombre)) {
     		RequestDispatcher rd;

@@ -17,7 +17,7 @@
         <div class="flex-grow text-center">
             <h1 class="text-white text-2xl">Consulta de Clases Deportivas</h1>
         </div>
-                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesi�n</a>
+                <a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar Sesion</a>
 
     </nav>
 
@@ -38,10 +38,8 @@
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
                             <%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
 							<%
-                    		Fabrica fab = Fabrica.getInstance();
-							Vector<String> clas = fab.getIControladorClaseDeportiva().obtenerVectorClases();
+							Vector<String> clas = (java.util.Vector<String>)request.getAttribute("listCla");
 							if (clas!=null){
 								for (String c : clas){ 
 									out.print("<option value='"+c+"'>"+c+"</option>");

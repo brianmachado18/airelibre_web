@@ -43,10 +43,8 @@
             			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
                     		<%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
 							<%
-                    		Fabrica fab = Fabrica.getInstance();
-							Vector<String> usus = fab.getIControladorUsuario().obtenerVectorUsuarios();
+							Vector<String> usus = (java.util.Vector<String>)request.getAttribute("listUsu");
 							if (usus!=null){
 								for (String u : usus){ 
 									out.print("<option value='"+u+"'>"+u+"</option>");
@@ -270,7 +268,7 @@
 	        
 	        if (actividadesAaceptadas.length > 0) {
 	            for (let i = 0; i < actividadesAaceptadas.length; i++) {
-	                document.v("btnA" + i).onclick = function() {
+	                document.getElementById("btnA" + i).onclick = function() {
 	                    window.location.href = "consultarActividad?actividadSeleccionada=" + encodeURIComponent(val);
 	                }
 	            }
@@ -324,7 +322,7 @@
 	        if (inscripciones.length > 0) {
 	            for (let i = 0; i < inscripciones.length; i++) {
 	                document.getElementById("btnC" + i).onclick = function() {
-	                    window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); //MODIFICAR PARA CONSULTAR CLASE
+	                    window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); 
 	                }
 	            }
 	        } else {
@@ -336,7 +334,7 @@
 	    function consInscripciones(val){
 			console.log("Val: "+val);
 
-			window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); //MODIFICAR PARA CONSULTAR CLASE
+			window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); 
 		}
 	  
 	  //===================================================================================================================

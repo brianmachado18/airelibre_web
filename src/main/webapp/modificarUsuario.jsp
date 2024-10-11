@@ -118,15 +118,11 @@
                             <input type="text" id="sitio_web" name="sitio_web" class="border border-gray-300 rounded w-full p-2">
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                
     
     <script type="text/javascript" src="js/menu.jsp"></script>
     
     <script>
-    
         function selectRole(role) {
             const deportistaFields = document.getElementById('deportistaFields');
             const entrenadorFields = document.getElementById('entrenadorFields');
@@ -168,16 +164,14 @@
             }
         };
     </script>
-	    <script type="text/javascript" src="js/menu.jsp"></script>
-	    <script>
-	    
+    
+	<script>
 	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
 	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
 	    	document.getElementById("acs").innerText = "Cerrar Sesion";
 	    	document.getElementById("acs").href = "logout"; 
-	    
 	    }
-	    
-        </script>
+	</script>
+	
 </body>
 </html>

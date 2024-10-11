@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import datatype.DtDeportista;
 import datatype.DtEntrenador;
@@ -31,6 +32,18 @@ public class consultarUsuario extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
+        
+        Fabrica fab = Fabrica.getInstance();
+        Vector<String> vUsuarios = new Vector<String>();
+        try {
+			vUsuarios = fab.getIControladorUsuario().obtenerVectorUsuarios();
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
+        request.setAttribute("listUsu", vUsuarios);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("consultarUsuario.jsp");
+        rd.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,6 +52,14 @@ public class consultarUsuario extends HttpServlet {
     	IControladorUsuario ICU = fab.getIControladorUsuario();
     	IControladorClaseDeportiva ICC = fab.getIControladorClaseDeportiva();
     	IControladorActividad ICA = fab.getIControladorActividad();
+    	
+    	Vector<String> vUsuarios = new Vector<String>();
+        try {
+			vUsuarios = ICU.obtenerVectorUsuarios();
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
+        request.setAttribute("listUsu", vUsuarios);
     	
     	String nickname = request.getParameter("buscar");
     	
