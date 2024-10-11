@@ -32,6 +32,25 @@
                 <h2 class="text-center text-2xl font-bold mb-4">Alta Clase Deportiva</h2>
 
                 <form id="activityForm" action="altaClaseDeportiva" method="POST" enctype="multipart/form-data">
+                	<div class="mb-4">
+                        <label for="actividad" class="block text-gray-700">Seleccionar Actividad:</label>
+                        <select id="actividad" name="actividad" class="border border-gray-300 rounded w-full p-2" required>
+                            <%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+                    		Fabrica fab = Fabrica.getInstance();
+							HttpSession session2 = request.getSession(false);
+							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividadesAceptadasEntrenador((String) session.getAttribute("usuarioLogueado"));
+							if (acts!=null){
+								for (String a : acts){ 
+									out.print("<option value='"+a+"'>"+a+"</option>");
+								}
+							}
+							%>
+                        </select>
+                    </div>
+                
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" required>
@@ -66,28 +85,9 @@
                         <label for="cupo" class="block text-gray-700">Cupo:</label>
                         <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" required>
                     </div>
-
-                    <div class="mb-4">
-                        <label for="actividad" class="block text-gray-700">Seleccionar Actividad:</label>
-                        <select id="actividad" name="actividad" class="border border-gray-300 rounded w-full p-2" required>
-                            <%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
-							<%
-                    		Fabrica fab = Fabrica.getInstance();
-							HttpSession session2 = request.getSession(false);
-							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividadesAceptadasEntrenador((String) session.getAttribute("usuarioLogueado"));
-							if (acts!=null){
-								for (String a : acts){ 
-									out.print("<option value='"+a+"'>"+a+"</option>");
-								}
-							}
-							%>
-                        </select>
-                    </div>
-
+                    
                     <div class="text-center">
-                        <button type="submit" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600">Crear Clase Deportiva</button>
+                        <button type="submit" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600">Enviar</button>
                     </div>
                 </form>
             </div>

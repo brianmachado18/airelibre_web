@@ -29,7 +29,7 @@
         <div class="flex-1 p-5 flex items-start" style="margin-left: 25rem;">
             <!-- Formulario para crear clase deportiva -->
             <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
-                <h2 class="text-center text-2xl font-bold mb-4">Buscar Actividad</h2>
+                <h2 class="text-center text-2xl font-bold mb-4">Buscar Clase</h2>
 
 				<!-- Campo de b�squeda -->
 				<form id="userForm" action="consultarClaseDeportiva" method="POST">
@@ -120,7 +120,14 @@
     </div>
 
     <script type="text/javascript" src="js/menu.jsp"></script>
-        <script type="text/javascript">
+    <script type="text/javascript">
+  	//Setear img default
+	window.onload = function cargarImagenDefault(){
+		if("${imgen}"=="" || "${imgen}"=="/airelibre_webnull"){
+			document.getElementById("userImage").src = "https://via.placeholder.com/150";
+		}
+	}
+    
    	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
     if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
     	document.getElementById("acs").innerText = "Cerrar Sesion";

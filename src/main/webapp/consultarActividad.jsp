@@ -97,8 +97,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="clases" class="block text-gray-700">Seleccionar Clases Asociadas:</label>
-                        <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                        <label for="clases" class="block text-gray-700">Clases Asociadas:</label>
+                        <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
                             <%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
 							<%
@@ -120,25 +120,35 @@
         </div>
     </div>
 
-        <script type="text/javascript" src="js/menu.jsp"></script>
-		<script >
-		 document.addEventListener("DOMContentLoaded", function() {
-	            
-	                const buscarInput = document.getElementById("buscar");
-	                if (buscarInput.value !== "") {
-	                    document.getElementById("userForm").submit(); // Env�a el formulario
-	                }
-	           
-	        });
-
-		</script>
-    <script type="text/javascript">
-   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
-    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
-    	document.getElementById("acs").innerText = "Cerrar Sesion";
-    	document.getElementById("acs").href = "logout"; 
+    <script type="text/javascript" src="js/menu.jsp"></script>
     
-    }
-</script>
+	<script >
+		//Setear img default
+		window.onload = function cargarImagenDefault(){
+			if("${imgen}"=="" || "${imgen}"=="/airelibre_webnull"){
+				document.getElementById("imagen").src = "https://via.placeholder.com/150";
+			}
+		}
+	
+		document.addEventListener("DOMContentLoaded", function() {        
+	    	const buscarInput = document.getElementById("buscar");
+	    	if (buscarInput.value !== "") {
+	    		document.getElementById("userForm").submit(); // Env�a el formulario
+	    	}
+	    });
+		
+		function consInscripciones(val){
+			window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); 
+		}
+	</script>
+	
+    <script type="text/javascript">
+   		const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    	if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    		document.getElementById("acs").innerText = "Cerrar Sesion";
+    		document.getElementById("acs").href = "logout"; 
+    	}
+	</script>
+
 </body>
 </html>

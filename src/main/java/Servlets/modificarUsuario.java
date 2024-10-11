@@ -63,14 +63,15 @@ public class modificarUsuario extends HttpServlet {
             	        rd.forward(request, response);
             	    }
             	} else {
-            	    
             	    System.out.println("El usuario no existe en la base de datos.");
             	}
             } catch (Exception e) {
                 e.printStackTrace();
-                request.setAttribute("mensajeError", "Error al cargar los datos del usuario.");
-                RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
-                rd.forward(request, response);
+                RequestDispatcher rd;
+     			request.setAttribute("estado", "Error al Modificar.");
+     			request.setAttribute("pag", "\"modificarUsuario.jsp\"");
+     			rd = request.getRequestDispatcher("/notificacion.jsp");
+     			rd.forward(request, response);
             }
     }
 
@@ -115,8 +116,8 @@ public class modificarUsuario extends HttpServlet {
     			
     			RequestDispatcher rd;
      			request.setAttribute("estado", "Usuario modificado.");
-     			rd = request.getRequestDispatcher("/notificacion.jsp");
      			request.setAttribute("pag", "\"index.jsp\"");
+     			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
      		
 		} catch (PersistenciaException e) {

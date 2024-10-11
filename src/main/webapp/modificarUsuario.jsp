@@ -34,7 +34,7 @@
 			<!-- Formulario con campos bloqueados -->
 			<div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full"
 				style="margin-right: 2rem;">
-				<h2 class="text-center text-2xl font-bold mb-4">Buscar Usuario</h2>
+				<h2 class="text-center text-2xl font-bold mb-4">Mi Usuario</h2>
 
   			<form id="modificarForm" action="modificarUsuario" method="POST" >
                 <div class="mb-4">
@@ -119,11 +119,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-
-            <!-- Cuadro de imagen separado, pero m�s cerca -->
-            <div class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
-                <img id="userImage" src="https://via.placeholder.com/150" alt="Imagen de Usuario" class="w-full h-full object-cover rounded-lg">
             </div>
         </div>
     </div>

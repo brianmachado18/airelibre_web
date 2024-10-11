@@ -63,23 +63,28 @@ public class altaClaseDeportiva extends HttpServlet {
         DtActividad Act = ICA.obtenerActividad(actividad);
         
         // Crear la nueva clase deportiva
+		RequestDispatcher rd;
         try {
-        	ICC.AltaClaseDeportiva(nombreClaseDeportiva, fechaAux, horaFor, lugar, cupo, LocalDate.now(), Act, rutaArchivo);
-
-            // Redirigir a la página de éxito
-            request.setAttribute("estado", "Clase Deportiva creada exitosamente.");
- 			request.setAttribute("pag", "\"index.jsp\"");
-            RequestDispatcher rd = request.getRequestDispatcher("/notificacion.jsp");
-            rd.forward(request, response);
-
+        	if(ICC.claseExiste(nombreClaseDeportiva)) {
+     			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
+     			request.setAttribute("mensaje", "El nombre de la actividad ya están en uso.");
+     			request.setAttribute("pag", "\"altaClaseDeportiva.jsp\"");
+     			rd = request.getRequestDispatcher("/notificacion.jsp");
+     			rd.forward(request, response);
+        	} else {
+            	ICC.AltaClaseDeportiva(nombreClaseDeportiva, fechaAux, horaFor, lugar, cupo, LocalDate.now(), Act, rutaArchivo);
+        		request.setAttribute("estado", "Clase Deportiva creada exitosamente.");
+     			request.setAttribute("pag", "\"index.jsp\"");
+     			rd = request.getRequestDispatcher("/notificacion.jsp");
+                rd.forward(request, response);
+        	}
         } catch (Exception e) {
- 			RequestDispatcher rd;
- 			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
- 			request.setAttribute("mensaje", "Error al conectarse a la base de datos.");
+        	e.printStackTrace();
+        	request.setAttribute("estado", "Vuelva a intentar mas tarde.");
+ 			request.setAttribute("mensaje", "Error al Conectarse con la Base de Datos.");
  			request.setAttribute("pag", "\"altaClaseDeportiva.jsp\"");
  			rd = request.getRequestDispatcher("/notificacion.jsp");
  			rd.forward(request, response);
-        	e.printStackTrace();
         }
     }
 }

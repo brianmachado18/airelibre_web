@@ -96,25 +96,66 @@
 							class="border border-gray-300 rounded w-full p-2"value="${fnac}" disabled>
 					</div>
 
-					<label class="block text-gray-700 mb-2">Rol:</label>
-					
-					
-
-					<div id="deportistaFields" class="hidden mb-4">
+					<div id="deportistaFields" class="hidden mb-4" style="display: none;">
+						<label class="block text-gray-700 mb-2">Rol:</label>
 						<button type="button" id = "srol"
-							class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600"
-							onclick="selectRole('Deportista')"  disabled >Deportista</button>
+							class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" disabled>Deportista</button>
 						<label class="block text-gray-700">¿Eres profesional?</label> <input
 							type="radio" id="profesional_si" name="profesional" value="si" disabled>
 						<label for="profesional_si">Si</label> <input type="radio"
 							id="profesional_no" name="profesional" value="no" disabled> <label
 							for="profesional_no">No</label>
+							
+							<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4" style="display: none;">
+								<label for="inscrp" class="block text-gray-700">Clases Inscripto:</label>
+		            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
+		                    		<%@ page import="java.util.Vector" %>
+									<%@ page import="java.util.Iterator" %>
+									<%
+									Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
+									if (clasesIns!=null){
+										for (String ci : clasesIns){ 
+											out.print("<option value=\"" + ci + "\">" + ci + "</option>"); 
+										}
+									}
+									%>
+		            			</select>
+							</div>
+							
+							<div id="inscrpcionesFieldsMismoDepor" class="hidden mb-4" style="display: none;">
+							    <label for="inscrp" class="block text-gray-700">Mis Inscripciones:</label>
+							    <table id="tablaInscripciones" class="min-w-full bg-white border border-gray-300 rounded-lg">
+							        <thead class="bg-gray-200">
+							            <tr>
+							                <th class="py-2 px-4 border-b text-left text-gray-700">Clase</th>
+							                <th class="py-2 px-4 border-b text-left text-gray-700">Costo</th>
+							                <th class="py-2 px-4 border-b text-left text-gray-700">Cantidad de deportistas</th>
+							                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
+							            </tr>
+							        </thead>
+							        <tbody>
+							            <% String[][] inscrips = (String[][])request.getAttribute("inscrips");
+							            if (inscrips != null) {
+							                for (int i = 0; i < inscrips.length; i++) { %>
+							                    <tr>
+							                        <td class="py-2 px-4 border-b"><%= inscrips[i][0] %></td>
+							                        <td class="py-2 px-4 border-b"><%= inscrips[i][1] %></td>
+							                        <td class="py-2 px-4 border-b"><%= inscrips[i][2] %></td>
+							                        <td class="py-2 px-4 border-b">
+							                            <button id="btnC<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= inscrips[i][0] %>" onclick="consInscripciones(this.value)">Buscar</button>
+							                        </td>
+							                    </tr>
+							                <% }
+							            } %>
+							        </tbody>
+							    </table>
+							</div>
 					</div>
 
-					<div id="entrenadorFields" class="hidden mb-4">
+					<div id="entrenadorFields" class="hidden mb-4" style="display: none;"> 
+						<label class="block text-gray-700 mb-2">Rol:</label>
 						<button type="button" id = "srol"
-							class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600"
-							onclick="selectRole('Entrenador')" disabled >Entrenador</button>
+							class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" disabled>Entrenador</button>
 						<div>
 							<label for="disciplina" class="block text-gray-700">¿Cual
 								es tu disciplina?</label> <input type="text" id="disciplina"
@@ -126,113 +167,67 @@
 								Web:</label> <input type="text" id="sitio_web" name="sitio_web"
 								class="border border-gray-300 rounded w-full p-2" value="${web}"disabled>
 						</div>
+						
+						<div id="actividadesEntrenador" class="hidden mb-4" style="display: none;">
+						    <label for="inscrp" class="block text-gray-700">Actividades vinculadas:</label>
+						    <table id="tablaActividadesAceptadas" class="min-w-full bg-white border border-gray-300 rounded-lg">
+						        <thead class="bg-gray-200">
+						            <tr>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						            <% String[][] actividadesAceptadas = (String[][])request.getAttribute("actividadesAceptadas");
+						            if (actividadesAceptadas != null) {
+						                for (int i = 0; i < actividadesAceptadas.length; i++) { %>
+						                    <tr>
+						                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][0] %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][1] %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][2] %></td>
+						                        <td class="py-2 px-4 border-b">
+						                            <button id="btnA<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividadesAceptadas[i][0] %>" onclick="consActividadAceptada(this.value)">Buscar</button>
+						                        </td>
+						                    </tr>
+						                <% }
+						            } %>
+						        </tbody>
+						    </table>
+						</div>
+						
+						<div id="actividadesMismoEntrenador" class="hidden mb-4" style="display: none;">
+						    <label for="inscrp" class="block text-gray-700">Mis Actividades:</label>
+						    <table id="tablaActividades" class="min-w-full bg-white border border-gray-300 rounded-lg">
+						        <thead class="bg-gray-200">
+						            <tr>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Estado</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
+						                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						            <% String[][] actividades = (String[][])request.getAttribute("actividades");
+						            if (actividades != null) {
+						                for (int i = 0; i < actividades.length; i++) { %>
+						                    <tr>
+						                        <td class="py-2 px-4 border-b"><%= actividades[i][0] %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividades[i][1] %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividades[i][2] %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividades[i][3] %></td>
+						                        <td class="py-2 px-4 border-b">
+						                            <button id="btnB<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividades[i][0] %>" onclick="consActividad(this.value)">Buscar</button>
+						                        </td>
+						                    </tr>
+						                <% }
+						            } %>
+						        </tbody>
+						    </table>
+						</div>
 					</div>
-					
-					<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4" style="display: none;">
-						<label for="inscrp" class="block text-gray-700">Clases Inscripto:</label>
-            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
-                    		<%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
-							<%
-							Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
-							if (clasesIns!=null){
-								for (String ci : clasesIns){ 
-									out.print("<option value=\"" + ci + "\">" + ci + "</option>"); 
-								}
-							}
-							%>
-            			</select>
-					</div>
-					
-					<div id="inscrpcionesFieldsMismoDepor" class="hidden mb-4" style="display: none;">
-    <label for="inscrp" class="block text-gray-700">Mis Inscripciones:</label>
-    <table id="tablaInscripciones" class="min-w-full bg-white border border-gray-300 rounded-lg">
-        <thead class="bg-gray-200">
-            <tr>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Clase</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Costo</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Cantidad de deportistas</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% String[][] inscrips = (String[][])request.getAttribute("inscrips");
-            if (inscrips != null) {
-                for (int i = 0; i < inscrips.length; i++) { %>
-                    <tr>
-                        <td class="py-2 px-4 border-b"><%= inscrips[i][0] %></td>
-                        <td class="py-2 px-4 border-b"><%= inscrips[i][1] %></td>
-                        <td class="py-2 px-4 border-b"><%= inscrips[i][2] %></td>
-                        <td class="py-2 px-4 border-b">
-                            <button id="btnC<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= inscrips[i][0] %>" onclick="consInscripciones(this.value)">Buscar</button>
-                        </td>
-                    </tr>
-                <% }
-            } %>
-        </tbody>
-    </table>
-</div>
-
-<div id="actividadesEntrenador" class="hidden mb-4" style="display: none;">
-    <label for="inscrp" class="block text-gray-700">Actividades vinculadas:</label>
-    <table id="tablaActividadesAceptadas" class="min-w-full bg-white border border-gray-300 rounded-lg">
-        <thead class="bg-gray-200">
-            <tr>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% String[][] actividadesAceptadas = (String[][])request.getAttribute("actividadesAceptadas");
-            if (actividadesAceptadas != null) {
-                for (int i = 0; i < actividadesAceptadas.length; i++) { %>
-                    <tr>
-                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][0] %></td>
-                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][1] %></td>
-                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][2] %></td>
-                        <td class="py-2 px-4 border-b">
-                            <button id="btnA<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividadesAceptadas[i][0] %>" onclick="consActividadAceptada(this.value)">Buscar</button>
-                        </td>
-                    </tr>
-                <% }
-            } %>
-        </tbody>
-    </table>
-</div>
-
-<div id="actividadesMismoEntrenador" class="hidden mb-4" style="display: none;">
-    <label for="inscrp" class="block text-gray-700">Mis Actividades:</label>
-    <table id="tablaActividades" class="min-w-full bg-white border border-gray-300 rounded-lg">
-        <thead class="bg-gray-200">
-            <tr>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Estado</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
-                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% String[][] actividades = (String[][])request.getAttribute("actividades");
-            if (actividades != null) {
-                for (int i = 0; i < actividades.length; i++) { %>
-                    <tr>
-                        <td class="py-2 px-4 border-b"><%= actividades[i][0] %></td>
-                        <td class="py-2 px-4 border-b"><%= actividades[i][1] %></td>
-                        <td class="py-2 px-4 border-b"><%= actividades[i][2] %></td>
-                        <td class="py-2 px-4 border-b"><%= actividades[i][3] %></td>
-                        <td class="py-2 px-4 border-b">
-                            <button id="btnB<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividades[i][0] %>" onclick="consActividad(this.value)">Buscar</button>
-                        </td>
-                    </tr>
-                <% }
-            } %>
-        </tbody>
-    </table>
-</div>
-					
 				</form>
 			</div>
 
@@ -249,10 +244,15 @@
 		
 	</div>
 
-	    <script type="text/javascript" src="js/menu.jsp"></script>
-	    <script>
-	    
-
+	<script type="text/javascript" src="js/menu.jsp"></script>
+	<script>
+		//Setear img default
+		window.onload = function cargarImagenDefault(){
+			if("${imgen}"=="" || "${imgen}"=="/airelibre_webnull"){
+				document.getElementById("userImage").src = "https://via.placeholder.com/150";
+			}
+		}
+	
 	    //=== actividadesAaceptadas ==================================================================================
 	    const actividadesAaceptadas = [
 	        <% 
@@ -270,7 +270,7 @@
 	        
 	        if (actividadesAaceptadas.length > 0) {
 	            for (let i = 0; i < actividadesAaceptadas.length; i++) {
-	                document.getElementById("btnA" + i).onclick = function() {
+	                document.v("btnA" + i).onclick = function() {
 	                    window.location.href = "consultarActividad?actividadSeleccionada=" + encodeURIComponent(val);
 	                }
 	            }
@@ -340,28 +340,12 @@
 		}
 	  
 	  //===================================================================================================================
-	    function selectRole(role) {
-            const deportistaFields = document.getElementById('deportistaFields');
-            const entrenadorFields = document.getElementById('entrenadorFields');
-
-            deportistaFields.classList.toggle('hidden', role !== 'Deportista');
-            entrenadorFields.classList.toggle('hidden', role !== 'Entrenador');
-        }
-
+	    
 	   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
 	    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
 	    	document.getElementById("acs").innerText = "Cerrar Sesion";
 	    	document.getElementById("acs").href = "logout"; 
-	    
 	    }
-	    
-	    function selectRole(role) {
-            const deportistaFields = document.getElementById('deportistaFields');
-            const entrenadorFields = document.getElementById('entrenadorFields');
-
-            deportistaFields.classList.toggle('hidden', role !== 'Deportista');
-            entrenadorFields.classList.toggle('hidden', role !== 'Entrenador');
-        }
 
         document.addEventListener("DOMContentLoaded", function() {
             const profesionalSi = document.getElementById('profesional_si');
@@ -369,7 +353,20 @@
             const SeleccionRol = document.getElementById('srol');
 
             SeleccionRol.disabled = true;
-            selectRole("${tipoUsuario}"); 
+            if ("${nickname}"!=""){
+            	const deportistaFields = document.getElementById('deportistaFields');
+               	const entrenadorFields = document.getElementById('entrenadorFields');
+               	if("${tipoUsuario}" !== 'Deportista'){
+               		deportistaFields.style.display = "none";
+                   	entrenadorFields.style.display = "inline";
+               	}else{
+                   	entrenadorFields.style.display = "none";
+               		deportistaFields.style.display = "inline";
+				}
+			}else{
+				deportistaFields.style.display = "none";
+               	entrenadorFields.style.display = "none";
+			}
 
             if("${prof}" == true){
                 profesionalSi.checked = false;
@@ -386,8 +383,9 @@
             
             var nn = '<%= session.getAttribute("usuarioLogueado") %>';
             var tu = '<%= session.getAttribute("tipoUsuario") %>';
-            
+
             if("${nickname}" == nn){
+				
             	if('Deportista' == tu){
 					//Un deportista consulta SU perfil
             		inscrpcionesFieldsOtroDepor.style.display = "none";
@@ -415,8 +413,9 @@
                 	actividadesEntrenador.style.display = "inline";
                 	actividadesMismoEntrenador.style.display = "none";
 				}
-			}
-            
-        });</script>
+			}    
+        });
+	</script>
+	
 </body>
 </html>
