@@ -31,53 +31,56 @@
             <!-- Formulario para inscripci�n -->
             <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
                 <h2 class="text-center text-2xl font-bold mb-4">Inscripcion a Clase Deportiva</h2>
-
+				<form id="userForm" action="InscripcionClaseDeportiva" method="POST" enctype="multipart/form-data">
+					<div class="mb-4">
+            			<label for="clases" class="block text-gray-700">Usuarios:</label>
+            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
+                    		<%@ page import="java.util.Vector" %>
+							<%@ page import="java.util.Iterator" %>
+							<%@ page import="logica.Fabrica" %>
+							<%
+                    		Fabrica fab = Fabrica.getInstance();
+							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividadesAceptadas();
+							if (acts!=null){
+								for (String a : acts){ 
+									out.print("<option value='"+a+"'>"+a+"</option>");
+								}
+							}
+							%>
+            			</select>
+            		</div>
+					<div class="mb-4 flex">
+						<input type="text" id="buscar" name="buscar"
+							placeholder="Buscar usuario..."
+							class="border border-gray-300 rounded w-full p-2" required>
+						<button type="submit"
+							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
+					</div>
+				</form>
                 <form id="inscripcionForm" action="inscribirClaseDeportiva" method="POST">
                    
-                    <div class="mb-4">
-                        <label for="actividad" class="block text-gray-700">Seleccionar Actividad:</label>
-                        <select id="actividad" name="actividad" class="border border-gray-300 rounded w-full p-2" required>
-                            <option value="Actividad1">Actividad 1</option>
-                            <option value="Actividad2">Actividad 2</option>
-                            <option value="Actividad3">Actividad 3</option>
-                            <option value="Actividad4">Actividad 4</option>
-                            <!-- Agrega m�s opciones seg�n sea necesario -->
-                        </select>
-                    </div>
 
                     <div class="mb-4">
                         <label for="clase" class="block text-gray-700">Seleccionar Clase:</label>
                         <select id="clase" name="clase" class="border border-gray-300 rounded w-full p-2" required>
-                            <option value="Clase1">Clase 1</option>
-                            <option value="Clase2">Clase 2</option>
-                            <option value="Clase3">Clase 3</option>
-                            <option value="Clase4">Clase 4</option>
+
+                        	<%
+							Vector<String> clas = (java.util.Vector<String>)request.getAttribute("listCla");
+							if (clas!=null){
+								for (String c : clas){ 
+									out.print("<option value='"+c+"'>"+c+"</option>");
+								}
+							}
+							%>
                             <!-- Agrega m�s opciones seg�n sea necesario -->
                         </select>
                     </div>
-				<div class="mb-4">
-                        <label for="nombre" class="block text-gray-700">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="fecha" class="block text-gray-700">Fecha:</label>
-                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="hora" class="block text-gray-700">Hora:</label>
-                        <input type="time" id="hora" name="hora" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="lugar" class="block text-gray-700">Lugar:</label>
-                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
-                    <div class="mb-4">
-                        <label for="cupo" class="block text-gray-700">Cupo:</label>
-                        <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" disabled>
-                    </div>
+					<div class="mb-4">
+					    <label for="cupo" class="block text-gray-700">Cantidad de Deportistas:</label>
+					    <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2">
+					</div>
+                    
+                    	<button type="submit" id="GuardaIns" class="bg-blue-500 text-white rounded w-full p-2 hover:bg-blue-600">Guardar</button>
                 </form>
             </div>
         </div>

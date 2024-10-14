@@ -18,7 +18,7 @@
             <a id="clasesToggle" class="block text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer">Clases Deportivas</a>
             <ul id="submenuClases" class="ml-4 mt-2 hidden">
                 <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarClaseDeportiva">Consultar Clase Deportiva</a></li>
-                <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="inscripcionClaseDeportiva.jsp">Inscripcion Clase Deportiva</a></li>
+                <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="inscripcionClaseDeportiva">Inscripcion Clase Deportiva</a></li>
             </ul>
         </li>
         <li><a class="block text-gray-700 hover:bg-gray-200 p-2 rounded" href="https://chatgpt.com/">Ayuda</a></li>
