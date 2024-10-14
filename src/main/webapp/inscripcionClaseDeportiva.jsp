@@ -34,7 +34,7 @@
                 
 				<form id="actForm" action="InscripcionClaseDeportiva" method="POST">
 					<div class="mb-4">
-            			<label for="clases" class="block text-gray-700">Usuarios:</label>
+            			<label for="clases" class="block text-gray-700">Selecionar actividad:</label>
             			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
                     		<%@ page import="java.util.Vector" %>
 							<%@ page import="java.util.Iterator" %>
@@ -58,10 +58,8 @@
 							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
 					</div>
 				</form>
-                <form id="inscripcionForm" action="InscripcionClaseDeportiva" method="POST">
-                   
-
-                    <div class="mb-4">
+					<form id="classForm" action="InscripcionClaseDeportiva" method="POST">
+					<div class="mb-4 flex">
                         <label for="clase" class="block text-gray-700">Seleccionar Clase:</label>
                         <select id="clase" name="clase" class="border border-gray-300 rounded w-full p-2" required>
 
@@ -75,7 +73,36 @@
 							%>
                             <!-- Agrega m�s opciones seg�n sea necesario -->
                         </select>
+                       <button type="submit"
+							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Mostrar Datos</button>
                     </div>
+				</form>
+                <form id="inscripcionForm" action="InscripcionClaseDeportiva" method="POST">
+                   <div class="mb-4">
+                        <label for="nombre" class="block text-gray-700">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" class="border border-gray-300 rounded w-full p-2" value="${nombre}" disabled>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="fecha" class="block text-gray-700">Fecha:</label>
+                        <input type="date" id="fecha" name="fecha" class="border border-gray-300 rounded w-full p-2" value="${fecha}" disabled>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="hora" class="block text-gray-700">Hora:</label>
+                        <input type="time" id="hora" name="hora" class="border border-gray-300 rounded w-full p-2" value="${hora}" disabled>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="lugar" class="block text-gray-700">Lugar:</label>
+                        <input type="text" id="lugar" name="lugar" class="border border-gray-300 rounded w-full p-2" value="${lugar}" disabled>
+                    </div>
+					<div class="mb-4">
+                        <label for="cupo" class="block text-gray-700">Cupo:</label>
+                        <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2" value="${cupo}" disabled>
+                    </div>
+
+                    
 					<div class="mb-4">
 					    <label for="cupo" class="block text-gray-700">Cantidad de Deportistas:</label>
 					    <input type="number" id="cupo" name="cupo" class="border border-gray-300 rounded w-full p-2">
