@@ -13,48 +13,43 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import logica.Fabrica;
+import logica.IControladorActividad;
+import logica.IControladorUsuario;
 
 @WebServlet("/InscripcionClaseDeportiva")
 public class InscripcionClaseDeportiva extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String actividadSeleccionada = request.getParameter("actividad");
-        System.out.println(actividadSeleccionada + 1 );
-        if (actividadSeleccionada != null && !actividadSeleccionada.isEmpty()) {
-            Fabrica fab = Fabrica.getInstance();
-            Vector<String> vClases = fab.getIControladorActividad().obtenerVectorClasesActividad("actividad real");
-            System.out.println(vClases);
-            request.setAttribute("listCla", vClases);
-        }
-        RequestDispatcher rd = request.getRequestDispatcher("inscripcionClaseDeportiva.jsp");
-        rd.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response); // Para manejar peticiones POST de la misma forma
+       
         
         String BuscaAct  = request.getParameter("buscar");
 
         // Procesar la inscripción
         Fabrica fab = Fabrica.getInstance();
-        String clase = request.getParameter("clase");
-        HttpSession session = request.getSession(false);
-        String nombre = (String) session.getAttribute("usuarioLogueado");
-        String cupoStr = request.getParameter("cupo");
+        IControladorActividad ICA = fab.getIControladorActividad();
+
 
         try {
-        	if  (BuscaAct != null) {
+        	System.out.println(BuscaAct);
+        	if  (ICA.actividadExiste(BuscaAct)) {
         		 Vector<String> vClases = fab.getIControladorActividad().obtenerVectorClasesActividad(BuscaAct);
                  System.out.println(vClases);
                  request.setAttribute("listCla", vClases);
+             	request.getRequestDispatcher("/inscripcionClaseDeportiva.jsp").forward(request, response);
+        	}else{
+        		RequestDispatcher rd;
+				request.setAttribute("estado", "Vuelva a intentar mas tarde.");
+     			request.setAttribute("mensaje", "La actividad no existe.");
+     			request.setAttribute("pag", "\"inscripcionClaseDeportiva.jsp\"");
+     			rd = request.getRequestDispatcher("/notificacion.jsp");
+     			rd.forward(request, response);
         	}
-            int cupo = Integer.parseInt(cupoStr);
-            LocalDate fechaHoy = LocalDate.now();
-            fab.getIControladorClaseDeportiva().AltainscripcionAClase(clase, nombre, cupo, fechaHoy);
+
         } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (ClaseNoExisteException e) {
             e.printStackTrace();
         }
     }

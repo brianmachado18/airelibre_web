@@ -31,7 +31,8 @@
             <!-- Formulario para inscripci�n -->
             <div class="bg-white rounded-lg shadow-md p-6 max-w-lg w-full" style="margin-right: 2rem;">
                 <h2 class="text-center text-2xl font-bold mb-4">Inscripcion a Clase Deportiva</h2>
-				<form id="userForm" action="InscripcionClaseDeportiva" method="POST" enctype="multipart/form-data">
+                
+				<form id="actForm" action="InscripcionClaseDeportiva" method="POST">
 					<div class="mb-4">
             			<label for="clases" class="block text-gray-700">Usuarios:</label>
             			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
@@ -51,13 +52,13 @@
             		</div>
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
-							placeholder="Buscar usuario..."
+							placeholder="Buscar actividad..."
 							class="border border-gray-300 rounded w-full p-2" required>
 						<button type="submit"
 							class="bg-blue-500 text-white rounded p-2 ml-2 hover:bg-blue-600">Buscar</button>
 					</div>
 				</form>
-                <form id="inscripcionForm" action="inscribirClaseDeportiva" method="POST">
+                <form id="inscripcionForm" action="InscripcionClaseDeportiva" method="POST">
                    
 
                     <div class="mb-4">

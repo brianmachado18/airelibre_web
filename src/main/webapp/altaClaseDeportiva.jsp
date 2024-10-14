@@ -73,7 +73,7 @@
 
                     <div class="mb-4">
                         <label for="imagen" class="block text-gray-700">Subir Imagen:</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg" class="border border-gray-300 rounded w-full p-2" required>
+                        <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg" class="border border-gray-300 rounded w-full p-2" >
                     </div>
 
                     <div class="mb-4">
