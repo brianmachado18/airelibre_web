@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        body{
+            background-image: url("vanity/background.jpg");
+           
+   
+        }
+        nav{
+            background-color: black;
+        }
+        .navegador{
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.01));
+            height: 100px;
+            padding: 1rem;
+            
+            display: flex;               
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .iniciar-sesion {
+    	color: white; /* Equivalente a text-white */
+    	margin-left: 1rem; /* Equivalente a ml-4 */
+    	text-decoration: none; /* Para eliminar el subrayado */
+    	padding: 10px;
+	}
+
+	.iniciar-sesion:hover {
+    	color: #90cdf4; /* Equivalente a hover:text-blue-200 */
+    	background-color: rgba(255,255,153,0.1);
+    	border-width: 2px;
+    	border-color: rgba(255,255,153,0.4);
+    	border-style: hidden hidden hidden solid;
+   
+	}
+    </style>
+</head>
+
+<body>
+
+    
+    <nav class="navegador">
+        <div class="flex-grow text-center">
+            <h1 class="text-white text-2xl"></h1>
+        </div>
+        <a id="acs" href="login.html" class="iniciar-sesion">Iniciar Sesión</a>
+    </nav>
+
+
+    <div class="flex">
+        <!-- Menú lateral -->
+        <div id="menuLateral"></div>
+      
+      
+        <style>
+            .menuLat1 {
+        background: rgba(255, 255, 255, 0.3);
+        width: 16rem;
+        height: 100vh;
+        padding: 1.25rem;
+        }
+        
+        #actividadesToggle, #usuariosToggle, #clasesToggle, #ayudaToggle {
+        display: block;
+        color: #4a5568;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        text-decoration: none;
+        }
+        
+        #actividadesToggle:hover, #usuariosToggle:hover, #clasesToggle:hover, #ayudaToggle:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: rgb(255, 255, 255);
+        }
+        
+        .submenuActividades, .submenuUsuarios, .submenuClases {
+        display: block;
+        color: #4a5568;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+        
+        }
+        
+        .submenuActividades:hover, .submenuUsuarios:hover, .submenuClases:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: rgb(255, 255, 255);
+        }
+        
+        .hidden {
+        display: none;
+        }
+        </style>
+        <nav class="menuLat1">
+        <h5 class="font-semibold mb-4">Menú</h5>
+        <ul>
+            <li>
+                <a id="usuariosToggle">Usuarios</a>
+                <ul id="submenuUsuarios" class="submenuUsuarios">
+                    <li><a href="consultarUsuario.jsp">Consultar Usuario</a></li>
+                </ul>
+            </li>
+            <li>
+                <a id="actividadesToggle" >Actividades</a>
+                <ul id="submenuActividades" class="submenuActividades">
+                    <li><a href="consultarActividad.jsp">Consultar Actividad</a></li>
+                </ul>
+            </li>
+            <li>
+                <a id="clasesToggle">Clases Deportivas</a>
+                <ul id="submenuClases" class="submenuClases">
+                    <li><a href="consultarClaseDeportiva.jsp">Consultar Clase Deportiva</a></li>
+                </ul>
+            </li>
+            <li><a id="ayudaToggle" href="https://chatgpt.com/">Ayuda</a></li>
+        </ul>
+        </nav>
+        
+
+        
+    </div>
+
+    <script type="text/javascript" src="js/menu.jsp"></script>
+
+    <script type="text/javascript">
+   	const tipoUsuario = '<%=session.getAttribute("tipoUsuario")%>'; 
+    if(tipoUsuario === "Deportista" || tipoUsuario === "Entrenador") {
+    	document.getElementById("acs").innerText = "Cerrar Sesión";
+    	document.getElementById("acs").href = "logout"; 
+    
+    }
+</script>
+</body>
+</html>

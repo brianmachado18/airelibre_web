@@ -1,0 +1,70 @@
+<style>
+    .menuLat2 {
+background: rgba(255, 255, 255, 0.3);
+width: 16rem;
+height: 100vh;
+padding: 1.25rem;
+}
+
+#actividadesToggle, #usuariosToggle, #clasesToggle, #ayudaToggle {
+display: block;
+color: #4a5568;
+padding: 0.5rem;
+border-radius: 0.25rem;
+cursor: pointer;
+text-decoration: none;
+}
+
+#actividadesToggle:hover, #usuariosToggle:hover, #clasesToggle:hover, #ayudaToggle:hover {
+background-color: rgba(0, 0, 0, 0.5);
+color: rgb(255, 255, 255);
+}
+
+.submenuActividades, .submenuUsuarios, .submenuClases {
+display: block;
+color: #4a5568;
+padding: 0.5rem;
+border-radius: 0.25rem;
+cursor: pointer;
+text-decoration: none;
+margin-left: 1rem;
+margin-top: 0.5rem;
+display:none;
+}
+
+.submenuActividades:hover, .submenuUsuarios:hover, .submenuClases:hover {
+background-color: rgba(0, 0, 0, 0.5);
+color: rgb(255, 255, 255);
+}
+
+.hidden {
+display: none;
+}
+</style>
+<nav class="menuLat2">
+    <h5 class="font-semibold mb-4">Menú</h5>
+    <ul>
+        <li>
+            <a id="usuariosToggle">Usuarios</a>
+            <ul id="submenuUsuarios" class="ml-4 mt-2 hidden">
+                <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarUsuario.html">Consultar Usuario</a></li>
+                <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="modificarUsuario.html">Modificar Usuario</a></li>
+            </ul>
+        </li>
+        <li>
+            <a id="actividadesToggle">Actividades</a>
+            <ul id="submenuActividades" class="ml-4 mt-2 hidden">
+            <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaActividad.html">Alta Actividad</a></li>
+                <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarActividad.html">Consultar Actividad</a></li>
+            </ul>
+        </li>
+        <li>
+            <a id="clasesToggle">Clases Deportivas</a>
+            <ul id="submenuClases" class="ml-4 mt-2 hidden">
+            <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="altaClaseDeportiva.html">Alta Clase Deportiva</a></li>
+             <li><a class="block text-gray-600 hover:bg-gray-200 p-2 rounded" href="consultarClaseDeportiva.html">Consultar Clase Deportiva</a></li>
+            </ul>
+        </li>
+        <li><a id="ayudaToggle" href="https://chatgpt.com/">Ayuda</a></li>
+    </ul>
+</nav>
