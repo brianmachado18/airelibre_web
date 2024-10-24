@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import logica.*;
+import servidor.PersistenciaException_Exception;
 import excepciones.*;
 
 
@@ -28,18 +29,14 @@ public class altaUsuario extends HttpServlet {
         super();
         
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    	    throws ServletException, IOException, PersistenciaException_Exception {
     	
-    	Fabrica fab = Fabrica.getInstance();
-    	IControladorUsuario ICC = fab.getIControladorUsuario();
+        servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
     	
-    	
-        String nickname = request.getParameter("nickname");
+    	String nickname = request.getParameter("nickname");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String correo = request.getParameter("email");
@@ -63,27 +60,39 @@ public class altaUsuario extends HttpServlet {
             archivo.write(rutaDestino);
             rutaArchivo = "/Perfiles/" + nickname + extension;
         }
+
         
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate fecha = LocalDate.parse(fechaNacimientoStr, formatoFecha);
-        
-        try {
-        	 if (ICC.usuarioExiste(nickname, correo)) {
-     			RequestDispatcher rd;
-     			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
-     			request.setAttribute("mensaje", "El nickname o el correo electrónico ya están en uso.");
-     			request.setAttribute("pag", "\"altaUsuario.jsp\"");
-     			rd = request.getRequestDispatcher("/notificacion.jsp");
-     			rd.forward(request, response);
-     		}else {
-    			ICC.AltaUsuario(nickname, contrasena, nombre, apellido, correo, fecha, tipoUsuario.trim(), esProfesional, disciplina, paginaWeb, rutaArchivo);
-    			RequestDispatcher rd;
-     			request.setAttribute("estado", "Usuario creado.");
-     			request.setAttribute("pag", "\"login.jsp\"");
-     			rd = request.getRequestDispatcher("/notificacion.jsp");
-     			rd.forward(request, response);
-     		}
-		} catch (PersistenciaException e) {
+        if (port.usuarioExiste(nickname) && port.usuarioExiste(correo)) {
+			RequestDispatcher rd;
+			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
+			request.setAttribute("mensaje", "El nickname o el correo electrónico ya están en uso.");
+			request.setAttribute("pag", "\"altaUsuario.jsp\"");
+			rd = request.getRequestDispatcher("/notificacion.jsp");
+			rd.forward(request, response);
+		}else {
+			port.altaUsuario(nickname, contrasena, nombre, apellido, correo, fechaNacimientoStr, tipoUsuario.trim(), esProfesional, disciplina, paginaWeb, rutaArchivo);
+			RequestDispatcher rd;
+			request.setAttribute("estado", "Usuario creado.");
+			request.setAttribute("pag", "\"login.jsp\"");
+			rd = request.getRequestDispatcher("/notificacion.jsp");
+			rd.forward(request, response);
+		}
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   	 try {
+			processRequest(request, response);
+		} catch (ServletException | IOException | PersistenciaException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   	 try {
+			processRequest(request, response);
+		} catch (ServletException | IOException | PersistenciaException_Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
