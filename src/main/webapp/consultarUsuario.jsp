@@ -41,10 +41,10 @@
 					<div class="mb-4">
             			<label for="clases" class="block text-gray-700">Usuarios:</label>
             			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                    		<%@ page import="java.util.Vector" %>
+                    		<%@ page import="java.util.ArrayList" %>
 							<%@ page import="java.util.Iterator" %>
 							<%
-							Vector<String> usus = (java.util.Vector<String>)request.getAttribute("listUsu");
+							ArrayList<String> usus = (ArrayList<String>) request.getAttribute("listUsu");
 							if (usus!=null){
 								for (String u : usus){ 
 									out.print("<option value='"+u+"'>"+u+"</option>");
@@ -107,7 +107,7 @@
 							<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4" style="display: none;">
 								<label for="inscrp" class="block text-gray-700">Clases Inscripto:</label>
 		            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
-		                    		<%@ page import="java.util.Vector" %>
+		                    		<%-- <%@ page import="java.util.Vector" %>
 									<%@ page import="java.util.Iterator" %>
 									<%
 									Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
@@ -116,7 +116,7 @@
 											out.print("<option value=\"" + ci + "\">" + ci + "</option>"); 
 										}
 									}
-									%>
+									%> --%>
 		            			</select>
 							</div>
 							
@@ -178,15 +178,18 @@
 						            </tr>
 						        </thead>
 						        <tbody>
-						            <% String[][] actividadesAceptadas = (String[][])request.getAttribute("actividadesAceptadas");
+						        <%@ page import="java.util.ArrayList" %>
+						            <% ArrayList<ArrayList<String>> actividadesAceptadas = (ArrayList<ArrayList<String>>) request.getAttribute("actividadesAceptadas");
 						            if (actividadesAceptadas != null) {
-						                for (int i = 0; i < actividadesAceptadas.length; i++) { %>
+						            	int i = 0;
+						            	for (ArrayList<String> actividad : actividadesAceptadas) { %>
+						                	
 						                    <tr>
-						                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][0] %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][1] %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividadesAceptadas[i][2] %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividad.get(0) %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividad.get(1) %></td>
+						                        <td class="py-2 px-4 border-b"><%= actividad.get(2) %></td>
 						                        <td class="py-2 px-4 border-b">
-						                            <button id="btnA<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividadesAceptadas[i][0] %>" onclick="consActividadAceptada(this.value)">Buscar</button>
+						                            <button id="btnA" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividad.get(0) %>" onclick="consActividadAceptada(this.value)">Buscar</button>
 						                        </td>
 						                    </tr>
 						                <% }

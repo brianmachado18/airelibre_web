@@ -1,11 +1,8 @@
 
 package servidor;
 
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -19,7 +16,6 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="actividades" type="{http://servidor/}actividad" maxOccurs="unbounded" minOccurs="0"/&gt;
  *         &lt;element name="apellido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="contrasena" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="disciplina" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -40,7 +36,6 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtEntrenador", propOrder = {
-    "actividades",
     "apellido",
     "contrasena",
     "disciplina",
@@ -54,8 +49,6 @@ import jakarta.xml.bind.annotation.XmlType;
 })
 public class DtEntrenador {
 
-    @XmlElement(nillable = true)
-    protected List<Actividad> actividades;
     protected String apellido;
     protected String contrasena;
     protected String disciplina;
@@ -66,35 +59,6 @@ public class DtEntrenador {
     protected String nickname;
     protected String nombre;
     protected String sitioWeb;
-
-    /**
-     * Gets the value of the actividades property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the actividades property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getActividades().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Actividad }
-     * 
-     * 
-     */
-    public List<Actividad> getActividades() {
-        if (actividades == null) {
-            actividades = new ArrayList<Actividad>();
-        }
-        return this.actividades;
-    }
 
     /**
      * Gets the value of the apellido property.
