@@ -1,6 +1,7 @@
 
 package servidor;
 
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="return" type="{http://servidor/}arrayList" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -34,7 +35,7 @@ import jakarta.xml.bind.annotation.XmlType;
 public class ObtenerArrayActividadesAceptadasEntrenadorResponse {
 
     @XmlElement(name = "return")
-    protected List<java.util.ArrayList> _return;
+    protected List<String> _return;
 
     /**
      * Gets the value of the return property.
@@ -54,13 +55,13 @@ public class ObtenerArrayActividadesAceptadasEntrenadorResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link servidor.ArrayList }
+     * {@link String }
      * 
      * 
      */
-    public List<java.util.ArrayList> getReturn() {
+    public List<String> getReturn() {
         if (_return == null) {
-            _return = new java.util.ArrayList<java.util.ArrayList>();
+            _return = new ArrayList<String>();
         }
         return this._return;
     }

@@ -347,14 +347,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArrayList }
-     * 
-     */
-    public java.util.ArrayList createArrayList() {
-        return new java.util.ArrayList();
-    }
-
-    /**
      * Create an instance of {@link DtDeportista }
      * 
      */

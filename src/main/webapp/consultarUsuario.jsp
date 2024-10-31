@@ -19,13 +19,13 @@
 		<div class="flex-grow text-center">
 			<h1 class="text-white text-2xl">Consulta de Usuarios</h1>
 		</div>
-		<a id="acs" href="login.jsp" class="text-white hover:text-blue-200 ml-4">Iniciar
-			Sesion</a>
+		<a id="acs" href="login.jsp"
+			class="text-white hover:text-blue-200 ml-4">Iniciar Sesion</a>
 	</nav>
 
 	<div class="flex">
 		<!-- Menï¿½ lateral -->
-        <div id="menuLateral"></div>
+		<div id="menuLateral"></div>
 
 
 		<!-- Contenedor para el formulario y la imagen -->
@@ -37,12 +37,14 @@
 				<h2 class="text-center text-2xl font-bold mb-4">Buscar Usuario</h2>
 
 				<!-- Campo de bï¿½squeda -->
-				<form id="userForm" action="consultarUsuario" method="POST" enctype="multipart/form-data">
+				<form id="userForm" action="consultarUsuario" method="POST"
+					enctype="multipart/form-data">
 					<div class="mb-4">
-            			<label for="clases" class="block text-gray-700">Usuarios:</label>
-            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                    		<%@ page import="java.util.ArrayList" %>
-							<%@ page import="java.util.Iterator" %>
+						<label for="clases" class="block text-gray-700">Usuarios:</label>
+						<select id="clases" name="clases" multiple
+							class="border border-gray-300 rounded w-full p-2">
+							<%@ page import="java.util.ArrayList"%>
+							<%@ page import="java.util.Iterator"%>
 							<%
 							ArrayList<String> usus = (ArrayList<String>) request.getAttribute("listUsu");
 							if (usus!=null){
@@ -51,8 +53,8 @@
 								}
 							}
 							%>
-            			</select>
-            		</div>
+						</select>
+					</div>
 					<div class="mb-4 flex">
 						<input type="text" id="buscar" name="buscar"
 							placeholder="Buscar usuario..."
@@ -64,50 +66,59 @@
 
 				<form id="userForm">
 					<div class="mb-4">
-						<label for="nombre" class="block text-gray-700" >Nombre:</label> 
-						<input
+						<label for="nombre" class="block text-gray-700">Nombre:</label> <input
 							type="text" id="nombre" name="nombre"
-							class="border border-gray-300 rounded w-full p-2" value="${nombre}" disabled>
+							class="border border-gray-300 rounded w-full p-2"
+							value="${nombre}" disabled>
 					</div>
 
 					<div class="mb-4">
-						<label for="apellido" class="block text-gray-700" >Apellido:</label>
+						<label for="apellido" class="block text-gray-700">Apellido:</label>
 						<input type="text" id="apellido" name="apellido"
-							class="border border-gray-300 rounded w-full p-2" value="${apellido}"disabled>
+							class="border border-gray-300 rounded w-full p-2"
+							value="${apellido}" disabled>
 					</div>
 
 					<div class="mb-4">
-						<label for="nickname" class="block text-gray-700" >Nickname:</label>
+						<label for="nickname" class="block text-gray-700">Nickname:</label>
 						<input type="text" id="nickname" name="nickname"
-							class="border border-gray-300 rounded w-full p-2" value="${nickname}"disabled>
+							class="border border-gray-300 rounded w-full p-2"
+							value="${nickname}" disabled>
 					</div>
 
 					<div class="mb-4">
 						<label for="email" class="block text-gray-700">Correo
 							Electronico:</label> <input type="email" id="email" name="email"
-							class="border border-gray-300 rounded w-full p-2"  value="${correo}"disabled>
+							class="border border-gray-300 rounded w-full p-2"
+							value="${correo}" disabled>
 					</div>
 
 					<div class="mb-4">
-						<label for="fecha" class="block text-gray-700" >Fecha de
+						<label for="fecha" class="block text-gray-700">Fecha de
 							Nacimiento:</label> <input type="date" id="fecha" name="fecha"
-							class="border border-gray-300 rounded w-full p-2"value="${fnac}" disabled>
+							class="border border-gray-300 rounded w-full p-2" value="${fnac}"
+							disabled>
 					</div>
 
-					<div id="deportistaFields" class="hidden mb-4" style="display: none;">
+					<div id="deportistaFields" class="hidden mb-4"
+						style="display: none;">
 						<label class="block text-gray-700 mb-2">Rol:</label>
-						<button type="button" id = "srol"
-							class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600" disabled>Deportista</button>
+						<button type="button" id="srol"
+							class="bg-blue-500 text-white rounded w-full p-2 mb-2 hover:bg-blue-600"
+							disabled>Deportista</button>
 						<label class="block text-gray-700">¿Eres profesional?</label> <input
-							type="radio" id="profesional_si" name="profesional" value="si" disabled>
-						<label for="profesional_si">Si</label> <input type="radio"
-							id="profesional_no" name="profesional" value="no" disabled> <label
-							for="profesional_no">No</label>
-							
-							<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4" style="display: none;">
-								<label for="inscrp" class="block text-gray-700">Clases Inscripto:</label>
-		            			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
-		                    		<%-- <%@ page import="java.util.Vector" %>
+							type="radio" id="profesional_si" name="profesional" value="si"
+							disabled> <label for="profesional_si">Si</label> <input
+							type="radio" id="profesional_no" name="profesional" value="no"
+							disabled> <label for="profesional_no">No</label>
+
+						<div id="inscrpcionesFieldsOtroDepor" class="hidden mb-4"
+							style="display: none;">
+							<label for="inscrp" class="block text-gray-700">Clases
+								Inscripto:</label> <select id="clases" name="clases" multiple
+								class="border border-gray-300 rounded w-full p-2"
+								onchange="consInscripciones(this.value);">
+								<%-- <%@ page import="java.util.Vector" %>
 									<%@ page import="java.util.Iterator" %>
 									<%
 									Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
@@ -117,116 +128,147 @@
 										}
 									}
 									%> --%>
-		            			</select>
-							</div>
-							
-							<div id="inscrpcionesFieldsMismoDepor" class="hidden mb-4" style="display: none;">
-							    <label for="inscrp" class="block text-gray-700">Mis Inscripciones:</label>
-							    <table id="tablaInscripciones" class="min-w-full bg-white border border-gray-300 rounded-lg">
-							        <thead class="bg-gray-200">
-							            <tr>
-							                <th class="py-2 px-4 border-b text-left text-gray-700">Clase</th>
-							                <th class="py-2 px-4 border-b text-left text-gray-700">Costo</th>
-							                <th class="py-2 px-4 border-b text-left text-gray-700">Cantidad de deportistas</th>
-							                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
-							            </tr>
-							        </thead>
-							        <tbody>
-							            <% String[][] inscrips = (String[][])request.getAttribute("inscrips");
+							</select>
+						</div>
+
+						<div id="inscrpcionesFieldsMismoDepor" class="hidden mb-4"
+							style="display: none;">
+							<label for="inscrp" class="block text-gray-700">Mis
+								Inscripciones:</label>
+							<table id="tablaInscripciones"
+								class="min-w-full bg-white border border-gray-300 rounded-lg">
+								<thead class="bg-gray-200">
+									<tr>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Clase</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Costo</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Cantidad
+											de deportistas</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<% String[][] inscrips = (String[][])request.getAttribute("inscrips");
 							            if (inscrips != null) {
 							                for (int i = 0; i < inscrips.length; i++) { %>
-							                    <tr>
-							                        <td class="py-2 px-4 border-b"><%= inscrips[i][0] %></td>
-							                        <td class="py-2 px-4 border-b"><%= inscrips[i][1] %></td>
-							                        <td class="py-2 px-4 border-b"><%= inscrips[i][2] %></td>
-							                        <td class="py-2 px-4 border-b">
-							                            <button id="btnC<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= inscrips[i][0] %>" onclick="consInscripciones(this.value)">Buscar</button>
-							                        </td>
-							                    </tr>
-							                <% }
+									<tr>
+										<td class="py-2 px-4 border-b"><%= inscrips[i][0] %></td>
+										<td class="py-2 px-4 border-b"><%= inscrips[i][1] %></td>
+										<td class="py-2 px-4 border-b"><%= inscrips[i][2] %></td>
+										<td class="py-2 px-4 border-b">
+											<button id="btnC<%= i %>" type="button"
+												class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
+												value="<%= inscrips[i][0] %>"
+												onclick="consInscripciones(this.value)">Buscar</button>
+										</td>
+									</tr>
+									<% }
 							            } %>
-							        </tbody>
-							    </table>
-							</div>
+								</tbody>
+							</table>
+						</div>
 					</div>
 
-					<div id="entrenadorFields" class="hidden mb-4" style="display: none;"> 
+					<div id="entrenadorFields" class="hidden mb-4"
+						style="display: none;">
 						<label class="block text-gray-700 mb-2">Rol:</label>
-						<button type="button" id = "srol"
-							class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600" disabled>Entrenador</button>
+						<button type="button" id="srol"
+							class="bg-blue-500 text-white rounded w-full p-2 mb-4 hover:bg-blue-600"
+							disabled>Entrenador</button>
 						<div>
 							<label for="disciplina" class="block text-gray-700">¿Cual
 								es tu disciplina?</label> <input type="text" id="disciplina"
 								name="disciplina"
-								class="border border-gray-300 rounded w-full p-2" value="${disciplina}"disabled>
+								class="border border-gray-300 rounded w-full p-2"
+								value="${disciplina}" disabled>
 						</div>
 						<div>
 							<label for="sitio_web" class="block text-gray-700">Sitio
 								Web:</label> <input type="text" id="sitio_web" name="sitio_web"
-								class="border border-gray-300 rounded w-full p-2" value="${web}"disabled>
+								class="border border-gray-300 rounded w-full p-2" value="${web}"
+								disabled>
 						</div>
-						
-						<div id="actividadesEntrenador" class="hidden mb-4" style="display: none;">
-						    <label for="inscrp" class="block text-gray-700">Actividades vinculadas:</label>
-						    <table id="tablaActividadesAceptadas" class="min-w-full bg-white border border-gray-300 rounded-lg">
-						        <thead class="bg-gray-200">
-						            <tr>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
-						            </tr>
-						        </thead>
-						        <tbody>
-						        <%@ page import="java.util.ArrayList" %>
-						            <% ArrayList<ArrayList<String>> actividadesAceptadas = (ArrayList<ArrayList<String>>) request.getAttribute("actividadesAceptadas");
+
+						<div id="actividadesEntrenador" class="hidden mb-4"
+							style="display: none;">
+							<label for="inscrp" class="block text-gray-700">Actividades
+								vinculadas:</label>
+							<table id="tablaActividadesAceptadas"
+								class="min-w-full bg-white border border-gray-300 rounded-lg">
+								<thead class="bg-gray-200">
+									<tr>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<%@ page import="java.util.Vector"%>
+									<% ArrayList<String> actividadesAceptadas = (ArrayList<String>)request.getAttribute("actividadesAceptadas");
 						            if (actividadesAceptadas != null) {
-						            	int i = 0;
-						            	for (ArrayList<String> actividad : actividadesAceptadas) { %>
-						                	
-						                    <tr>
-						                        <td class="py-2 px-4 border-b"><%= actividad.get(0) %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividad.get(1) %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividad.get(2) %></td>
-						                        <td class="py-2 px-4 border-b">
-						                            <button id="btnA" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividad.get(0) %>" onclick="consActividadAceptada(this.value)">Buscar</button>
-						                        </td>
-						                    </tr>
-						                <% }
+						            	int idBtn = 0;
+						            	for (int i = 0; i < actividadesAceptadas.size(); i ++) { %>
+
+									<tr>
+										<td class="py-2 px-4 border-b"><%=  actividadesAceptadas.get(i)%></td>
+										<%= i++ %>
+										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i) %></td>
+										<%= i++ %>
+										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i)%></td>
+										<td class="py-2 px-4 border-b">
+											<button id="btnA<%= idBtn %>" type="button"
+												class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
+												value="<%= actividadesAceptadas.get(idBtn) %>"
+												onclick="consActividadAceptada(this.value)">Buscar</button>
+										</td>
+									</tr>
+									<%= idBtn++ %>
+									<% }
 						            } %>
-						        </tbody>
-						    </table>
+								</tbody>
+							</table>
 						</div>
-						
-						<div id="actividadesMismoEntrenador" class="hidden mb-4" style="display: none;">
-						    <label for="inscrp" class="block text-gray-700">Mis Actividades:</label>
-						    <table id="tablaActividades" class="min-w-full bg-white border border-gray-300 rounded-lg">
-						        <thead class="bg-gray-200">
-						            <tr>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Estado</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
-						                <th class="py-2 px-4 border-b text-left text-gray-700"></th>
-						            </tr>
-						        </thead>
-						        <tbody>
-						            <% String[][] actividades = (String[][])request.getAttribute("actividades");
+
+						<div id="actividadesMismoEntrenador" class="hidden mb-4"
+							style="display: none;">
+							<label for="inscrp" class="block text-gray-700">Mis
+								Actividades:</label>
+							<table id="tablaActividades"
+								class="min-w-full bg-white border border-gray-300 rounded-lg">
+								<thead class="bg-gray-200">
+									<tr>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Actividad</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Estado</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Lugar</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700">Duración</th>
+										<th class="py-2 px-4 border-b text-left text-gray-700"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<% ArrayList<String> actividades = (ArrayList<String>)request.getAttribute("actividades");
 						            if (actividades != null) {
-						                for (int i = 0; i < actividades.length; i++) { %>
-						                    <tr>
-						                        <td class="py-2 px-4 border-b"><%= actividades[i][0] %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividades[i][1] %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividades[i][2] %></td>
-						                        <td class="py-2 px-4 border-b"><%= actividades[i][3] %></td>
-						                        <td class="py-2 px-4 border-b">
-						                            <button id="btnB<%= i %>" type="button" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600" value="<%= actividades[i][0] %>" onclick="consActividad(this.value)">Buscar</button>
-						                        </td>
-						                    </tr>
-						                <% }
+						            	int idBtn = 0;
+						                for (int i = 0; i < actividades.size(); i++) { %>
+									<tr>
+										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
+										<%= i++ %>
+										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
+										<%= i++ %>
+										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
+										<%= i++ %>
+										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
+										<td class="py-2 px-4 border-b">
+											<button id="btnB<%= idBtn %>" type="button"
+												class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
+												value="<%= actividades.get(idBtn).toString() %>"
+												onclick="consActividad(this.value)">Buscar</button>
+										</td>
+									</tr>
+									<%= idBtn++ %>
+									<% }
 						            } %>
-						        </tbody>
-						    </table>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</form>
@@ -236,13 +278,12 @@
 			<div
 				class="bg-white rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
 				<!-- Sin margen izquierdo -->
-				<img id="userImage" src="${imgen}"
-					alt="Imagen de Usuario"
+				<img id="userImage" src="${imgen}" alt="Imagen de Usuario"
 					class="w-full h-full object-cover rounded-lg">
 			</div>
-			
+
 		</div>
-		
+
 	</div>
 
 	<script type="text/javascript" src="js/menu.jsp"></script>
@@ -257,10 +298,10 @@
 	    //=== actividadesAaceptadas ==================================================================================
 	    const actividadesAaceptadas = [
 	        <% 
-	        String[][] arrayAA = (String[][]) request.getAttribute("actividadesAceptadas");
+	        ArrayList<String> arrayAA = (ArrayList<String>) request.getAttribute("actividadesAceptadas");
 	        if (arrayAA != null) {  // Comprobar si 'aa' no es null
-	            for (int i = 0; i < arrayAA.length; i++) { %>
-	                ["<%= arrayAA[i][0] %>", "<%= arrayAA[i][1] %>"]<% if (i < arrayAA.length - 1) { %>,<% } %>
+	            for (int i = 0; i < arrayAA.size(); i++) { %>
+	                ["<%= arrayAA.get(i) %>", "<%= arrayAA.get(i) %>"]<% if (i < arrayAA.size() - 1) { %>,<% } %>
 	            <% } 
 	        }
 	        %>
@@ -283,10 +324,10 @@
 	  //=== actividades ==============================================================================================
 	  const actividades = [
 	        <% 
-	        String[][] arrayA = (String[][]) request.getAttribute("actividades");
+	        ArrayList<String> arrayA = (ArrayList<String>) request.getAttribute("actividades");
 	        if (arrayA != null) {  // Comprobar si 'aa' no es null
-	            for (int i = 0; i < arrayA.length; i++) { %>
-	                ["<%= arrayA[i][0] %>", "<%= arrayA[i][1] %>"]<% if (i < arrayA.length - 1) { %>,<% } %>
+	            for (int i = 0; i < arrayA.size(); i++) { %>
+	                ["<%= arrayA.get(i) %>", "<%= arrayA.get(i) %>"]<% if (i < arrayA.size() - 1) { %>,<% } %>
 	            <% } 
 	        }
 	        %>
@@ -417,6 +458,6 @@
 			}    
         });
 	</script>
-	
+
 </body>
 </html>

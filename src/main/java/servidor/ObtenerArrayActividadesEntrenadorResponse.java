@@ -7,7 +7,6 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
-import net.java.dev.jaxb.array.StringArray;
 
 
 /**
@@ -20,7 +19,7 @@ import net.java.dev.jaxb.array.StringArray;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="return" type="{http://jaxb.dev.java.net/array}stringArray" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,8 +34,8 @@ import net.java.dev.jaxb.array.StringArray;
 })
 public class ObtenerArrayActividadesEntrenadorResponse {
 
-    @XmlElement(name = "return", nillable = true)
-    protected List<StringArray> _return;
+    @XmlElement(name = "return")
+    protected List<String> _return;
 
     /**
      * Gets the value of the return property.
@@ -56,13 +55,13 @@ public class ObtenerArrayActividadesEntrenadorResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link StringArray }
+     * {@link String }
      * 
      * 
      */
-    public List<StringArray> getReturn() {
+    public List<String> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<StringArray>();
+            _return = new ArrayList<String>();
         }
         return this._return;
     }
