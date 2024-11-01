@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import logica.*;
+import servidor.PersistenciaException_Exception;
 import excepciones.*;
 
 @WebServlet("/altaActividad")
@@ -27,15 +28,10 @@ public class altaActividad extends HttpServlet {
         
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, PersistenciaException_Exception {
     	
-    	Fabrica fab = Fabrica.getInstance();
-    	IControladorActividad ICA = fab.getIControladorActividad();
-    	IControladorUsuario ICU = fab.getIControladorUsuario();
+    	servidor.PublicadorService service = new servidor.PublicadorService();
+    	servidor.Publicador port = service.getPublicadorPort();
     	
     	String nombre = request.getParameter("nombre");
     	String descripcion = request.getParameter("descripcion");
@@ -43,28 +39,29 @@ public class altaActividad extends HttpServlet {
     	String costo = request.getParameter("costo");
     	String lugar = request.getParameter("lugar");
     	String fechaAlta = request.getParameter("fechaAlta");
-    	
+
     	Part archivo = request.getPart("imagen");
+    	
     	String nombreArchivo = null;
     	String extension = null;
     	String rutaDestino = null;
     	String rutaPersistir = null;
-    	if(archivo.getSize()>0) {
-	    	nombreArchivo = archivo.getSubmittedFileName(); 
-	        extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
-	        rutaDestino = request.getServletContext().getRealPath("/Actividades/") + nombre + extension;
-	        archivo.write(rutaDestino);
-	        rutaPersistir = "/Actividades/" + nombre + extension;
-    	}
     	
-        LocalDate fecha = LocalDate.parse(fechaAlta, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        
-        try {
-        	HttpSession session = request.getSession(false);
-            System.out.println((String) session.getAttribute("usuarioLogueado"));
-            DtEntrenador dtEnt = ICU.obtenerEntrenador((String) session.getAttribute("usuarioLogueado"));
-        	
-       	 	if (ICA.actividadExiste(nombre)) {
+    	if(archivo.getSize() > 0) {
+    		nombreArchivo = archivo.getSubmittedFileName();
+    		extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("0"));
+    		rutaDestino = request.getServletContext().getRealPath("/Actividades/") + nombre + extension;
+    		archivo.write(rutaDestino);
+    		rutaPersistir = "/Actividades/" + nombre + extension;
+    	}
+
+    	try {
+			
+    		HttpSession session = request.getSession(false);
+    		//System.out.println((String) session.getAttribute("usuarioLogueado"));
+    		servidor.DtEntrenador dataEntrenador = port.obtenerEntrenador((String) session.getAttribute("usuarioLogueado"));
+    		
+    		if(port.actividadExiste(nombre)) {
     			RequestDispatcher rd;
     			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
     			request.setAttribute("mensaje", "El nombre de la actividad ya están en uso.");
@@ -72,16 +69,28 @@ public class altaActividad extends HttpServlet {
     			rd = request.getRequestDispatcher("/notificacion.jsp");
     			rd.forward(request, response);
     		}else {
-    			ICA.AltaActividad(nombre, descripcion, Integer.parseInt(duracion), Integer.parseInt(costo), lugar, fecha, rutaPersistir, dtEnt);
+    			port.altaActividad(nombre, descripcion, Integer.parseInt(duracion), Integer.parseInt(costo), lugar, fechaAlta, rutaPersistir, dataEntrenador);
     			RequestDispatcher rd;
     			request.setAttribute("estado", "Actividad creada.");
      			request.setAttribute("pag", "\"index.jsp\"");
     			rd = request.getRequestDispatcher("/notificacion.jsp");
     			rd.forward(request, response);
     		}
-		} catch (PersistenciaException e) {
+    		
+		} catch (Exception e) {
+			
+		}
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+    	try {
+			processRequest(request, response);
+		} catch (ServletException | IOException | PersistenciaException_Exception e) {
 			e.printStackTrace();
 		}
-    	
     }
 }
