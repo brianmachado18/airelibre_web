@@ -24,10 +24,14 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _AltaActividad_QNAME = new QName("http://servidor/", "AltaActividad");
+    private final static QName _AltaActividadResponse_QNAME = new QName("http://servidor/", "AltaActividadResponse");
     private final static QName _AltaUsuario_QNAME = new QName("http://servidor/", "AltaUsuario");
     private final static QName _AltaUsuarioResponse_QNAME = new QName("http://servidor/", "AltaUsuarioResponse");
     private final static QName _PersistenciaException_QNAME = new QName("http://servidor/", "PersistenciaException");
     private final static QName _Actividad_QNAME = new QName("http://servidor/", "actividad");
+    private final static QName _ActividadExiste_QNAME = new QName("http://servidor/", "actividadExiste");
+    private final static QName _ActividadExisteResponse_QNAME = new QName("http://servidor/", "actividadExisteResponse");
     private final static QName _ClaseDeportiva_QNAME = new QName("http://servidor/", "claseDeportiva");
     private final static QName _Deportista_QNAME = new QName("http://servidor/", "deportista");
     private final static QName _DtEntrenador_QNAME = new QName("http://servidor/", "dtEntrenador");
@@ -67,6 +71,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AltaActividad }
+     * 
+     */
+    public AltaActividad createAltaActividad() {
+        return new AltaActividad();
+    }
+
+    /**
+     * Create an instance of {@link AltaActividadResponse }
+     * 
+     */
+    public AltaActividadResponse createAltaActividadResponse() {
+        return new AltaActividadResponse();
+    }
+
+    /**
      * Create an instance of {@link AltaUsuario }
      * 
      */
@@ -96,6 +116,22 @@ public class ObjectFactory {
      */
     public Actividad createActividad() {
         return new Actividad();
+    }
+
+    /**
+     * Create an instance of {@link ActividadExiste }
+     * 
+     */
+    public ActividadExiste createActividadExiste() {
+        return new ActividadExiste();
+    }
+
+    /**
+     * Create an instance of {@link ActividadExisteResponse }
+     * 
+     */
+    public ActividadExisteResponse createActividadExisteResponse() {
+        return new ActividadExisteResponse();
     }
 
     /**
@@ -363,6 +399,32 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AltaActividad }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AltaActividad }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "AltaActividad")
+    public JAXBElement<AltaActividad> createAltaActividad(AltaActividad value) {
+        return new JAXBElement<AltaActividad>(_AltaActividad_QNAME, AltaActividad.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AltaActividadResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AltaActividadResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "AltaActividadResponse")
+    public JAXBElement<AltaActividadResponse> createAltaActividadResponse(AltaActividadResponse value) {
+        return new JAXBElement<AltaActividadResponse>(_AltaActividadResponse_QNAME, AltaActividadResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AltaUsuario }{@code >}
      * 
      * @param value
@@ -412,6 +474,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://servidor/", name = "actividad")
     public JAXBElement<Actividad> createActividad(Actividad value) {
         return new JAXBElement<Actividad>(_Actividad_QNAME, Actividad.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ActividadExiste }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ActividadExiste }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "actividadExiste")
+    public JAXBElement<ActividadExiste> createActividadExiste(ActividadExiste value) {
+        return new JAXBElement<ActividadExiste>(_ActividadExiste_QNAME, ActividadExiste.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ActividadExisteResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ActividadExisteResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "actividadExisteResponse")
+    public JAXBElement<ActividadExisteResponse> createActividadExisteResponse(ActividadExisteResponse value) {
+        return new JAXBElement<ActividadExisteResponse>(_ActividadExisteResponse_QNAME, ActividadExisteResponse.class, null, value);
     }
 
     /**
