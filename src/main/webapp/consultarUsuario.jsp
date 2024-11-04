@@ -118,16 +118,14 @@
 								Inscripto:</label> <select id="clases" name="clases" multiple
 								class="border border-gray-300 rounded w-full p-2"
 								onchange="consInscripciones(this.value);">
-								<%-- <%@ page import="java.util.Vector" %>
-									<%@ page import="java.util.Iterator" %>
 									<%
-									Vector<String> clasesIns = (java.util.Vector<String>)request.getAttribute("clasesIns");
+									ArrayList<String> clasesIns = (ArrayList<String>)request.getAttribute("clasesIns");
 									if (clasesIns!=null){
 										for (String ci : clasesIns){ 
 											out.print("<option value=\"" + ci + "\">" + ci + "</option>"); 
 										}
 									}
-									%> --%>
+									%>
 							</select>
 						</div>
 
@@ -147,22 +145,27 @@
 									</tr>
 								</thead>
 								<tbody>
-									<% String[][] inscrips = (String[][])request.getAttribute("inscrips");
+									<% ArrayList<String> inscrips = (ArrayList<String>)request.getAttribute("inscrips");
 							            if (inscrips != null) {
-							                for (int i = 0; i < inscrips.length; i++) { %>
-									<tr>
-										<td class="py-2 px-4 border-b"><%= inscrips[i][0] %></td>
-										<td class="py-2 px-4 border-b"><%= inscrips[i][1] %></td>
-										<td class="py-2 px-4 border-b"><%= inscrips[i][2] %></td>
-										<td class="py-2 px-4 border-b">
-											<button id="btnC<%= i %>" type="button"
-												class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
-												value="<%= inscrips[i][0] %>"
-												onclick="consInscripciones(this.value)">Buscar</button>
-										</td>
-									</tr>
-									<% }
-							            } %>
+							            	int idBtn = 0;
+							                for (int i = 0; i < inscrips.size(); i++) { %>
+												<tr>
+													<td class="py-2 px-4 border-b"><%= inscrips.get(i) %></td>
+													<%= i++ %>
+													<td class="py-2 px-4 border-b"><%= inscrips.get(i) %></td>
+													<%= i++ %>
+													<td class="py-2 px-4 border-b"><%= inscrips.get(i) %></td>
+													<td class="py-2 px-4 border-b">
+														<button id="btnC<%= idBtn %>" type="button"
+															class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
+															value="<%= inscrips.get(idBtn).toString() %>"
+															onclick="consInscripciones(this.value)">Buscar</button>
+													</td>
+												</tr>
+												<%= idBtn++ %>
+									<% 		}
+							            }
+							        %>
 								</tbody>
 							</table>
 						</div>
@@ -211,10 +214,8 @@
 
 									<tr>
 										<td class="py-2 px-4 border-b"><%=  actividadesAceptadas.get(i)%></td>
-										<%= i++ %>
-										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i) %></td>
-										<%= i++ %>
-										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i)%></td>
+										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i+1) %></td>
+										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i+2)%></td>
 										<td class="py-2 px-4 border-b">
 											<button id="btnA<%= idBtn %>" type="button"
 												class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
@@ -222,7 +223,7 @@
 												onclick="consActividadAceptada(this.value)">Buscar</button>
 										</td>
 									</tr>
-									<%= idBtn++ %>
+									<%= idBtn = idBtn+1 %>
 									<% }
 						            } %>
 								</tbody>
@@ -231,8 +232,7 @@
 
 						<div id="actividadesMismoEntrenador" class="hidden mb-4"
 							style="display: none;">
-							<label for="inscrp" class="block text-gray-700">Mis
-								Actividades:</label>
+							<label for="inscrp" class="block text-gray-700">Mis Actividades:</label>
 							<table id="tablaActividades"
 								class="min-w-full bg-white border border-gray-300 rounded-lg">
 								<thead class="bg-gray-200">
@@ -295,13 +295,13 @@
 			}
 		}
 	
-	    //=== actividadesAaceptadas ==================================================================================
+		//=== actividadesAaceptadas ==================================================================================
 	    const actividadesAaceptadas = [
 	        <% 
 	        ArrayList<String> arrayAA = (ArrayList<String>) request.getAttribute("actividadesAceptadas");
 	        if (arrayAA != null) {  // Comprobar si 'aa' no es null
 	            for (int i = 0; i < arrayAA.size(); i++) { %>
-	                ["<%= arrayAA.get(i) %>", "<%= arrayAA.get(i) %>"]<% if (i < arrayAA.size() - 1) { %>,<% } %>
+	                ["<%= arrayAA.get(i) %>", "<%= arrayAA.get(i++) %>"]<% if (i < arrayAA.size() - 1) { %>,<% } %>
 	            <% } 
 	        }
 	        %>
@@ -322,46 +322,44 @@
 	    }
 	    
 	  //=== actividades ==============================================================================================
-	  const actividades = [
-	        <% 
-	        ArrayList<String> arrayA = (ArrayList<String>) request.getAttribute("actividades");
-	        if (arrayA != null) {  // Comprobar si 'aa' no es null
-	            for (int i = 0; i < arrayA.size(); i++) { %>
-	                ["<%= arrayA.get(i) %>", "<%= arrayA.get(i) %>"]<% if (i < arrayA.size() - 1) { %>,<% } %>
-	            <% } 
-	        }
-	        %>
-	   ];
-	    
-	   function consActividad(val) {
-	        console.log("Val: "+val);
-	        
-	        if (actividades.length > 0) {
-	            for (let i = 0; i < actividades.length; i++) {
-	                document.getElementById("btnB" + i).onclick = function() {
-	                    window.location.href = "consultarActividad?actividadSeleccionada=" + encodeURIComponent(val);
-	                }
-	            }
-	        } else {
-	            console.log("No hay actividades.");
-	        }
-	   }
-	    
+		  const actividades = [
+		        <% 
+		        ArrayList<String> arrayA = (ArrayList<String>) request.getAttribute("actividades");
+		        if (arrayA != null) {  // Comprobar si 'aa' no es null
+		            for (int i = 0; i < arrayA.size(); i++) { %>
+		                ["<%= arrayA.get(i) %>", "<%= arrayA.get(i++) %>"]<% if (i < arrayA.size() - 1) { %>,<% } %>
+		            <% } 
+		        }
+		        %>
+		   ];
+		    
+		   function consActividad(val) {
+		        console.log("Val: "+val);
+		        
+		        if (actividades.length > 0) {
+		            for (let i = 0; i < actividades.length; i++) {
+		                document.getElementById("btnB" + i).onclick = function() {
+		                    window.location.href = "consultarActividad?actividadSeleccionada=" + encodeURIComponent(val);
+		                }
+		            }
+		        } else {
+		            console.log("No hay actividades.");
+		        }
+		   }
 	    
 	  //=== inscripcionesTabla ============================================================================================
 		const inscripciones = [
 	        <% 
-	        String[][] arrayI = (String[][]) request.getAttribute("inscrips");
+	        ArrayList<String> arrayI = (ArrayList<String>) request.getAttribute("inscrips");
 	        if (arrayI != null) {  // Comprobar si 'aa' no es null
-	            for (int i = 0; i < arrayI.length; i++) { %>
-	                ["<%= arrayI[i][0] %>", "<%= arrayI[i][1] %>"]<% if (i < arrayI.length - 1) { %>,<% } %>
+	            for (int i = 0; i < arrayI.size(); i++) { %>
+	                ["<%= arrayI.get(i) %>", "<%= arrayI.get(i++) %>"]<% if (i < arrayI.size() - 1) { %>,<% } %>
 	            <% } 
 	        }
 	        %>
 	    ];
 	  
 	    function consInscripciones(val){
-			console.log("Val: "+val);
 	        
 	        if (inscripciones.length > 0) {
 	            for (let i = 0; i < inscripciones.length; i++) {
@@ -376,8 +374,6 @@
 	    
 	  //=== inscripcionesLista ============================================================================================
 	    function consInscripciones(val){
-			console.log("Val: "+val);
-
 			window.location.href = "consultarClaseDeportiva?claseSeleccionada=" + encodeURIComponent(val); 
 		}
 	  
