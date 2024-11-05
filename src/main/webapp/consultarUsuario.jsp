@@ -151,9 +151,9 @@
 							                for (int i = 0; i < inscrips.size(); i++) { %>
 												<tr>
 													<td class="py-2 px-4 border-b"><%= inscrips.get(i) %></td>
-													<%= i++ %>
+													<% i++; %>
 													<td class="py-2 px-4 border-b"><%= inscrips.get(i) %></td>
-													<%= i++ %>
+													<% i++; %>
 													<td class="py-2 px-4 border-b"><%= inscrips.get(i) %></td>
 													<td class="py-2 px-4 border-b">
 														<button id="btnC<%= idBtn %>" type="button"
@@ -162,7 +162,7 @@
 															onclick="consInscripciones(this.value)">Buscar</button>
 													</td>
 												</tr>
-												<%= idBtn++ %>
+												<% idBtn++; %>
 									<% 		}
 							            }
 							        %>
@@ -214,8 +214,10 @@
 
 									<tr>
 										<td class="py-2 px-4 border-b"><%=  actividadesAceptadas.get(i)%></td>
-										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i+1) %></td>
-										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i+2)%></td>
+										<%  i++;  %>
+										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i) %></td>
+										<% i++; %>
+										<td class="py-2 px-4 border-b"><%= actividadesAceptadas.get(i) %></td>
 										<td class="py-2 px-4 border-b">
 											<button id="btnA<%= idBtn %>" type="button"
 												class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
@@ -223,7 +225,7 @@
 												onclick="consActividadAceptada(this.value)">Buscar</button>
 										</td>
 									</tr>
-									<%= idBtn = idBtn+1 %>
+									<% idBtn++; %>
 									<% }
 						            } %>
 								</tbody>
@@ -251,11 +253,11 @@
 						                for (int i = 0; i < actividades.size(); i++) { %>
 									<tr>
 										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
-										<%= i++ %>
+										<% i++ ;%>
 										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
-										<%= i++ %>
+										<% i++; %>
 										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
-										<%= i++ %>
+										<% i++; %>
 										<td class="py-2 px-4 border-b"><%= actividades.get(i).toString() %></td>
 										<td class="py-2 px-4 border-b">
 											<button id="btnB<%= idBtn %>" type="button"
@@ -264,7 +266,7 @@
 												onclick="consActividad(this.value)">Buscar</button>
 										</td>
 									</tr>
-									<%= idBtn++ %>
+									<% idBtn++; %>
 									<% }
 						            } %>
 								</tbody>
