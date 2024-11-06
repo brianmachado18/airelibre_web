@@ -21,7 +21,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="arg4" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="arg5" type="{http://servidor/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="arg5" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="arg6" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="arg7" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
  *         &lt;element name="arg8" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -54,7 +54,7 @@ public class ModifiarUsuario {
     protected String arg2;
     protected String arg3;
     protected String arg4;
-    protected LocalDate arg5;
+    protected String arg5;
     protected String arg6;
     protected boolean arg7;
     protected String arg8;
@@ -185,10 +185,10 @@ public class ModifiarUsuario {
      * 
      * @return
      *     possible object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public LocalDate getArg5() {
+    public String getArg5() {
         return arg5;
     }
 
@@ -197,10 +197,10 @@ public class ModifiarUsuario {
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public void setArg5(LocalDate value) {
+    public void setArg5(String value) {
         this.arg5 = value;
     }
 

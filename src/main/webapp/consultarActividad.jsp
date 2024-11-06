@@ -37,10 +37,10 @@
 				<div class="mb-4">
                         <label for="clases" class="block text-gray-700">Actividades:</label>
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                            <%@ page import="java.util.Vector" %>
+                            <%@ page import="java.util.ArrayList" %>
 							<%@ page import="java.util.Iterator" %>
 							<%
-							Vector<String> acts = (java.util.Vector<String>)request.getAttribute("listAct");
+							ArrayList<String> acts = (ArrayList<String>)request.getAttribute("listAct");
 							if (acts!=null){
 								for (String a : acts){ 
 									out.print("<option value='"+a+"'>"+a+"</option>");
@@ -97,10 +97,8 @@
                     <div class="mb-4">
                         <label for="clases" class="block text-gray-700">Clases Asociadas:</label>
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" onchange="consInscripciones(this.value);">
-                            <%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
 							<%
-                            Vector<String> clases = (java.util.Vector<String>)request.getAttribute("clases");
+                            ArrayList<String> clases = (ArrayList<String>)request.getAttribute("clases");
 							if (clases!=null){
 								for (String clase : clases){ 
 									out.print("<option value='"+clase+"'>"+clase+"</option>");

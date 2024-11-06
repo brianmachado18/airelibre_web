@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import logica.Fabrica;
 import logica.IControladorUsuario;
+import servidor.PersistenciaException_Exception;
 import datatype.DtDeportista;
 import datatype.DtEntrenador;
 import excepciones.PersistenciaException;
@@ -21,19 +22,58 @@ import excepciones.PersistenciaException;
 public class modificarUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, PersistenciaException_Exception {
+    	
+    	servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+
+    	
+    	HttpSession session = request.getSession(false);
+        String nickname = (String) session.getAttribute("usuarioLogueado");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String contrasena = request.getParameter("contrasena");   
+        String fechaNacimientoStr = request.getParameter("fechaNacimiento");
+
+        	if (port.esEntrenador(nickname)){
+    	        servidor.DtEntrenador traerEntrenador = port.obtenerEntrenador(nickname);
+    	        System.out.println("Nombre:"+ nombre);
+    	        System.out.println("Apellido:"+ apellido);
+    	        System.out.println("Password:"+ contrasena);
+    	        System.out.println("fecha:"+ fechaNacimientoStr);
+				port.modifiarUsuario(nickname, contrasena, nombre, apellido, traerEntrenador.getMail(), fechaNacimientoStr, "Entrenador", false , traerEntrenador.getDisciplina(), traerEntrenador.getSitioWeb());
+        	}else{
+    	        servidor.DtDeportista traerDeportista = port.obtenerDeportista(nickname);
+    	        System.out.println("Nombre:"+ nombre);
+    	        System.out.println("Apellido:"+ apellido);
+    	        System.out.println("Password:"+ contrasena);
+    	        System.out.println("fecha:"+ fechaNacimientoStr);
+    	        port.modifiarUsuario(nickname, contrasena, nombre, apellido, traerDeportista.getMail(), fechaNacimientoStr, "Deportista", traerDeportista.isEsProfesional() , null, null);
+        	}
+
+    			
+    			RequestDispatcher rd;
+     			request.setAttribute("estado", "Usuario modificado.");
+     			request.setAttribute("pag", "\"index.jsp\"");
+     			rd = request.getRequestDispatcher("/notificacion.jsp");
+     			rd.forward(request, response);
+     		
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         String nickname = (String) session.getAttribute("usuarioLogueado");
 
 
-            Fabrica fabrica = Fabrica.getInstance();
-            IControladorUsuario ICC = fabrica.getIControladorUsuario();
+            servidor.PublicadorService service = new servidor.PublicadorService();
+            servidor.Publicador port = service.getPublicadorPort();
 
             try {
-            	if (ICC.usuarioExiste(nickname)) {
+            	if (port.usuarioExiste(nickname)) {
             	    RequestDispatcher rd;
-            	    if (ICC.esEntrenador(nickname)) {
-            	        DtEntrenador traerEntrenador = ICC.obtenerEntrenador(nickname);
+            	    if (port.esEntrenador(nickname)) {
+            	        servidor.DtEntrenador traerEntrenador = port.obtenerEntrenador(nickname);
             	        
             	        request.setAttribute("nombre", traerEntrenador.getNombre());
             	        request.setAttribute("apellido", traerEntrenador.getApellido());
@@ -49,7 +89,7 @@ public class modificarUsuario extends HttpServlet {
             	        rd.forward(request, response);
             	    } else {
      
-            	        DtDeportista traerDeportista = ICC.obtenerDeportista(nickname);
+            	        servidor.DtDeportista traerDeportista = port.obtenerDeportista(nickname);
 
             	        request.setAttribute("nombre", traerDeportista.getNombre());
             	        request.setAttribute("apellido", traerDeportista.getApellido());
@@ -77,51 +117,11 @@ public class modificarUsuario extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    	Fabrica fab = Fabrica.getInstance();
-    	IControladorUsuario ICC = fab.getIControladorUsuario();
-    	
-    	HttpSession session = request.getSession(false);
-        String nickname = (String) session.getAttribute("usuarioLogueado");
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String contrasena = request.getParameter("contrasena");   
-        String fechaNacimientoStr = request.getParameter("fechaNacimiento");
-        LocalDate fecha = null;
-        
-        if (fechaNacimientoStr != null && !fechaNacimientoStr.isEmpty()) {
-        	DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        	fecha = LocalDate.parse(fechaNacimientoStr, formatoFecha);
-        }else {
-        	System.out.println(nickname);
-        }
-        
-        try {
-        	if (ICC.esEntrenador(nickname)){
-    	        DtEntrenador traerEntrenador = ICC.obtenerEntrenador(nickname);
-    	        System.out.println("Nombre:"+ nombre);
-    	        System.out.println("Apellido:"+ apellido);
-    	        System.out.println("Password:"+ contrasena);
-    	        System.out.println("fecha:"+ fecha);
-				ICC.modifiarUsuario(nickname, contrasena, nombre, apellido, traerEntrenador.getMail(), fecha, "Entrenador", false , traerEntrenador.getDisciplina(), traerEntrenador.getSitioWeb());
-        	}else{
-    	        DtDeportista traerDeportista = ICC.obtenerDeportista(nickname);
-    	        System.out.println("Nombre:"+ nombre);
-    	        System.out.println("Apellido:"+ apellido);
-    	        System.out.println("Password:"+ contrasena);
-    	        System.out.println("fecha:"+ fecha);
-    	        ICC.modifiarUsuario(nickname, contrasena, nombre, apellido, traerDeportista.getMail(), fecha, "Deportista", traerDeportista.isEsProfesional() , null, null);
-        	}
-
-    			
-    			RequestDispatcher rd;
-     			request.setAttribute("estado", "Usuario modificado.");
-     			request.setAttribute("pag", "\"index.jsp\"");
-     			rd = request.getRequestDispatcher("/notificacion.jsp");
-     			rd.forward(request, response);
-     		
-		} catch (PersistenciaException e) {
-			e.printStackTrace();
-		}
+      	 try {
+ 			processRequest(request, response);
+ 		} catch (ServletException | IOException | PersistenciaException_Exception e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
     }
 }
