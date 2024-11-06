@@ -58,8 +58,6 @@ public class altaActividad extends HttpServlet {
     	try {
 			
     		HttpSession session = request.getSession(false);
-    		//System.out.println((String) session.getAttribute("usuarioLogueado"));
-    		servidor.DtEntrenador dataEntrenador = port.obtenerEntrenador((String) session.getAttribute("usuarioLogueado"));
     		
     		if(port.actividadExiste(nombre)) {
     			RequestDispatcher rd;
@@ -69,7 +67,7 @@ public class altaActividad extends HttpServlet {
     			rd = request.getRequestDispatcher("/notificacion.jsp");
     			rd.forward(request, response);
     		}else {
-    			port.altaActividad(nombre, descripcion, Integer.parseInt(duracion), Integer.parseInt(costo), lugar, fechaAlta, rutaPersistir, dataEntrenador);
+    			port.altaActividad(nombre, descripcion, Integer.parseInt(duracion), Integer.parseInt(costo), lugar, fechaAlta, rutaPersistir, (String) session.getAttribute("usuarioLogueado"));
     			RequestDispatcher rd;
     			request.setAttribute("estado", "Actividad creada.");
      			request.setAttribute("pag", "\"index.jsp\"");

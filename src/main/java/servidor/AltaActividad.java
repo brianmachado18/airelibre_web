@@ -23,7 +23,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="arg4" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="arg5" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="arg6" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="arg7" type="{http://servidor/}dtEntrenador" minOccurs="0"/&gt;
+ *         &lt;element name="arg7" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -52,7 +52,7 @@ public class AltaActividad {
     protected String arg4;
     protected String arg5;
     protected String arg6;
-    protected DtEntrenador arg7;
+    protected String arg7;
 
     /**
      * Gets the value of the arg0 property.
@@ -211,10 +211,10 @@ public class AltaActividad {
      * 
      * @return
      *     possible object is
-     *     {@link DtEntrenador }
+     *     {@link String }
      *     
      */
-    public DtEntrenador getArg7() {
+    public String getArg7() {
         return arg7;
     }
 
@@ -223,10 +223,10 @@ public class AltaActividad {
      * 
      * @param value
      *     allowed object is
-     *     {@link DtEntrenador }
+     *     {@link String }
      *     
      */
-    public void setArg7(DtEntrenador value) {
+    public void setArg7(String value) {
         this.arg7 = value;
     }
 
