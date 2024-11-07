@@ -26,13 +26,18 @@ public class ObjectFactory {
 
     private final static QName _AltaActividad_QNAME = new QName("http://servidor/", "AltaActividad");
     private final static QName _AltaActividadResponse_QNAME = new QName("http://servidor/", "AltaActividadResponse");
+    private final static QName _AltaClaseDeportiva_QNAME = new QName("http://servidor/", "AltaClaseDeportiva");
+    private final static QName _AltaClaseDeportivaResponse_QNAME = new QName("http://servidor/", "AltaClaseDeportivaResponse");
     private final static QName _AltaUsuario_QNAME = new QName("http://servidor/", "AltaUsuario");
     private final static QName _AltaUsuarioResponse_QNAME = new QName("http://servidor/", "AltaUsuarioResponse");
+    private final static QName _ClaseRepetidoException_QNAME = new QName("http://servidor/", "ClaseRepetidoException");
     private final static QName _PersistenciaException_QNAME = new QName("http://servidor/", "PersistenciaException");
     private final static QName _Actividad_QNAME = new QName("http://servidor/", "actividad");
     private final static QName _ActividadExiste_QNAME = new QName("http://servidor/", "actividadExiste");
     private final static QName _ActividadExisteResponse_QNAME = new QName("http://servidor/", "actividadExisteResponse");
     private final static QName _ClaseDeportiva_QNAME = new QName("http://servidor/", "claseDeportiva");
+    private final static QName _ClaseExiste_QNAME = new QName("http://servidor/", "claseExiste");
+    private final static QName _ClaseExisteResponse_QNAME = new QName("http://servidor/", "claseExisteResponse");
     private final static QName _Deportista_QNAME = new QName("http://servidor/", "deportista");
     private final static QName _DtActividad_QNAME = new QName("http://servidor/", "dtActividad");
     private final static QName _DtEntrenador_QNAME = new QName("http://servidor/", "dtEntrenador");
@@ -60,6 +65,8 @@ public class ObjectFactory {
     private final static QName _ObtenerNicknameResponse_QNAME = new QName("http://servidor/", "obtenerNicknameResponse");
     private final static QName _ObtenerVectorActividad_QNAME = new QName("http://servidor/", "obtenerVectorActividad");
     private final static QName _ObtenerVectorActividadResponse_QNAME = new QName("http://servidor/", "obtenerVectorActividadResponse");
+    private final static QName _ObtenerVectorActividadesAceptadasEntrenador_QNAME = new QName("http://servidor/", "obtenerVectorActividadesAceptadasEntrenador");
+    private final static QName _ObtenerVectorActividadesAceptadasEntrenadorResponse_QNAME = new QName("http://servidor/", "obtenerVectorActividadesAceptadasEntrenadorResponse");
     private final static QName _ObtenerVectorClasesActividad_QNAME = new QName("http://servidor/", "obtenerVectorClasesActividad");
     private final static QName _ObtenerVectorClasesActividadResponse_QNAME = new QName("http://servidor/", "obtenerVectorClasesActividadResponse");
     private final static QName _ObtenerVectorUsuarios_QNAME = new QName("http://servidor/", "obtenerVectorUsuarios");
@@ -94,6 +101,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AltaClaseDeportiva }
+     * 
+     */
+    public AltaClaseDeportiva createAltaClaseDeportiva() {
+        return new AltaClaseDeportiva();
+    }
+
+    /**
+     * Create an instance of {@link AltaClaseDeportivaResponse }
+     * 
+     */
+    public AltaClaseDeportivaResponse createAltaClaseDeportivaResponse() {
+        return new AltaClaseDeportivaResponse();
+    }
+
+    /**
      * Create an instance of {@link AltaUsuario }
      * 
      */
@@ -107,6 +130,14 @@ public class ObjectFactory {
      */
     public AltaUsuarioResponse createAltaUsuarioResponse() {
         return new AltaUsuarioResponse();
+    }
+
+    /**
+     * Create an instance of {@link ClaseRepetidoException }
+     * 
+     */
+    public ClaseRepetidoException createClaseRepetidoException() {
+        return new ClaseRepetidoException();
     }
 
     /**
@@ -147,6 +178,22 @@ public class ObjectFactory {
      */
     public ClaseDeportiva createClaseDeportiva() {
         return new ClaseDeportiva();
+    }
+
+    /**
+     * Create an instance of {@link ClaseExiste }
+     * 
+     */
+    public ClaseExiste createClaseExiste() {
+        return new ClaseExiste();
+    }
+
+    /**
+     * Create an instance of {@link ClaseExisteResponse }
+     * 
+     */
+    public ClaseExisteResponse createClaseExisteResponse() {
+        return new ClaseExisteResponse();
     }
 
     /**
@@ -366,6 +413,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ObtenerVectorActividadesAceptadasEntrenador }
+     * 
+     */
+    public ObtenerVectorActividadesAceptadasEntrenador createObtenerVectorActividadesAceptadasEntrenador() {
+        return new ObtenerVectorActividadesAceptadasEntrenador();
+    }
+
+    /**
+     * Create an instance of {@link ObtenerVectorActividadesAceptadasEntrenadorResponse }
+     * 
+     */
+    public ObtenerVectorActividadesAceptadasEntrenadorResponse createObtenerVectorActividadesAceptadasEntrenadorResponse() {
+        return new ObtenerVectorActividadesAceptadasEntrenadorResponse();
+    }
+
+    /**
      * Create an instance of {@link ObtenerVectorClasesActividad }
      * 
      */
@@ -488,6 +551,32 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AltaClaseDeportiva }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AltaClaseDeportiva }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "AltaClaseDeportiva")
+    public JAXBElement<AltaClaseDeportiva> createAltaClaseDeportiva(AltaClaseDeportiva value) {
+        return new JAXBElement<AltaClaseDeportiva>(_AltaClaseDeportiva_QNAME, AltaClaseDeportiva.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AltaClaseDeportivaResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AltaClaseDeportivaResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "AltaClaseDeportivaResponse")
+    public JAXBElement<AltaClaseDeportivaResponse> createAltaClaseDeportivaResponse(AltaClaseDeportivaResponse value) {
+        return new JAXBElement<AltaClaseDeportivaResponse>(_AltaClaseDeportivaResponse_QNAME, AltaClaseDeportivaResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AltaUsuario }{@code >}
      * 
      * @param value
@@ -511,6 +600,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://servidor/", name = "AltaUsuarioResponse")
     public JAXBElement<AltaUsuarioResponse> createAltaUsuarioResponse(AltaUsuarioResponse value) {
         return new JAXBElement<AltaUsuarioResponse>(_AltaUsuarioResponse_QNAME, AltaUsuarioResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ClaseRepetidoException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ClaseRepetidoException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "ClaseRepetidoException")
+    public JAXBElement<ClaseRepetidoException> createClaseRepetidoException(ClaseRepetidoException value) {
+        return new JAXBElement<ClaseRepetidoException>(_ClaseRepetidoException_QNAME, ClaseRepetidoException.class, null, value);
     }
 
     /**
@@ -576,6 +678,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://servidor/", name = "claseDeportiva")
     public JAXBElement<ClaseDeportiva> createClaseDeportiva(ClaseDeportiva value) {
         return new JAXBElement<ClaseDeportiva>(_ClaseDeportiva_QNAME, ClaseDeportiva.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ClaseExiste }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ClaseExiste }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "claseExiste")
+    public JAXBElement<ClaseExiste> createClaseExiste(ClaseExiste value) {
+        return new JAXBElement<ClaseExiste>(_ClaseExiste_QNAME, ClaseExiste.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ClaseExisteResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ClaseExisteResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "claseExisteResponse")
+    public JAXBElement<ClaseExisteResponse> createClaseExisteResponse(ClaseExisteResponse value) {
+        return new JAXBElement<ClaseExisteResponse>(_ClaseExisteResponse_QNAME, ClaseExisteResponse.class, null, value);
     }
 
     /**
@@ -927,6 +1055,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://servidor/", name = "obtenerVectorActividadResponse")
     public JAXBElement<ObtenerVectorActividadResponse> createObtenerVectorActividadResponse(ObtenerVectorActividadResponse value) {
         return new JAXBElement<ObtenerVectorActividadResponse>(_ObtenerVectorActividadResponse_QNAME, ObtenerVectorActividadResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerVectorActividadesAceptadasEntrenador }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ObtenerVectorActividadesAceptadasEntrenador }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "obtenerVectorActividadesAceptadasEntrenador")
+    public JAXBElement<ObtenerVectorActividadesAceptadasEntrenador> createObtenerVectorActividadesAceptadasEntrenador(ObtenerVectorActividadesAceptadasEntrenador value) {
+        return new JAXBElement<ObtenerVectorActividadesAceptadasEntrenador>(_ObtenerVectorActividadesAceptadasEntrenador_QNAME, ObtenerVectorActividadesAceptadasEntrenador.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerVectorActividadesAceptadasEntrenadorResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ObtenerVectorActividadesAceptadasEntrenadorResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://servidor/", name = "obtenerVectorActividadesAceptadasEntrenadorResponse")
+    public JAXBElement<ObtenerVectorActividadesAceptadasEntrenadorResponse> createObtenerVectorActividadesAceptadasEntrenadorResponse(ObtenerVectorActividadesAceptadasEntrenadorResponse value) {
+        return new JAXBElement<ObtenerVectorActividadesAceptadasEntrenadorResponse>(_ObtenerVectorActividadesAceptadasEntrenadorResponse_QNAME, ObtenerVectorActividadesAceptadasEntrenadorResponse.class, null, value);
     }
 
     /**

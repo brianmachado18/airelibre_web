@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import logica.*;
 import modelo.*;
+import servidor.PersistenciaException_Exception;
 import excepciones.*;
 import datatype.*;
 
@@ -27,15 +28,13 @@ public class altaClaseDeportiva extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-    }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    	    throws ServletException, IOException, PersistenciaException_Exception {
+    	
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Fabrica fab = Fabrica.getInstance();
-        IControladorClaseDeportiva ICC = fab.getIControladorClaseDeportiva();
-        IControladorActividad ICA = fab.getIControladorActividad();
-
+    	servidor.PublicadorService service = new servidor.PublicadorService();
+    	servidor.Publicador port = service.getPublicadorPort();
+    	
         // Obtener los parámetros del formulario
         String nombreClaseDeportiva = request.getParameter("nombre");
         String fecha = request.getParameter("fecha");
@@ -58,21 +57,19 @@ public class altaClaseDeportiva extends HttpServlet {
             rutaArchivo = "/Clases/" + nombreClaseDeportiva + extension; 
         }
         
-        LocalDate fechaAux = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalTime horaFor = LocalTime.parse(hora, DateTimeFormatter.ofPattern("HH:mm"));
-        DtActividad Act = ICA.obtenerActividad(actividad);
+
         
         // Crear la nueva clase deportiva
 		RequestDispatcher rd;
         try {
-        	if(ICC.claseExiste(nombreClaseDeportiva)) {
+        	if(port.claseExiste(nombreClaseDeportiva)) {
      			request.setAttribute("estado", "Vuelva a intentar mas tarde.");
      			request.setAttribute("mensaje", "El nombre de la actividad ya están en uso.");
      			request.setAttribute("pag", "\"altaClaseDeportiva.jsp\"");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
      			rd.forward(request, response);
         	} else {
-            	ICC.AltaClaseDeportiva(nombreClaseDeportiva, fechaAux, horaFor, lugar, cupo, LocalDate.now(), Act, rutaArchivo);
+            	port.altaClaseDeportiva(nombreClaseDeportiva, fecha, hora, lugar, cupo, actividad, rutaArchivo);
         		request.setAttribute("estado", "Clase Deportiva creada exitosamente.");
      			request.setAttribute("pag", "\"index.jsp\"");
      			rd = request.getRequestDispatcher("/notificacion.jsp");
@@ -86,5 +83,23 @@ public class altaClaseDeportiva extends HttpServlet {
  			rd = request.getRequestDispatcher("/notificacion.jsp");
  			rd.forward(request, response);
         }
+    	
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	try {
+			processRequest(request, response);
+		} catch (ServletException | IOException | PersistenciaException_Exception e) {
+			e.printStackTrace();
+		}
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	try {
+			processRequest(request, response);
+		} catch (ServletException | IOException | PersistenciaException_Exception e) {
+			e.printStackTrace();
+		}
+
     }
 }

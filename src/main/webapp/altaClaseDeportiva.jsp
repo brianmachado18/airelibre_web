@@ -35,13 +35,15 @@
                 	<div class="mb-4">
                         <label for="actividad" class="block text-gray-700">Seleccionar Actividad:</label>
                         <select id="actividad" name="actividad" class="border border-gray-300 rounded w-full p-2" required>
-                            <%@ page import="java.util.Vector" %>
+                            <%@ page import="java.util.List" %>
 							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
 							<%
-                    		Fabrica fab = Fabrica.getInstance();
+					    	servidor.PublicadorService service = new servidor.PublicadorService();
+					    	servidor.Publicador port = service.getPublicadorPort();
+					    	
+                    	
 							HttpSession session2 = request.getSession(false);
-							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividadesAceptadasEntrenador((String) session.getAttribute("usuarioLogueado"));
+							List<String> acts = port.obtenerVectorActividadesAceptadasEntrenador((String) session.getAttribute("usuarioLogueado"));
 							if (acts!=null){
 								for (String a : acts){ 
 									out.print("<option value='"+a+"'>"+a+"</option>");
