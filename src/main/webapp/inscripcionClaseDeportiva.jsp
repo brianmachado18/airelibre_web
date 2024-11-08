@@ -1,3 +1,6 @@
+                    		<%@ page import="java.util.List" %>
+							<%@ page import="java.util.Iterator" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,12 +39,11 @@
 					<div class="mb-4">
             			<label for="clases" class="block text-gray-700">Selecionar actividad:</label>
             			<select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                    		<%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
+
 							<%
-                    		Fabrica fab = Fabrica.getInstance();
-							Vector<String> acts = fab.getIControladorActividad().obtenerVectorActividadesAceptadas();
+							 servidor.PublicadorService service = new servidor.PublicadorService();
+					         servidor.Publicador port = service.getPublicadorPort();
+							List<String> acts = (List<String>)port.obtenerVectorActividadesAceptadas();
 							if (acts!=null){
 								for (String a : acts){ 
 									out.print("<option value='"+a+"'>"+a+"</option>");
@@ -64,7 +66,7 @@
                         <select id="clase" name="clase" class="border border-gray-300 rounded w-full p-2" required>
 
                         	<%
-							Vector<String> clas = (java.util.Vector<String>)request.getAttribute("listCla");
+							List<String> clas = (java.util.List<String>)request.getAttribute("listCla");
 							if (clas!=null){
 								for (String c : clas){ 
 									out.print("<option value='"+c+"'>"+c+"</option>");

@@ -81,7 +81,11 @@ public class altaActividad extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+    	try {
+			processRequest(request, response);
+		} catch (ServletException | IOException | PersistenciaException_Exception e) {
+			e.printStackTrace();
+		}
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  

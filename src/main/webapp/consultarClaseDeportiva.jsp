@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,10 +38,9 @@
 					<div class="mb-4">
                         <label for="clases" class="block text-gray-700">Clases:</label>
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                            <%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
+
 							<%
-							Vector<String> clas = (java.util.Vector<String>)request.getAttribute("listCla");
+							List<String> clas = (List<String>)request.getAttribute("listCla");
 							if (clas!=null){
 								for (String c : clas){ 
 									out.print("<option value='"+c+"'>"+c+"</option>");
@@ -93,11 +94,8 @@
                     <div class="mb-4">
                         <label for="inscritos" class="block text-gray-700">Inscriptos:</label>
                         <select id="clases" name="clases" multiple class="border border-gray-300 rounded w-full p-2" >
-                            <%@ page import="java.util.Vector" %>
-							<%@ page import="java.util.Iterator" %>
-							<%@ page import="logica.Fabrica" %>
 							<%
-							Vector<String> inscrips = (java.util.Vector<String>)request.getAttribute("inscrips");
+							List<String> inscrips = (java.util.List<String>)request.getAttribute("inscrips");
 							if (inscrips!=null){
 								for (String i : inscrips){ 
 									out.print("<option value='"+i+"'>"+i+"</option>");
