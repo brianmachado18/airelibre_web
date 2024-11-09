@@ -44,7 +44,7 @@ public class consultarUsuario extends HttpServlet {
 				request.setAttribute("apellido", traerEntrenador.getApellido());
 				request.setAttribute("nickname", traerEntrenador.getNickname());
 				request.setAttribute("correo", traerEntrenador.getMail());
-				request.setAttribute("fnac", traerEntrenador.getFechaNacimiento());
+				request.setAttribute("fnac", traerEntrenador.getFechaNacimientoString());
 				request.setAttribute("tipoUsuario", "Entrenador");
 				request.setAttribute("web", traerEntrenador.getSitioWeb());
 				request.setAttribute("disciplina", traerEntrenador.getDisciplina());
@@ -56,9 +56,7 @@ public class consultarUsuario extends HttpServlet {
 					request.setAttribute("actividades", port.obtenerArrayActividadesEntrenador(nickname));
 				} else {
 					// FUNCIONA --- NO TOCAR
-					request.setAttribute("actividadesAceptadas",
-							port.obtenerArrayActividadesAceptadasEntrenador(nickname));
-
+					request.setAttribute("actividadesAceptadas", port.obtenerArrayActividadesAceptadasEntrenador(nickname));
 				}
 
 				rd = request.getRequestDispatcher("/consultarUsuario.jsp");
@@ -69,7 +67,7 @@ public class consultarUsuario extends HttpServlet {
 				request.setAttribute("apellido", traerDeportista.getApellido());
 				request.setAttribute("nickname", traerDeportista.getNickname());
 				request.setAttribute("correo", traerDeportista.getMail());
-				request.setAttribute("fnac", traerDeportista.getFechaNacimiento());
+				request.setAttribute("fnac", traerDeportista.getFechaNacimientoString());
 				request.setAttribute("imgen", request.getContextPath() + traerDeportista.getImagen());
 				request.setAttribute("tipoUsuario", "Deportista");
 

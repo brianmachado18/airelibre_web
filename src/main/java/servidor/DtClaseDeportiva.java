@@ -23,7 +23,10 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="cupo" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="fecha" type="{http://servidor/}localDate" minOccurs="0"/&gt;
  *         &lt;element name="fechaAlta" type="{http://servidor/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fechaAltaString" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="fechaString" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="hora" type="{http://servidor/}localTime" minOccurs="0"/&gt;
+ *         &lt;element name="horaString" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="inscripciones" type="{http://servidor/}inscripcion" maxOccurs="unbounded" minOccurs="0"/&gt;
@@ -43,7 +46,10 @@ import jakarta.xml.bind.annotation.XmlType;
     "cupo",
     "fecha",
     "fechaAlta",
+    "fechaAltaString",
+    "fechaString",
     "hora",
+    "horaString",
     "id",
     "imagen",
     "inscripciones",
@@ -56,7 +62,10 @@ public class DtClaseDeportiva {
     protected int cupo;
     protected LocalDate fecha;
     protected LocalDate fechaAlta;
+    protected String fechaAltaString;
+    protected String fechaString;
     protected LocalTime hora;
+    protected String horaString;
     protected int id;
     protected String imagen;
     @XmlElement(nillable = true)
@@ -153,6 +162,54 @@ public class DtClaseDeportiva {
     }
 
     /**
+     * Gets the value of the fechaAltaString property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFechaAltaString() {
+        return fechaAltaString;
+    }
+
+    /**
+     * Sets the value of the fechaAltaString property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFechaAltaString(String value) {
+        this.fechaAltaString = value;
+    }
+
+    /**
+     * Gets the value of the fechaString property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFechaString() {
+        return fechaString;
+    }
+
+    /**
+     * Sets the value of the fechaString property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFechaString(String value) {
+        this.fechaString = value;
+    }
+
+    /**
      * Gets the value of the hora property.
      * 
      * @return
@@ -174,6 +231,30 @@ public class DtClaseDeportiva {
      */
     public void setHora(LocalTime value) {
         this.hora = value;
+    }
+
+    /**
+     * Gets the value of the horaString property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getHoraString() {
+        return horaString;
+    }
+
+    /**
+     * Sets the value of the horaString property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHoraString(String value) {
+        this.horaString = value;
     }
 
     /**
