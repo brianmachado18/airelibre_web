@@ -48,7 +48,7 @@ public class consultarActividad extends HttpServlet {
     		request.setAttribute("duracionHoras", tActividad.getDuracionHoras());
     		request.setAttribute("costo", tActividad.getCosto());
     		request.setAttribute("lugar", tActividad.getLugar());
-    		request.setAttribute("fechaAlta", tActividad.getFechaAlta());
+    		request.setAttribute("fechaAlta", tActividad.getFechaAltaString());
     		request.setAttribute("estado", tActividad.getEstado());
     		request.setAttribute("imgen", request.getContextPath()+ tActividad.getImagen());
 			request.setAttribute("clases", port.obtenerVectorClasesActividad(nombre));

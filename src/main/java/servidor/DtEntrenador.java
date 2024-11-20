@@ -20,6 +20,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="contrasena" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="disciplina" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="fechaNacimiento" type="{http://servidor/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fechaNacimientoString" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="mail" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -40,6 +41,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "contrasena",
     "disciplina",
     "fechaNacimiento",
+    "fechaNacimientoString",
     "id",
     "imagen",
     "mail",
@@ -53,6 +55,7 @@ public class DtEntrenador {
     protected String contrasena;
     protected String disciplina;
     protected LocalDate fechaNacimiento;
+    protected String fechaNacimientoString;
     protected int id;
     protected String imagen;
     protected String mail;
@@ -154,6 +157,30 @@ public class DtEntrenador {
      */
     public void setFechaNacimiento(LocalDate value) {
         this.fechaNacimiento = value;
+    }
+
+    /**
+     * Gets the value of the fechaNacimientoString property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFechaNacimientoString() {
+        return fechaNacimientoString;
+    }
+
+    /**
+     * Sets the value of the fechaNacimientoString property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFechaNacimientoString(String value) {
+        this.fechaNacimientoString = value;
     }
 
     /**

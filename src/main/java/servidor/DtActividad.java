@@ -26,6 +26,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="entrenador" type="{http://servidor/}entrenador" minOccurs="0"/&gt;
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="fechaAlta" type="{http://servidor/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fechaAltaString" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="lugar" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -47,6 +48,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "entrenador",
     "estado",
     "fechaAlta",
+    "fechaAltaString",
     "id",
     "imagen",
     "lugar",
@@ -62,6 +64,7 @@ public class DtActividad {
     protected Entrenador entrenador;
     protected String estado;
     protected LocalDate fechaAlta;
+    protected String fechaAltaString;
     protected int id;
     protected String imagen;
     protected String lugar;
@@ -222,6 +225,30 @@ public class DtActividad {
      */
     public void setFechaAlta(LocalDate value) {
         this.fechaAlta = value;
+    }
+
+    /**
+     * Gets the value of the fechaAltaString property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFechaAltaString() {
+        return fechaAltaString;
+    }
+
+    /**
+     * Sets the value of the fechaAltaString property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFechaAltaString(String value) {
+        this.fechaAltaString = value;
     }
 
     /**

@@ -41,10 +41,10 @@ public class consultarClaseDeportiva extends HttpServlet {
     		
     		servidor.DtClaseDeportiva tClase = port.obtenerClase(nombre);
     		request.setAttribute("nombre", tClase.getNombre());
-    		request.setAttribute("fecha", tClase.getFecha());
-    		request.setAttribute("hora", tClase.getHora());
+    		request.setAttribute("fecha", tClase.getFechaString());
+    		request.setAttribute("hora", tClase.getHoraString());
     		request.setAttribute("lugar", tClase.getLugar());
-    		request.setAttribute("fechaAlta", tClase.getFechaAlta());
+    		request.setAttribute("fechaAlta", tClase.getFechaAltaString());
     		request.setAttribute("cupo", tClase.getCupo());
     		request.setAttribute("imgen", request.getContextPath()+ tClase.getImagen());
     		request.setAttribute("inscrips", port.obtenerListaInscripciones(nombre));
